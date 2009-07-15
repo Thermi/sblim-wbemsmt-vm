@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Michael Bauschert (private)-->
+<!--/**
+ *  Generated-File by XMLBeans
+ *
+ * (C) Copyright IBM Corp. 2005
+ *
+ * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+ * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+ *
+ * You can obtain a current copy of the Common Public License from
+ * http://www.opensource.org/licenses/cpl1.0.php
+ *
+ * Author:     org.sblim.wbemsmt.dcg.util.DCGModelUtil
+ *
+ * Contributors: 
+ */-->
+<cli:clientConfig version="VERSION_2_5" xsi:schemaLocation="http://sblim.org/wbemsmt/clientconfig ../../wbemsmt-tools-dcg/conf/clientConfig.xsd" xmlns:cmd="http://sblim.org/wbemsmt/cmd" xmlns:cli="http://sblim.org/wbemsmt/clientconfig" xmlns:cd="http://sblim.org/wbemsmt/dcg" xmlns:pkg="http://sblim.org/wbemsmt/pkg" xmlns:pl="http://sblim.org/wbemsmt/pl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:plugins="http://sblim.org/wbemsmt/plugins">
+    <cli:environment application="VM" documentationDirectory="../wbemsmt-vm/doc/" helpDirectory="../wbemsmt-vm/help">
+        <cli:adapterPackage dir="../wbemsmt-vm/generated/" id="adapterPackage" name="org.sblim.wbemsmt.vm.bl.adapter"/>
+        <cli:wizardPackage dir="../wbemsmt-vm/generated" id="wizardPackage" name="org.sblim.wbemsmt.vm.wizard"/>
+        <cli:adapter adapterclass="VMCimAdapter" adapterPackageId="adapterPackage" id="vmAdapter"/>
+        <cli:resourceBundle name="messages"/>
+        <cli:resourceBundle name="messagesVm"/>
+    </cli:environment>
+    <dcg:container-definitions xmlns:dcg="http://sblim.org/wbemsmt/dcg">
+        <dcg:environment>
+            <dcg:mofinput description="Cim schema" generate="true">
+                <dcg:fcoPackage id="cimschema" name="org.sblim.wbemsmt.vm.schema.cim_2_17" dir="../wbemsmt-vm/generated"/>
+                <dcg:moffile location="../wbemsmt-vm-cim-schema/supported/cimv217.mof"/>
+            </dcg:mofinput>
+            <dcg:containerInterfacePkg dir="../wbemsmt-vm/generated/" id="edit" name="org.sblim.wbemsmt.vm.container.edit"/>
+            <dcg:containerInterfacePkg dir="../wbemsmt-vm/generated/" id="wizard" name="org.sblim.wbemsmt.vm.container.wizard"/>
+        </dcg:environment>
+        <dcg:container name="VMDataContainer" packageId="edit" implPackageId="editImpl" adapterId="vmAdapter" canCreate="false" canDelete="true" canModify="true" isWizard="false" description="" customLayouter="true" dynamic="false">
+            <dcg:fcoRelation fcoName="CIM_ComputerSystem" fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" description=""/>
+            <dcg:field name="vmID" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="Metacluster_ComputerSystem.get_ContainerID" description="" orientation="LEFT" readOnly="true" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="true" duplicateOK="false" long="vmid" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="vmName" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="Metacluster_ComputerSystem.get_ContainerName" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="EnabledState" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ComputerSystem.get_EnabledState" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="RequestedState" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ComputerSystem.get_RequestedState" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="Info" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ComputerSystem.Caption" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateVMPage1DataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoName="CIM_ComputerSystem" fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" description=""/>
+            <dcg:field name="virtualSystemType" dataType="UNSIGNED_INT16" userDefined="false" uiType="COMBOBOX" fcoFieldName="" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="virtualSystemType" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container name="VMConfigDataContainer" packageId="edit" implPackageId="editImpl" adapterId="vmAdapter" canCreate="false" canDelete="false" canModify="false" isWizard="false" description="" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoName="CIM_VirtualSystemSettingData" fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" description=""/>
+            <dcg:link linkedContainer="ConfigItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateVMSummaryDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="true" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoName="CIM_ComputerSystem" fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" description=""/>
+            <dcg:field name="referencedSystem" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="hostsystem" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="Processor" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="Metacluster_ComputerSystem.get_ContainerName" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="Memory" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="Metacluster_ComputerSystem.get_ApplicationExecutedCmd" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="startContainer" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="true" required="false">
+                <cmd:option long="startContainer" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:link linkedContainer="SummaryConfigItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="configItems" description=""/>
+            <dcg:link linkedContainer="SummaryDiskItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="disks" description=""/>
+            <dcg:link linkedContainer="SummaryNetworkItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="networks" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateVMPage3DataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="startContainer" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="startContainer" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="VMOperationsDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:field name="action" dataType="UNSIGNED_INT16" userDefined="true" uiType="COMBOBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="action" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="execute" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="execute" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="false"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateMigrationContainerPage1" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="presetOrUserdefined" dataType="UNSIGNED_INT16" userDefined="true" uiType="RADIOBUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="presetOrUserdefined" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateMigrationContainerPage2a" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="cimClientPreset" dataType="UNSIGNED_INT16" userDefined="true" uiType="COMBOBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateMigrationContainerPage2b" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="migrationTargetHostname" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="migrationTargetHostname" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:field name="migrationTargetPort" dataType="UNSIGNED_INT16" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="migrationTargetPort" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:field name="migrationTargetNamespace" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="migrationTargetNamespace" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:field name="migrationTargetUser" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="migrationTargetUser" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:field name="migrationTargetPassword" dataType="STRING" userDefined="true" uiType="PASSWORD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="migrationTargetPassword" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateMigrationContainerSummary" packageId="wizard" adapterId="vmAdapter" description="" canCreate="true" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="container" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="targetsystem" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="postMigrateState" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="VMOverviewDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="true">
+            <dcg:link linkedContainer="VMOverviewItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="VMOverviewItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" fcoName="CIM_ComputerSystem" description=""/>
+            <dcg:field name="ContainerName" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ComputerSystem.get_Name" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="state" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="WelcomeDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="true" dynamic="true">
+            <dcg:field name="picture" dataType="PICTUREDATA" userDefined="true" uiType="PICTURE" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="welcometext" dataType="MEMODATA" userDefined="true" uiType="MEMO" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:field name="createLink" dataType="LINKDATA" userDefined="true" uiType="LINK" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+            <dcg:link linkedContainer="WelcomeItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="WelcomeItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects" fcoName="VM" description="" userdefined="true"/>
+            <dcg:field name="VMName" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="Info" dataType="MEMODATA" userDefined="true" uiType="MEMO" fcoFieldName="" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateMigrationContainerPage2c" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="targetHost" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="targetHost" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment=""/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateMigrationContainerPage3" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="postMigrateState" dataType="UNSIGNED_INT16" userDefined="true" uiType="RADIOBUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="postMigrateState" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="MemoryHostInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="MemoryHostInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="ProcessorHostInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="ProcessorHostInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="NetworkHostInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="NetworkHostInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="DiskHostInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="DiskHostInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="MemoryDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="size" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="min" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined"/>
+            <dcg:field name="max" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined"/>
+            <dcg:field name="default" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="ProcessorDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="amount" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="min" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined"/>
+            <dcg:field name="max" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined"/>
+            <dcg:field name="default" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined"/>
+            <dcg:field name="weight" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="limit" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="NetworkDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="networks" dataType="UNSIGNED_INT16" userDefined="true" uiType="COMBOBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="add" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="remove" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:link linkedContainer="NetworkItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="networks" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="DiskDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="disks" dataType="UNSIGNED_INT16" userDefined="true" uiType="COMBOBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="add" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="remove" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:link linkedContainer="DiskItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="disks" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="ConfigItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="java.lang" fcoName="String" description="" userdefined="true"/>
+            <dcg:field name="name" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="currentValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="nextValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="defaultValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="info" dataType="PICTUREDATA" userDefined="true" uiType="PICTURE" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="ProcessorHostInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.host" fcoName="Processor" userdefined="true" description=""/>
+            <dcg:field name="min" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="max" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="defaultValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="NetworkHostInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.host" fcoName="Network" userdefined="true" description=""/>
+            <dcg:field name="pool" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="network" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="DiskHostInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.host" fcoName="Disk" userdefined="true" description=""/>
+            <dcg:field name="pool" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="disk" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="MemoryHostInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.host" fcoName="Memory" userdefined="true" description=""/>
+            <dcg:field name="min" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="max" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="defaultValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="MemoryVMInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="MemoryVMInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="ProcessorVMInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="ProcessorVMInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="NetworkVMInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="NetworkVMInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="DiskVMInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="DiskVMInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="ProcessorVMInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.vm" fcoName="Processor" userdefined="true" description=""/>
+            <dcg:field name="current" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="min" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="max" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="defaultValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="weight" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="limit" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="NetworkVMInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.vm" fcoName="Network" userdefined="true" description=""/>
+            <dcg:field name="Address" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ResourceAllocationSettingData.Address" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="address" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="Info" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="DiskVMInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.vm" fcoName="Disk" userdefined="true" description=""/>
+            <dcg:field name="InstanceID" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ResourceAllocationSettingData.InstanceID" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="instanceID" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="Address" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="CIM_ResourceAllocationSettingData.Address" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="address" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="Info" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="MemoryVMInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.vm" fcoName="Memory" userdefined="true" description=""/>
+            <dcg:field name="current" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="min" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="max" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="defaultValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="HostSystemInfoDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="HostSystemInfoItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="HostSystemInfoItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects" fcoName="VM" userdefined="true" description=""/>
+            <dcg:field name="VMName" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="Info" dataType="MEMODATA" userDefined="true" uiType="MEMO" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="PossibleOperationsDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:link linkedContainer="PossibleOperationsItemDataContainer" linkedPackage="edit" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="editImpl" name="PossibleOperationsItemDataContainer" packageId="edit" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.objects.host" fcoName="PossibleOperation" userdefined="true" description=""/>
+            <dcg:field name="operation" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="supported" dataType="PICTUREDATA" userDefined="true" uiType="PICTURE" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="type" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="DiskItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system" fcoName="Disk" userdefined="true" description=""/>
+            <dcg:field name="field1" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field2" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field3" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field4" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="remove" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="NetworkItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system" fcoName="Network" userdefined="true" description=""/>
+            <dcg:field name="field1" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field2" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field3" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field4" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="remove" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="CreateVMPage2DataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="referencedSystem" dataType="UNSIGNED_INT16" userDefined="false" uiType="COMBOBOX" fcoFieldName="" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="referencedSystem" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="ConfigItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="java.lang" fcoName="String" description="" userdefined="true"/>
+            <dcg:field name="name" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="currentValue" dataType="GENERICFIELDDATA" userDefined="true" uiType="GENERIC" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="info" dataType="PICTUREDATA" userDefined="true" uiType="PICTURE" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="SummaryDiskItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system" fcoName="Disk" userdefined="true" description=""/>
+            <dcg:field name="fromPool" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="path" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field1" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field2" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field3" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field4" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="SummaryNetworkItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system" fcoName="Network" userdefined="true" description=""/>
+            <dcg:field name="fromPool" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="mac" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field1" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field2" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field3" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="field4" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="SummaryConfigItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="java.lang" fcoName="String" description="" userdefined="true"/>
+            <dcg:field name="name" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="currentValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="ChangeVMSettingsSummaryDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="true" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoName="CIM_ComputerSystem" fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" description=""/>
+            <dcg:field name="system" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="hostsystem" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="Processor" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="Metacluster_ComputerSystem.get_ContainerName" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:field name="Memory" dataType="STRING" userDefined="false" uiType="LABEL" fcoFieldName="Metacluster_ComputerSystem.get_ApplicationExecutedCmd" description="" orientation="LEFT" readOnly="true" required="false"/>
+            <dcg:link linkedContainer="SummaryConfigItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="configItems" description=""/>
+            <dcg:link linkedContainer="SummaryDiskItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="disks" description=""/>
+            <dcg:link linkedContainer="SummaryNetworkItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="networks" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="DefineSystemCLIDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="referencedSystem" dataType="UNSIGNED_INT16" userDefined="true" uiType="LIST" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="referencedSystem" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="memory" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="memory" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="processor" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="processor" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="networks" dataType="UNSIGNED_INT16" userDefined="true" uiType="LIST" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="networks" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="disks" dataType="UNSIGNED_INT16" userDefined="true" uiType="LIST" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="disks" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="addDisk" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="addDisk" comment="" hasArgument="false"/>
+            </dcg:field>
+            <dcg:field name="removeDisk" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="removeDisk" comment="" hasArgument="false"/>
+            </dcg:field>
+            <dcg:field name="diskConfigKey" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="diskConfigKey" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="diskConfigValue" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="diskConfigValue" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="diskSelector" dataType="UNSIGNED_INT16" userDefined="true" uiType="LIST" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="diskSelector" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="addNetwork" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="addNetwork" comment="" hasArgument="false"/>
+            </dcg:field>
+            <dcg:field name="removeNetwork" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="removeNetwork" comment="" hasArgument="false"/>
+            </dcg:field>
+            <dcg:field name="networkConfigKey" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="networkConfigKey" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="networkConfigValue" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="networkConfigValue" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="networkSelector" dataType="UNSIGNED_INT16" userDefined="true" uiType="LIST" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="networkSelector" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="configValue" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="configValue" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="configKey" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="configKey" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="execute" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="execute" comment="" hasArgument="false"/>
+            </dcg:field>
+            <dcg:field name="startAfterCreation" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="startAfterCreation" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="listOnly" dataType="ACTION" userDefined="true" uiType="BUTTON" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" long="listOnly" comment="" hasArgument="false"/>
+            </dcg:field>
+            <dcg:field name="sessionkey" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="true">
+                <cmd:option long="sessionkey" scope="LOCAL_CONTAINER" required="true" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="virtualSystemType" dataType="UNSIGNED_INT16" userDefined="true" uiType="LIST" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="virtualSystemType" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="deleteSession" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="deleteSession" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+            <dcg:field name="cleanupSession" dataType="BOOLEAN" userDefined="true" uiType="CHECKBOX" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false">
+                <cmd:option long="cleanupSession" scope="LOCAL_CONTAINER" required="false" usedForSelection="false" duplicateOK="false" comment="" hasArgument="true"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="DefineSystemCLISummaryDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="true" canModify="false" canDelete="false" isWizard="true" customLayouter="false" dynamic="false">
+            <dcg:field name="memory" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="processor" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="startAfterCreation" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:link linkedContainer="DefineSystemCLISummaryConfigItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="configValues" description=""/>
+        </dcg:container>
+        <dcg:container implPackageId="wizardImpl" name="DefineSystemCLISummaryConfigItemDataContainer" packageId="wizard" adapterId="vmAdapter" description="" canCreate="false" canModify="false" canDelete="false" isWizard="false" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoPackageId="java.lang" fcoName="String" description="" userdefined="true"/>
+            <dcg:field name="name" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="currentValue" dataType="STRING" userDefined="true" uiType="LABEL" fcoFieldName="userdefined" description="" orientation="LEFT" readOnly="false" required="false"/>
+            <dcg:field name="userdefined" dataType="STRING" userDefined="true" uiType="TEXTFIELD" fcoFieldName="userdefined">
+                <cmd:option long="userdefined" scope="LOCAL_CONTAINER"/>
+            </dcg:field>
+        </dcg:container>
+        <dcg:container name="VMConfigDataContainer" packageId="wizard" implPackageId="wizardImpl" adapterId="vmAdapter" canCreate="false" canDelete="false" canModify="false" isWizard="true" description="" customLayouter="false" dynamic="false">
+            <dcg:fcoRelation fcoName="CIM_VirtualSystemSettingData" fcoPackageId="org.sblim.wbemsmt.vm.schema.cim_2_17" description=""/>
+            <dcg:link linkedContainer="ConfigItemDataContainer" linkedPackage="wizard" occurrence="LIST" role="items" description=""/>
+        </dcg:container>
+    </dcg:container-definitions>
+    <pl:presentationLayer>
+        <pl:environment treeConfig="../wbemsmt-vm/java/vmTree.xml" taskConfig="../wbemsmt-vm/conf/vm-task-config.xml" doJSF="true" doSwing="false" doCmd="true">
+            <pl:listenerPackage packageId="implPackage1">
+                <pl:delegationPackage dir="../wbemsmt-vm/generated/" id="listenerDelegatee" name="org.sblim.wbemsmt.vm.listener"/>
+                <pl:jsfPackage dir="../wbemsmt-vm/generated/" id="listenerJsf" name="org.sblim.wbemsmt.vm.listener.jsf"/>
+                <pl:swingPackage dir="../wbemsmt-vm/generated/" id="listenerSwing" name="org.sblim.wbemsmt.vm.listener.jswing"/>
+                <pl:cmdPackage dir="../wbemsmt-vm/generated/" id="listenerCommandlet" name="org.sblim.wbemsmt.vm.listener.cli"/>
+            </pl:listenerPackage>
+            <pl:containerImplPackage packageId="editImpl">
+                <pl:jsfPackage dir="../wbemsmt-vm/generated/" id="jsfContainer" name="org.sblim.wbemsmt.vm.container.edit.jsf"/>
+                <pl:swingPackage dir="../wbemsmt-vm/generated/" id="swingContainer" name="org.sblim.wbemsmt.vm.container.edit.jswing"/>
+                <pl:cmdPackage dir="../wbemsmt-vm/generated/" id="cmdContainer" name="org.sblim.wbemsmt.vm.container.edit.cli"/>
+            </pl:containerImplPackage>
+            <pl:containerImplPackage packageId="wizardImpl">
+                <pl:jsfPackage dir="../wbemsmt-vm/generated/" id="jsfwizardImpl" name="org.sblim.wbemsmt.vm.container.wizard.jsf"/>
+                <pl:swingPackage dir="../wbemsmt-vm/generated/" id="swingwizardImpl" name="org.sblim.wbemsmt.vm.container.wizard.jswing"/>
+                <pl:cmdPackage dir="../wbemsmt-vm/generated/" id="cliwizardImpl" name="org.sblim.wbemsmt.vm.container.wizard.cli"/>
+            </pl:containerImplPackage>
+            <pl:wizardImplPackage packageId="wizardImpl">
+                <pl:jsfPackage dir="../wbemsmt-vm/generated" id="jsfWizards" name="org.sblim.wbemsmt.vm.wizard.jsf"/>
+                <pl:swingPackage dir="../wbemsmt-vm/generated/" id="swingWizards" name="org.sblim.wbemsmt.vm.wizard.jswing"/>
+                <pl:cmdPackage dir="../wbemsmt-vm/generated" id="cmdWizards" name="org.sblim.wbemsmt.vm.wizard.cli"/>
+            </pl:wizardImplPackage>
+            <pl:commandsPackage id="commands" dir="../wbemsmt-vm/generated/" name="org.sblim.wbemsmt.vm.cli"/>
+        </pl:environment>
+        <pl:createAction id="DefineSystem" traceContainerContainerId="VMDataContainer" traceContainerPackageId="edit">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="DefineSystemListener" packageId="implPackage1" useCurrentTreeNodeForSelection="false"/>
+            </pl:actionListener>
+            <pl:wizard id="CreateVM" description="">
+                <pl:wizardClass>
+                    <pl:wizardClassDefinition name="CreateVMWizard" packageId="wizardImpl"/>
+                </pl:wizardClass>
+                <pl:wizardContainer>
+                    <pl:wizardContainerClassDefinition name="CreateVMWizardContainer" packageId="wizardPackage"/>
+                </pl:wizardContainer>
+                <pl:wizardPanel id="page1" isFirst="true" isLast="false" linkedContainer="CreateVMPage1DataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="page2" isFirst="false" isLast="false" linkedContainer="CreateVMPage2DataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="processor" isFirst="false" isLast="false" linkedContainer="ProcessorDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="memory" isFirst="false" isLast="false" linkedContainer="MemoryDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="disk" isFirst="false" isLast="false" linkedContainer="DiskDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="network" isFirst="false" isLast="false" linkedContainer="NetworkDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="page3" isFirst="false" isLast="false" linkedContainer="CreateVMPage3DataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="summary" isFirst="false" isLast="true" linkedContainer="CreateVMSummaryDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="vssd" isFirst="false" isLast="false" linkedContainer="VMConfigDataContainer" linkedPackage="wizard"/>
+            </pl:wizard>
+            <cmd:command commandName="Ignore"/>
+        </pl:createAction>
+        <pl:createAction id="CreateMigration" traceContainerContainerId="CreateMigrationContainerSummary" traceContainerPackageId="wizard">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="CreateMigrationListener" packageId="implPackage1"/>
+            </pl:actionListener>
+            <pl:wizard id="MigrationWizard" description="">
+                <pl:wizardClass>
+                    <pl:wizardClassDefinition name="MigrationWizard" packageId="wizardImpl"/>
+                </pl:wizardClass>
+                <pl:wizardContainer>
+                    <pl:wizardContainerClassDefinition name="MigrationWizardContainer" packageId="wizardPackage"/>
+                </pl:wizardContainer>
+                <pl:wizardPanel id="panel1" isFirst="true" isLast="false" linkedContainer="CreateMigrationContainerPage1" linkedPackage="wizard"/>
+                <pl:wizardPanel id="panel2a" isFirst="false" isLast="false" linkedContainer="CreateMigrationContainerPage2a" linkedPackage="wizard"/>
+                <pl:wizardPanel id="panel2b" isFirst="false" isLast="false" linkedContainer="CreateMigrationContainerPage2b" linkedPackage="wizard"/>
+                <pl:wizardPanel id="summary" isFirst="false" isLast="true" linkedContainer="CreateMigrationContainerSummary" linkedPackage="wizard"/>
+                <pl:wizardPanel id="panel2c" isFirst="false" isLast="false" linkedContainer="CreateMigrationContainerPage2c" linkedPackage="wizard"/>
+                <pl:wizardPanel id="panel3" isFirst="false" isLast="false" linkedContainer="CreateMigrationContainerPage3" linkedPackage="wizard"/>
+            </pl:wizard>
+            <cmd:command commandName="Ignore"/>
+        </pl:createAction>
+        <pl:createAction id="ChangeVMSettings" traceContainerContainerId="VMDataContainer" traceContainerPackageId="edit">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="ChangeVMSettingsListener" packageId="implPackage1"/>
+            </pl:actionListener>
+            <pl:wizard id="ChangeVMSettingsWizard" description="">
+                <pl:wizardClass>
+                    <pl:wizardClassDefinition name="ChangeVMSettingsWizard" packageId="wizardImpl"/>
+                </pl:wizardClass>
+                <pl:wizardContainer>
+                    <pl:wizardContainerClassDefinition name="ChangeVMSettingsWizardContainer" packageId="wizardPackage"/>
+                </pl:wizardContainer>
+                <pl:wizardPanel id="vssd" isFirst="true" isLast="false" linkedContainer="VMConfigDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="processor" isFirst="false" isLast="false" linkedContainer="ProcessorDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="memory" isFirst="false" isLast="false" linkedContainer="MemoryDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="network" isFirst="false" isLast="false" linkedContainer="NetworkDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="disk" isFirst="false" isLast="false" linkedContainer="DiskDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="summary" isFirst="false" isLast="true" linkedContainer="ChangeVMSettingsSummaryDataContainer" linkedPackage="wizard"/>
+            </pl:wizard>
+            <cmd:command commandName="Ignore"/>
+        </pl:createAction>
+        <pl:createAction id="DefineSystemCLI" traceContainerContainerId="DefineSystemCLISummaryDataContainer" traceContainerPackageId="wizard">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="DefineSystemCliListener" packageId="implPackage1" useCurrentTreeNodeForSelection="true"/>
+            </pl:actionListener>
+            <pl:wizard id="DefineSystemCLIWizard" description="">
+                <pl:wizardClass>
+                    <pl:wizardClassDefinition name="DefineSystemCLIWizard" packageId="wizardImpl"/>
+                </pl:wizardClass>
+                <pl:wizardContainer>
+                    <pl:wizardContainerClassDefinition name="DefineSystemCLIWizardContainer" packageId="wizardPackage"/>
+                </pl:wizardContainer>
+                <pl:wizardPanel id="input" isFirst="true" isLast="false" linkedContainer="DefineSystemCLIDataContainer" linkedPackage="wizard"/>
+                <pl:wizardPanel id="summary" isFirst="false" isLast="true" linkedContainer="DefineSystemCLISummaryDataContainer" linkedPackage="wizard"/>
+            </pl:wizard>
+            <cmd:command commandName="CreateVM"/>
+        </pl:createAction>
+        <pl:editAction id="EditVM" saveSinglePanels="false">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="EditVMListener" packageId="implPackage1" useCurrentTreeNodeForSelection="true"/>
+            </pl:actionListener>
+            <pl:editPanel>
+                <pl:tab caption="tabGeneral">
+                    <pl:childEditPanel caption="appContainerPanel" linkedContainer="VMDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="EditVM"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="appContainerOperationsPanel" linkedContainer="VMOperationsDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                </pl:tab>
+                <pl:tab caption="tabSettings">
+                    <pl:childEditPanel caption="settingDataPanel" linkedContainer="VMConfigDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore">
+                            <cmd:option long="containerName" required="true" usedForSelection="true" comment="" scope="LOCAL_ACTION"/>
+                        </cmd:command>
+                    </pl:childEditPanel>
+                </pl:tab>
+                <pl:tab caption="resources">
+                    <pl:childEditPanel caption="editMemory" linkedContainer="MemoryVMInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editProcessor" linkedContainer="ProcessorVMInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editNetwork" linkedContainer="NetworkVMInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editDisk" linkedContainer="DiskVMInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                </pl:tab>
+            </pl:editPanel>
+        </pl:editAction>
+        <pl:editAction id="EditHostSystem" saveSinglePanels="false">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="EditHostSystemListener" packageId="implPackage1" useCurrentTreeNodeForSelection="true"/>
+            </pl:actionListener>
+            <pl:editPanel>
+                <pl:tab caption="SystemInfo">
+                    <pl:childEditPanel caption="editInfo" linkedContainer="HostSystemInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editPossibleOperations" linkedContainer="PossibleOperationsDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                </pl:tab>
+                <pl:tab caption="Resources">
+                    <pl:childEditPanel caption="editMemory" linkedContainer="MemoryHostInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editProcessor" linkedContainer="ProcessorHostInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editNetwork" linkedContainer="NetworkHostInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                    <pl:childEditPanel caption="editDisk" linkedContainer="DiskHostInfoDataContainer" linkedPackage="edit">
+                        <cmd:command commandName="Ignore"/>
+                    </pl:childEditPanel>
+                </pl:tab>
+            </pl:editPanel>
+        </pl:editAction>
+        <pl:deleteAction id="deleteVM" linkedContainer="VMDataContainer" linkedPackage="edit">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="DeleteVMListener" packageId="implPackage1" useCurrentTreeNodeForSelection="true"/>
+            </pl:actionListener>
+            <cmd:command commandName="DeleteVM">
+                <cmd:option long="vmName" scope="LOCAL_ACTION" required="false" usedForSelection="true" duplicateOK="false" comment="" hasArgument="true"/>
+            </cmd:command>
+        </pl:deleteAction>
+        <pl:listAction id="ListAppContainer" linkedContainer="VMDataContainer" linkedPackage="edit">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="ListAppContainerListener" packageId="implPackage1" useCurrentTreeNodeForSelection="true"/>
+            </pl:actionListener>
+            <cmd:command commandName="Ignore" listType="KEY" traceOnlyChilds="false">
+                <cmd:option long="list" required="false" usedForSelection="true" duplicateOK="false" comment="" scope="LOCAL_ACTION" defaultValue="INSTANCE_WITH_CHILDS"/>
+            </cmd:command>
+        </pl:listAction>
+        <pl:welcomeAction linkedContainer="WelcomeDataContainer" linkedPackage="edit">
+            <pl:actionListener>
+                <pl:actionListenerClassDefinition name="WelcomeListener" packageId="implPackage1" useCurrentTreeNodeForSelection="false"/>
+            </pl:actionListener>
+        </pl:welcomeAction>
+        <cmd:commands>
+            <cmd:option long="hostname" required="false" usedForSelection="false" duplicateOK="false" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="port" required="false" usedForSelection="false" duplicateOK="false" defaultValue="5988" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="namespace" required="false" usedForSelection="false" duplicateOK="false" defaultValue="/root/PG_InterOp" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="user" required="false" usedForSelection="false" duplicateOK="false" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="password" required="false" usedForSelection="false" duplicateOK="false" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="publickeyfile" required="false" usedForSelection="false" duplicateOK="false" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="privatekeyfile" required="false" usedForSelection="false" duplicateOK="false" comment="" scope="GLOBAL_WBEMSMT_COMMUNICATION"/>
+            <cmd:option long="locale" required="false" usedForSelection="false" duplicateOK="false" short="L" comment="" defaultValue="en" scope="GLOBAL_WBEMSMT_COMMON"/>
+            <cmd:option required="false" usedForSelection="false" duplicateOK="false" short="?" comment="" scope="GLOBAL_WBEMSMT_COMMON" hasArgument="false"/>
+            <cmd:option long="help" required="false" usedForSelection="false" duplicateOK="false" short="h" comment="" scope="GLOBAL_WBEMSMT_COMMON" hasArgument="false"/>
+            <cmd:option long="httpProtocolType" required="false" scope="GLOBAL_WBEMSMT_COMMUNICATION" usedForSelection="true" duplicateOK="false" comment="" defaultValue="http" hasArgument="true"/>
+        </cmd:commands>
+    </pl:presentationLayer>
+    <plugins:plugins>
+        <plugins:plugin classname="org.sblim.wbemsmt.dcg.ext.usmi.plugin.USMIPlugin" version="1.0.0">
+            <cmd:option long="type" short="t" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="names" short="n" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="groups" short="N" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="ipaddress" short="i" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="tasks" short="T" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="where" short="w" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="file" short="f" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <cmd:option long="format" short="F" required="false" usedForSelection="false" scope="GLOBAL_CUSTOM"/>
+            <plugins:package id="usmi.commands" name="org.sblim.wbemsmt.vm.usmi" dir="../org.sblim.wbemsmt.vm.usmi"/>
+        </plugins:plugin>
+    </plugins:plugins>
+</cli:clientConfig>

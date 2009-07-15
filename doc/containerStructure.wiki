@@ -1,0 +1,1084 @@
+{anchor:Index}
+| *edit* |  	[#edit.ConfigItemDataContainer] \\  	[#edit.DiskHostInfoDataContainer] \\  	[#edit.DiskHostInfoItemDataContainer] \\  	[#edit.DiskVMInfoDataContainer] \\  	[#edit.DiskVMInfoItemDataContainer] \\  	[#edit.HostSystemInfoDataContainer] \\  	[#edit.HostSystemInfoItemDataContainer] \\  	[#edit.MemoryHostInfoDataContainer] \\  	[#edit.MemoryHostInfoItemDataContainer] \\  	[#edit.MemoryVMInfoDataContainer] \\  	[#edit.MemoryVMInfoItemDataContainer] \\  	[#edit.NetworkHostInfoDataContainer] \\  	[#edit.NetworkHostInfoItemDataContainer] \\  	[#edit.NetworkVMInfoDataContainer] \\  	[#edit.NetworkVMInfoItemDataContainer] \\  	[#edit.PossibleOperationsDataContainer] \\  	[#edit.PossibleOperationsItemDataContainer] \\  	[#edit.ProcessorHostInfoDataContainer] \\  	[#edit.ProcessorHostInfoItemDataContainer] \\  	[#edit.ProcessorVMInfoDataContainer] \\  	[#edit.ProcessorVMInfoItemDataContainer] \\  	[#edit.VMConfigDataContainer] \\  	[#edit.VMDataContainer] \\  	[#edit.VMOperationsDataContainer] \\  	[#edit.VMOverviewDataContainer] \\  	[#edit.VMOverviewItemDataContainer] \\  	[#edit.WelcomeDataContainer] \\  	[#edit.WelcomeItemDataContainer] \\  |
+| *wizard* |  	[#wizard.ChangeVMSettingsSummaryDataContainer] \\  	[#wizard.ConfigItemDataContainer] \\  	[#wizard.CreateMigrationContainerPage1] \\  	[#wizard.CreateMigrationContainerPage2a] \\  	[#wizard.CreateMigrationContainerPage2b] \\  	[#wizard.CreateMigrationContainerPage2c] \\  	[#wizard.CreateMigrationContainerPage3] \\  	[#wizard.CreateMigrationContainerSummary] \\  	[#wizard.CreateVMPage1DataContainer] \\  	[#wizard.CreateVMPage2DataContainer] \\  	[#wizard.CreateVMPage3DataContainer] \\  	[#wizard.CreateVMSummaryDataContainer] \\  	[#wizard.DefineSystemCLIDataContainer] \\  	[#wizard.DefineSystemCLISummaryConfigItemDataContainer] \\  	[#wizard.DefineSystemCLISummaryDataContainer] \\  	[#wizard.DiskDataContainer] \\  	[#wizard.DiskItemDataContainer] \\  	[#wizard.MemoryDataContainer] \\  	[#wizard.NetworkDataContainer] \\  	[#wizard.NetworkItemDataContainer] \\  	[#wizard.ProcessorDataContainer] \\  	[#wizard.SummaryConfigItemDataContainer] \\  	[#wizard.SummaryDiskItemDataContainer] \\  	[#wizard.SummaryNetworkItemDataContainer] \\  	[#wizard.VMConfigDataContainer] \\  |
+
+
+[#Index]
+{anchor:edit.ConfigItemDataContainer}
+{panel:title=edit.ConfigItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | java.lang.String |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| name | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| currentValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| nextValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| defaultValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| info | PICTUREDATA | PICTURE | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.DiskHostInfoDataContainer}
+{panel:title=edit.DiskHostInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.DiskHostInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.DiskHostInfoItemDataContainer}
+{panel:title=edit.DiskHostInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Disk |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| pool | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| disk | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.DiskVMInfoDataContainer}
+{panel:title=edit.DiskVMInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.DiskVMInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.DiskVMInfoItemDataContainer}
+{panel:title=edit.DiskVMInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| InstanceID | STRING | LABEL | CIM_ResourceAllocationSettingData.InstanceID \\ | --- | -instanceID, Optional,no default |
+| Address | STRING | LABEL | CIM_ResourceAllocationSettingData.Address \\ | --- | -address, Optional,no default |
+| Info | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.HostSystemInfoDataContainer}
+{panel:title=edit.HostSystemInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.HostSystemInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.HostSystemInfoItemDataContainer}
+{panel:title=edit.HostSystemInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.VM |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| VMName | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| Info | MEMODATA | MEMO | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.MemoryHostInfoDataContainer}
+{panel:title=edit.MemoryHostInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.MemoryHostInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.MemoryHostInfoItemDataContainer}
+{panel:title=edit.MemoryHostInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Memory |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| min | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| max | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| defaultValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.MemoryVMInfoDataContainer}
+{panel:title=edit.MemoryVMInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.MemoryVMInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.MemoryVMInfoItemDataContainer}
+{panel:title=edit.MemoryVMInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Memory |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| current | STRING | TEXTFIELD | userdefined \\ | Readonly, Userdefined | Not used for Commandline |
+| min | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| max | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| defaultValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.NetworkHostInfoDataContainer}
+{panel:title=edit.NetworkHostInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.NetworkHostInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.NetworkHostInfoItemDataContainer}
+{panel:title=edit.NetworkHostInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Network |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| pool | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| network | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.NetworkVMInfoDataContainer}
+{panel:title=edit.NetworkVMInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.NetworkVMInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.NetworkVMInfoItemDataContainer}
+{panel:title=edit.NetworkVMInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| Address | STRING | LABEL | CIM_ResourceAllocationSettingData.Address \\ | --- | -address, Optional,no default |
+| Info | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.PossibleOperationsDataContainer}
+{panel:title=edit.PossibleOperationsDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.PossibleOperationsItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.PossibleOperationsItemDataContainer}
+{panel:title=edit.PossibleOperationsItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.host.PossibleOperation |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| operation | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| supported | PICTUREDATA | PICTURE | userdefined \\ | Userdefined | Not used for Commandline |
+| type | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.ProcessorHostInfoDataContainer}
+{panel:title=edit.ProcessorHostInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.ProcessorHostInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.ProcessorHostInfoItemDataContainer}
+{panel:title=edit.ProcessorHostInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Processor |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| min | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| max | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| defaultValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.ProcessorVMInfoDataContainer}
+{panel:title=edit.ProcessorVMInfoDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.ProcessorVMInfoItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.ProcessorVMInfoItemDataContainer}
+{panel:title=edit.ProcessorVMInfoItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Processor |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| current | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| min | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| max | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| defaultValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| weight | STRING | LABEL | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+| limit | STRING | LABEL | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.VMConfigDataContainer}
+{panel:title=edit.VMConfigDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemSettingData |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.ConfigItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.VMDataContainer}
+{panel:title=edit.VMDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | DELETE, MODIFY \\ |
+| *CustomLayouter* \\ | X |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| vmID | STRING | LABEL | Metacluster_ComputerSystem.get_ContainerID \\ | Readonly | -vmid, Optional,no default, Used for selection |
+| vmName | STRING | LABEL | Metacluster_ComputerSystem.get_ContainerName \\ | --- | Not used for Commandline |
+| EnabledState | STRING | LABEL | CIM_ComputerSystem.get_EnabledState \\ | --- | Not used for Commandline |
+| RequestedState | STRING | LABEL | CIM_ComputerSystem.get_RequestedState \\ | --- | Not used for Commandline |
+| Info | STRING | LABEL | CIM_ComputerSystem.Caption \\ | --- | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.VMOperationsDataContainer}
+{panel:title=edit.VMOperationsDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| action | UNSIGNED_INT16 | COMBOBOX | userdefined \\ | Userdefined | -action, Optional,no default |
+| execute | ACTION | BUTTON | userdefined \\ | Userdefined | -execute, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.VMOverviewDataContainer}
+{panel:title=edit.VMOverviewDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.VMOverviewItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.VMOverviewItemDataContainer}
+{panel:title=edit.VMOverviewItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| ContainerName | STRING | LABEL | CIM_ComputerSystem.get_Name \\ | --- | Not used for Commandline |
+| state | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.WelcomeDataContainer}
+{panel:title=edit.WelcomeDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | X |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| picture | PICTUREDATA | PICTURE | userdefined \\ | Userdefined | Not used for Commandline |
+| welcometext | MEMODATA | MEMO | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+| createLink | LINKDATA | LINK | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#edit.WelcomeItemDataContainer] | Rolename: items, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:edit.WelcomeItemDataContainer}
+{panel:title=edit.WelcomeItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.objects.VM |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.edit |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| VMName | STRING | LABEL |  \\ | Userdefined | Not used for Commandline |
+| Info | MEMODATA | MEMO |  \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.ChangeVMSettingsSummaryDataContainer}
+{panel:title=wizard.ChangeVMSettingsSummaryDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | CREATE, WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| system | STRING | LABEL | userdefined \\ | Readonly, Userdefined | Not used for Commandline |
+| hostsystem | STRING | LABEL | userdefined \\ | Readonly, Userdefined | Not used for Commandline |
+| Processor | STRING | LABEL | Metacluster_ComputerSystem.get_ContainerName \\ | Readonly | Not used for Commandline |
+| Memory | STRING | LABEL | Metacluster_ComputerSystem.get_ApplicationExecutedCmd \\ | Readonly | Not used for Commandline |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#wizard.SummaryConfigItemDataContainer] | Rolename: configItems, Type: LIST |
+| Link | [#wizard.SummaryDiskItemDataContainer] | Rolename: disks, Type: LIST |
+| Link | [#wizard.SummaryNetworkItemDataContainer] | Rolename: networks, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.ConfigItemDataContainer}
+{panel:title=wizard.ConfigItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | java.lang.String |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| name | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| currentValue | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| info | PICTUREDATA | PICTURE | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateMigrationContainerPage1}
+{panel:title=wizard.CreateMigrationContainerPage1|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| presetOrUserdefined | UNSIGNED_INT16 | RADIOBUTTON | userdefined \\ | Userdefined | -presetOrUserdefined, Required |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateMigrationContainerPage2a}
+{panel:title=wizard.CreateMigrationContainerPage2a|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| cimClientPreset | UNSIGNED_INT16 | COMBOBOX | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateMigrationContainerPage2b}
+{panel:title=wizard.CreateMigrationContainerPage2b|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| migrationTargetHostname | STRING | TEXTFIELD | userdefined \\ | Userdefined | -migrationTargetHostname, Required |
+| migrationTargetPort | UNSIGNED_INT16 | TEXTFIELD | userdefined \\ | Userdefined | -migrationTargetPort, Required |
+| migrationTargetNamespace | STRING | TEXTFIELD | userdefined \\ | Userdefined | -migrationTargetNamespace, Required |
+| migrationTargetUser | STRING | TEXTFIELD | userdefined \\ | Userdefined | -migrationTargetUser, Required |
+| migrationTargetPassword | STRING | PASSWORD | userdefined \\ | Userdefined | -migrationTargetPassword, Required |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateMigrationContainerPage2c}
+{panel:title=wizard.CreateMigrationContainerPage2c|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| targetHost | STRING | TEXTFIELD | userdefined \\ | Userdefined | -targetHost, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateMigrationContainerPage3}
+{panel:title=wizard.CreateMigrationContainerPage3|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| postMigrateState | UNSIGNED_INT16 | RADIOBUTTON | userdefined \\ | Userdefined | -postMigrateState, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateMigrationContainerSummary}
+{panel:title=wizard.CreateMigrationContainerSummary|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | CREATE, WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| container | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| targetsystem | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| postMigrateState | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateVMPage1DataContainer}
+{panel:title=wizard.CreateVMPage1DataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| virtualSystemType | UNSIGNED_INT16 | COMBOBOX |  \\ | --- | -virtualSystemType, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateVMPage2DataContainer}
+{panel:title=wizard.CreateVMPage2DataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| referencedSystem | UNSIGNED_INT16 | COMBOBOX |  \\ | --- | -referencedSystem, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateVMPage3DataContainer}
+{panel:title=wizard.CreateVMPage3DataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| startContainer | BOOLEAN | CHECKBOX | userdefined \\ | Userdefined | -startContainer, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.CreateVMSummaryDataContainer}
+{panel:title=wizard.CreateVMSummaryDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | CREATE, WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| referencedSystem | STRING | LABEL | userdefined \\ | Readonly, Userdefined | Not used for Commandline |
+| hostsystem | STRING | LABEL | userdefined \\ | Readonly, Userdefined | Not used for Commandline |
+| Processor | STRING | LABEL | Metacluster_ComputerSystem.get_ContainerName \\ | Readonly | Not used for Commandline |
+| Memory | STRING | LABEL | Metacluster_ComputerSystem.get_ApplicationExecutedCmd \\ | Readonly | Not used for Commandline |
+| startContainer | BOOLEAN | CHECKBOX | userdefined \\ | Readonly, Userdefined | -startContainer, Optional,no default |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#wizard.SummaryConfigItemDataContainer] | Rolename: configItems, Type: LIST |
+| Link | [#wizard.SummaryDiskItemDataContainer] | Rolename: disks, Type: LIST |
+| Link | [#wizard.SummaryNetworkItemDataContainer] | Rolename: networks, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.DefineSystemCLIDataContainer}
+{panel:title=wizard.DefineSystemCLIDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| referencedSystem | UNSIGNED_INT16 | LIST | userdefined \\ | Userdefined | -referencedSystem, Optional,no default |
+| memory | STRING | TEXTFIELD | userdefined \\ | Userdefined | -memory, Optional,no default |
+| processor | STRING | TEXTFIELD | userdefined \\ | Userdefined | -processor, Optional,no default |
+| networks | UNSIGNED_INT16 | LIST | userdefined \\ | Userdefined | -networks, Optional,no default |
+| disks | UNSIGNED_INT16 | LIST | userdefined \\ | Userdefined | -disks, Optional,no default |
+| addDisk | ACTION | BUTTON | userdefined \\ | Userdefined | -addDisk, Optional,no default |
+| removeDisk | ACTION | BUTTON | userdefined \\ | Userdefined | -removeDisk, Optional,no default |
+| diskConfigKey | STRING | TEXTFIELD | userdefined \\ | Userdefined | -diskConfigKey, Optional,no default |
+| diskConfigValue | STRING | TEXTFIELD | userdefined \\ | Userdefined | -diskConfigValue, Optional,no default |
+| diskSelector | UNSIGNED_INT16 | LIST | userdefined \\ | Userdefined | -diskSelector, Optional,no default |
+| addNetwork | ACTION | BUTTON | userdefined \\ | Userdefined | -addNetwork, Optional,no default |
+| removeNetwork | ACTION | BUTTON | userdefined \\ | Userdefined | -removeNetwork, Optional,no default |
+| networkConfigKey | STRING | TEXTFIELD | userdefined \\ | Userdefined | -networkConfigKey, Optional,no default |
+| networkConfigValue | STRING | TEXTFIELD | userdefined \\ | Userdefined | -networkConfigValue, Optional,no default |
+| networkSelector | UNSIGNED_INT16 | LIST | userdefined \\ | Userdefined | -networkSelector, Optional,no default |
+| configValue | STRING | TEXTFIELD | userdefined \\ | Userdefined | -configValue, Optional,no default |
+| configKey | STRING | TEXTFIELD | userdefined \\ | Userdefined | -configKey, Optional,no default |
+| execute | ACTION | BUTTON | userdefined \\ | Userdefined | -execute, Optional,no default |
+| startAfterCreation | BOOLEAN | CHECKBOX | userdefined \\ | Userdefined | -startAfterCreation, Optional,no default |
+| listOnly | ACTION | BUTTON | userdefined \\ | Userdefined | -listOnly, Optional,no default |
+| sessionkey | STRING | TEXTFIELD | userdefined \\ | Userdefined | -sessionkey, Required |
+| virtualSystemType | UNSIGNED_INT16 | LIST | userdefined \\ | Userdefined | -virtualSystemType, Optional,no default |
+| deleteSession | BOOLEAN | CHECKBOX | userdefined \\ | Userdefined | -deleteSession, Optional,no default |
+| cleanupSession | BOOLEAN | CHECKBOX | userdefined \\ | Userdefined | -cleanupSession, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.DefineSystemCLISummaryConfigItemDataContainer}
+{panel:title=wizard.DefineSystemCLISummaryConfigItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | java.lang.String |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| name | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| currentValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| userdefined | STRING | TEXTFIELD | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.DefineSystemCLISummaryDataContainer}
+{panel:title=wizard.DefineSystemCLISummaryDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | CREATE, WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| memory | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| processor | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| startAfterCreation | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#wizard.DefineSystemCLISummaryConfigItemDataContainer] | Rolename: configValues, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.DiskDataContainer}
+{panel:title=wizard.DiskDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| disks | UNSIGNED_INT16 | COMBOBOX | userdefined \\ | Userdefined | Not used for Commandline |
+| add | ACTION | BUTTON | userdefined \\ | Userdefined | Not used for Commandline |
+| remove | ACTION | BUTTON | userdefined \\ | Userdefined | Not used for Commandline |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#wizard.DiskItemDataContainer] | Rolename: disks, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.DiskItemDataContainer}
+{panel:title=wizard.DiskItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.Disk |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| field1 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| field2 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| field3 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| field4 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| remove | BOOLEAN | CHECKBOX | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.MemoryDataContainer}
+{panel:title=wizard.MemoryDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| size | STRING | TEXTFIELD | userdefined \\ | Userdefined | Not used for Commandline |
+| min | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| max | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| default | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.NetworkDataContainer}
+{panel:title=wizard.NetworkDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| networks | UNSIGNED_INT16 | COMBOBOX | userdefined \\ | Userdefined | Not used for Commandline |
+| add | ACTION | BUTTON | userdefined \\ | Userdefined | Not used for Commandline |
+| remove | ACTION | BUTTON | userdefined \\ | Userdefined | Not used for Commandline |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#wizard.NetworkItemDataContainer] | Rolename: networks, Type: LIST |
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.NetworkItemDataContainer}
+{panel:title=wizard.NetworkItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.Network |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| field1 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| field2 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| field3 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| field4 | GENERICFIELDDATA | GENERIC | userdefined \\ | Userdefined | Not used for Commandline |
+| remove | BOOLEAN | CHECKBOX | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.ProcessorDataContainer}
+{panel:title=wizard.ProcessorDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ |  ---  |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| amount | STRING | TEXTFIELD | userdefined \\ | Userdefined | Not used for Commandline |
+| min | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| max | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| default | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| weight | STRING | TEXTFIELD | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+| limit | STRING | TEXTFIELD | userdefined \\ | Userdefined | -userdefined, Optional,no default |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.SummaryConfigItemDataContainer}
+{panel:title=wizard.SummaryConfigItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | java.lang.String |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| name | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| currentValue | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.SummaryDiskItemDataContainer}
+{panel:title=wizard.SummaryDiskItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.Disk |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| fromPool | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| path | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field1 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field2 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field3 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field4 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.SummaryNetworkItemDataContainer}
+{panel:title=wizard.SummaryNetworkItemDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.Network |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | --- \\ |
+| *CustomLayouter* \\ | --- |
+*Fields:*
+| *Fieldname* | *DataType* | *UIType* | *related FCO Field* | *Constraints* | *Commandline* |
+| fromPool | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| mac | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field1 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field2 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field3 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+| field4 | STRING | LABEL | userdefined \\ | Userdefined | Not used for Commandline |
+
+{panel}
+
+	
+
+[#Index]
+{anchor:wizard.VMConfigDataContainer}
+{panel:title=wizard.VMConfigDataContainer|titleBGColor=#CCE5FF| bgColor=#FFFFFF}
+
+| *Description* |  \\ |
+| *Related FCO*\\ | org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemSettingData |
+| *Adapter* \\ | vmAdapter |
+| *Package* \\ | Interface: org.sblim.wbemsmt.vm.container.wizard |
+| *Actions* | WIZARD \\ |
+| *CustomLayouter* \\ | --- |
+
+*Relations*
+| *RelationType&nbsp;* | *&nbsp;related DataContainer* \\ | *&nbsp;Additional Information* \\ |
+| Link | [#wizard.ConfigItemDataContainer] | Rolename: items, Type: LIST |
+{panel}

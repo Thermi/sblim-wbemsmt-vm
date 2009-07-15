@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?NLS  TYPE="org.eclipse.help.toc"?>
+<toc label="VM">
+   <topic label="Index" href="index.html">
+	  	  <topic label="DefineSystem" href="DefineSystem.html"/>
+  	  	  <topic label="CreateMigration" href="CreateMigration.html"/>
+  	  	  <topic label="EditVM Tab tabGeneral" href="EditVM.html#tab_0"/>
+  	  	  <topic label="EditVM Tab tabSettings" href="EditVM.html#tab_1"/>
+  	     </topic> 
+</toc>

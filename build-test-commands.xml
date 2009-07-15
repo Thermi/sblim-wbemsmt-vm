@@ -1,0 +1,116 @@
+<!--
+ * test-commands.xml
+ *
+ * (C) Copyright IBM Corp. 2005
+ *
+ * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+ * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+ *
+ * You can obtain a current copy of the Common Public License from
+ * http://www.opensource.org/licenses/cpl1.0.php
+ *
+ * Author:     Michael Bauschert <michael.bauschert@de.ibm.com>
+ *
+ * Contributors:
+ *
+ * Build file for testing samba-commandlets
+ *
+  -->
+
+<project name="wbemsmt-samba-eui-commandlet" default="all" basedir="." >
+    <description>
+    	 Build file for testing samba-commandlets
+    </description>
+
+	<property name="cmd.main" value="org.sblim.wbemsmt.tools.commandlet.CommandletMain"/>
+	<property name="commands.class" value="org.sblim.wbemsmt.commandlet.samba.listener.Commands"/>
+	<property name="host" value="gargya2.boeblingen.de.ibm.com"/>
+	<property name="user" value="pegasus"/>
+	<property name="password" value="wbem01smt"/>
+	<property name="port" value="5988"/>
+	<property name="namespace" value="/root/cimv2"/>
+	<property name="usr-shortcut" value="mb"/>
+	<property name="printername" value="${usr-shortcut}printer01"/>
+	
+	<!--
+		Dependencies
+	-->
+	<property name="systemprinter" value="printer"/>
+		
+	
+	<!--
+		Targets
+	-->
+		
+    <target name="all" depends="printer"/>
+    	
+    <target name="printer" depends="CreateSambaPrinter,DeleteSambaPrinter"/>
+    
+	<target name="CreateSambaPrinter">
+        <java classname="${cmd.main}">
+        	<arg value="CreateSambaPrinter"/>
+			<arg line="-user ${user}"/>
+			<arg line="-password ${password}"/>
+			<arg line="-hostname ${host}"/>
+			<arg line="-port ${port}"/>
+			<arg line="-namespace ${namespace}"/>
+			<arg line="-serviceName smbd"/>
+        	<arg line="-allOrOne false"/>
+        	<arg line="-path /spool-dir"/>
+        	<arg line="-sambaPrinterName ${printername}"/>
+        	<arg line="-systemPrintername ${systemprinter}"/>
+        </java>
+    </target>
+
+	<target name="DeleteSambaPrinter">
+        <java classname="${cmd.main}">
+        	<arg value="DeleteSambaPrinter"/>
+			<arg line="-user ${user}"/>
+			<arg line="-password ${password}"/>
+			<arg line="-hostname ${host}"/>
+			<arg line="-port ${port}"/>
+			<arg line="-namespace ${namespace}"/>
+			<arg line="-serviceName smbd"/>
+        	<arg line="-sambaPrintername ${printername}"/>
+        </java>
+    </target>
+
+	<target name="EditSambaShareAclInUser">
+        <java classname="${cmd.main}">
+        	<arg value="EditSambaShareAclInUser"/>
+			<arg line="-user ${user}"/>
+			<arg line="-password ${password}"/>
+			<arg line="-hostname ${host}"/>
+			<arg line="-port ${port}"/>
+			<arg line="-namespace ${namespace}"/>
+			<arg line="-serviceName smbd"/>
+
+        	<arg line="-shareName share1"/>
+			<arg line="-sambaUsername wbemsmt-test"/>
+			<arg line="-accesType lesen/schreiben"/>
+			<arg line="-admin true"/>
+			<arg line="-forceToUser true"/>
+        </java>
+    </target>
+
+    <target name="EditSambaPrinterAclInUser">
+        <java classname="${cmd.main}">
+        	<arg value="EditSambaPrinterAclInUser"/>
+			<arg line="-user ${user}"/>
+			<arg line="-password ${password}"/>
+			<arg line="-hostname ${host}"/>
+			<arg line="-port ${port}"/>
+			<arg line="-namespace ${namespace}"/>
+			<arg line="-serviceName smbd"/>
+
+        	<arg line="-sambaPrintername ${printername}"/>
+			<arg line="-sambaUsername wbemsmt-test"/>
+			<arg value="-accesType"/>
+			<arg value="kein Zugriff"/>
+			<arg line="-admin true"/>
+			<arg line="-forceToUser true"/>
+        </java>
+    </target>
+
+</project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ *  samba-config.xml
+ *
+ * (C) Copyright IBM Corp. 2005
+ *
+ * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+ * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
+ *
+ * You can obtain a current copy of the Common Public License from
+ * http://www.opensource.org/licenses/cpl1.0.php
+ *
+ * Author:     Michael.Bauschert@de.ibm.com
+ *
+ * Contributors: 
+ *
+ */
+-->
+<tasklauncherconfig version="VERSION_2_6" xmlns="http://sblim.org/wbemsmt/tasklauncher/tasklauncherconfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sblim.org/wbemsmt/tasklauncher/tasklauncherconfig ../../wbemsmt-commons/commons-bl/conf/tasklauncher-config.xsd">
+	<treeconfig name="VM" 
+	            filename="vmTree.xml" 
+	            namespace="/root/interop"
+	            slpServicename="IBM:Managed Container" 
+	            classForServerTaskLookup="org.sblim.wbemsmt.vm.lookup.LookupServerTask" 
+	            embeddedFilter="org.sblim.wbemsmt.vm.filter.EmbeddedFilter"
+	            welcomeListener="org.sblim.wbemsmt.vm.listener.WelcomeListener"
+	             >
+		<resourceBundle name="messages"/>
+		<resourceBundle name="messagesVm"/>
+		<configurationDefinition name="indicationListMaxLength" defaultValue="20" info="info.indicationListMaxLength"/>
+		<configurationDefinition name="presetForDestinationUrl" defaultValue="default" info="info.urlForIndicationDelivery"/>
+		<configurationDefinition name="preloadHostSystem" defaultValue="true" info="info.preloadHostSystem"/>
+		<configurationDefinition name="preloadVM" defaultValue="true" info="info.preloadVM"/>
+		<configurationDefinition name="preloadUsesNewClients" defaultValue="true" info="info.preloadUsesNewClients"/>
+	</treeconfig>
+</tasklauncherconfig>

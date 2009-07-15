@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by Michael Bauschert (private) -->
+<tlc:customtreeconfig version="VERSION_2_2" xmlns:tlc="http://sblim.org/wbemsmt/tasklauncher/customtreeconfig" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://sblim.org/wbemsmt/tasklauncher/customtreeconfig ../../wbemsmt-commons/commons-bl/conf/customtreeconfig.xsd">
+	<tlc:contextmenu>
+		<tlc:menuitem>
+			<tlc:description>tree.menu.createVM</tlc:description>
+			<tlc:eventListener>
+				<tlc:classname>org.sblim.wbemsmt.vm.listener.DefineSystemListener</tlc:classname>
+			</tlc:eventListener>
+		</tlc:menuitem>
+		<!--
+		<tlc:menuitem>
+			<tlc:description>tree.menu.createVMCli</tlc:description>
+			<tlc:eventListener>
+				<tlc:classname>org.sblim.wbemsmt.vm.listener.DefineSystemCliListener</tlc:classname>
+			</tlc:eventListener>
+		</tlc:menuitem> -->
+
+	</tlc:contextmenu>
+	<tlc:treenode>
+		<tlc:description>root</tlc:description>
+		<tlc:treenode>
+			<tlc:description>tree.virtualsystems</tlc:description>
+			<tlc:eventListener isSystemListener="true">
+				<tlc:classname>org.sblim.wbemsmt.vm.DynamicTreeBuilderListener</tlc:classname>
+			</tlc:eventListener>		
+			<tlc:eventListener isSystemListener="true">
+				<tlc:classname>org.sblim.wbemsmt.tasklauncher.InitAdapterListener</tlc:classname>
+				<tlc:param>
+					<tlc:param-name>adapterClassName</tlc:param-name>
+					<tlc:param-value>org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapter</tlc:param-value>
+				</tlc:param>
+				<tlc:param>
+					<tlc:param-name>taskName</tlc:param-name>
+					<tlc:param-value>VM</tlc:param-value>
+				</tlc:param>
+			</tlc:eventListener>
+		</tlc:treenode>
+	</tlc:treenode>
+</tlc:customtreeconfig>
