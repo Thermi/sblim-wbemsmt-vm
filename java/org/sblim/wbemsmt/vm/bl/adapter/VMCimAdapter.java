@@ -1,14 +1,14 @@
  /** 
   * MetaclusterCimAdapter.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -22,7 +22,14 @@ package org.sblim.wbemsmt.vm.bl.adapter;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,9 +39,21 @@ import javax.cim.UnsignedInteger16;
 import javax.wbem.client.WBEMClient;
 import javax.wbem.listener.IndicationListener;
 
-import org.sblim.wbemsmt.bl.adapter.*;
+import org.sblim.wbemsmt.bl.adapter.AbstractBaseCimAdapter;
+import org.sblim.wbemsmt.bl.adapter.CimObjectKey;
+import org.sblim.wbemsmt.bl.adapter.CountDelegatee;
+import org.sblim.wbemsmt.bl.adapter.CreateDelegatee;
+import org.sblim.wbemsmt.bl.adapter.DeleteDelegatee;
+import org.sblim.wbemsmt.bl.adapter.InitContainerDelegatee;
+import org.sblim.wbemsmt.bl.adapter.InitWizardDelegatee;
+import org.sblim.wbemsmt.bl.adapter.InstallValidatorsDelegatee;
+import org.sblim.wbemsmt.bl.adapter.RevertDelegatee;
+import org.sblim.wbemsmt.bl.adapter.SaveDelegatee;
+import org.sblim.wbemsmt.bl.adapter.UpdateControlsDelegatee;
+import org.sblim.wbemsmt.bl.adapter.UpdateModelDelegatee;
 import org.sblim.wbemsmt.bl.fco.FcoHelper;
 import org.sblim.wbemsmt.bl.profiles.ProfileVersion;
+import org.sblim.wbemsmt.bl.tree.CIMInstanceNode;
 import org.sblim.wbemsmt.bl.tree.ICIMInstanceNode;
 import org.sblim.wbemsmt.bl.tree.ITaskLauncherTreeNode;
 import org.sblim.wbemsmt.bl.tree.InstanceNodeFilter;
@@ -46,14 +65,52 @@ import org.sblim.wbemsmt.exception.WbemsmtException;
 import org.sblim.wbemsmt.session.WbemsmtSession;
 import org.sblim.wbemsmt.tools.resources.ResourceBundleManager;
 import org.sblim.wbemsmt.tools.runtime.RuntimeUtil;
-import org.sblim.wbemsmt.vm.bl.adapter.delegatee.*;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterCountDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterCreateDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterDeleteDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterInitContainerDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterInitWizardDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterInstallValidatorsDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterRevertDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterSaveDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterUpdateControlsDelegatee;
+import org.sblim.wbemsmt.vm.bl.adapter.delegatee.VMCimAdapterUpdateModelDelegatee;
 import org.sblim.wbemsmt.vm.bl.wrapper.list.HostSystemList;
 import org.sblim.wbemsmt.vm.bl.wrapper.list.VMList;
 import org.sblim.wbemsmt.vm.bl.wrapper.objects.HostSystem;
 import org.sblim.wbemsmt.vm.bl.wrapper.objects.VM;
-import org.sblim.wbemsmt.vm.bl.wrapper.wizard.*;
+import org.sblim.wbemsmt.vm.bl.wrapper.wizard.ChangeVMSettingsWizard;
+import org.sblim.wbemsmt.vm.bl.wrapper.wizard.MigrationWizard;
+import org.sblim.wbemsmt.vm.bl.wrapper.wizard.VMBaseWizard;
+import org.sblim.wbemsmt.vm.bl.wrapper.wizard.VMCliWizard;
+import org.sblim.wbemsmt.vm.bl.wrapper.wizard.VMWizard;
 import org.sblim.wbemsmt.vm.container.edit.VMOverviewItemDataContainer;
-import org.sblim.wbemsmt.vm.schema.cim_2_17.*;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Capabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystemHelper;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ConcreteDependency;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_FilterCollection;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_FilterCollectionSubscription;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Indication;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_IndicationFilter;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_IndicationSubscription;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_InstCreation;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_InstDeletion;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_InstIndication;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_InstModification;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ListenerDestination;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ListenerDestinationCIMXML;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ListenerDestinationHelper;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ManagedElement;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_RegisteredProfile;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_RegisteredProfileHelper;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourceAllocationSettingData;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_System;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_SystemHelper;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementService;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationService;
 
 public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationListener {
 
@@ -224,11 +281,11 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 		setCimClient(cimClient);
 
 		//check if there is more than one virtualsystemManagementService found for one virtual system type
-		Map hostsByType = HostSystem.getHostSystemsByVirtualSystemType(cimClient,getInterOpNamespace());
+		Map<String, CIM_System> hostsByType = HostSystem.getHostSystemsByVirtualSystemType(cimClient,getInterOpNamespace());
 		
 		int count = 0;
 		
-		for (Iterator iterator = hostsByType.keySet().iterator(); iterator.hasNext();) {
+		for (Iterator<String> iterator = hostsByType.keySet().iterator(); iterator.hasNext();) {
             String type = (String) iterator.next();
             CIM_System system = (CIM_System) hostsByType.get(type);
 
@@ -274,19 +331,19 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 			this.rootNode = rootNode;
 			setCimClient(rootNode.getCimClient());
 
-            List nodes = rootNode.findInstanceNodes(instanceNodeFilterHostSystem);
+            List<ICIMInstanceNode> nodes = rootNode.findInstanceNodes(instanceNodeFilterHostSystem);
 			
             int count = 0;
             
-			for (Iterator iter = nodes.iterator(); iter.hasNext();) {
+			for (Iterator<ICIMInstanceNode> iter = nodes.iterator(); iter.hasNext();) {
 				ICIMInstanceNode node = (ICIMInstanceNode) iter.next();
 				CIM_System fco = CIM_SystemHelper.getInstance(getCimClient(), node.getCimInstance());
 				HostSystem hostSystem = new HostSystem(this,fco, (String)node.getValue(VIRTUAL_SYSTEM_TYPE));
                 hostSystems.addHostSystem(hostSystem);
 				
-	            List vmNodes = node.findInstanceNodes(instanceNodeFilterVm);
+	            List<ICIMInstanceNode> vmNodes = node.findInstanceNodes(instanceNodeFilterVm);
 	            
-	            for (Iterator iter1 = vmNodes.iterator(); iter1.hasNext();) {
+	            for (Iterator<ICIMInstanceNode> iter1 = vmNodes.iterator(); iter1.hasNext();) {
 	                ICIMInstanceNode vmnode = (ICIMInstanceNode) iter1.next();
 	                VM vm = new VM(this,CIM_ComputerSystemHelper.getInstance(getCimClient(), vmnode.getCimInstance()),hostSystem, count++);
                     hostSystem.getVmList().addVM(vm);
@@ -325,7 +382,7 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 				
 				if (migrationService != null)
 				{
-					List profiles = null;
+					List<CIM_RegisteredProfile> profiles = null;
 					profiles = migrationService.getAssociated_CIM_RegisteredProfile_CIM_ElementConformsToProfiles(cimClient);
                     for (int i = profiles.size() - 1; i >= 0; i--) {
                     	CIM_RegisteredProfile profile = (CIM_RegisteredProfile) profiles.get(i);
@@ -367,8 +424,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 		
 		CIM_ListenerDestinationCIMXML ourDestination = null;
         
-        List destinations = CIM_ListenerDestinationHelper.enumerateInstances(cimClient,interOpNamespace,true);
-        for (Iterator iterator = destinations.iterator(); iterator.hasNext() && ourDestination == null;) {
+        List<CIM_ListenerDestination> destinations = CIM_ListenerDestinationHelper.enumerateInstances(cimClient,interOpNamespace,true);
+        for (Iterator<CIM_ListenerDestination> iterator = destinations.iterator(); iterator.hasNext() && ourDestination == null;) {
         	CIM_ListenerDestination destination = (CIM_ListenerDestination) iterator.next();
         	if (destination instanceof CIM_ListenerDestinationCIMXML) {
         		CIM_ListenerDestinationCIMXML xmlDestination = (CIM_ListenerDestinationCIMXML) destination;
@@ -407,8 +464,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 		
 		if (ourDestination != null)
 		{
-			List subscriptions = ourDestination.getAssociations_CIM_IndicationSubscription(cimClient, false, false, null, null);
-            for (Iterator iterator = subscriptions.iterator(); iterator.hasNext();) {
+			List<CIM_IndicationSubscription> subscriptions = ourDestination.getAssociations_CIM_IndicationSubscription(cimClient, false, false, null, null);
+            for (Iterator<CIM_IndicationSubscription> iterator = subscriptions.iterator(); iterator.hasNext();) {
             	CIM_IndicationSubscription subscription = (CIM_IndicationSubscription) iterator.next();
                 CIM_IndicationFilter filter = subscription.get_Filter_CIM_IndicationFilter(cimClient);
                 
@@ -446,8 +503,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 	 * @throws WbemsmtException
 	 */
 	protected void subscribe_vsmp_072(CIM_ListenerDestinationCIMXML ourDestination,CIM_RegisteredProfile profile) throws WbemsmtException {
-		List dependencys = profile.getAssociated_CIM_ManagedElement_CIM_ConcreteDependencys(getCimClient(), CIM_FilterCollection.CIM_CLASS_NAME,null,null);
-        for (Iterator iterator = dependencys.iterator(); iterator.hasNext();) {
+		List<CIM_ManagedElement> dependencys = profile.getAssociated_CIM_ManagedElement_CIM_ConcreteDependencys(getCimClient(), CIM_FilterCollection.CIM_CLASS_NAME,null,null);
+        for (Iterator<CIM_ManagedElement> iterator = dependencys.iterator(); iterator.hasNext();) {
         	CIM_FilterCollection filterCollection = (CIM_FilterCollection) iterator.next();
             if (filterCollection.get_CollectionName().equals(FILTER_COLLECTION_NAME_ALERT)
             	|| filterCollection.get_CollectionName().equals(FILTER_COLLECTION_NAME_OPTIONAL)
@@ -455,8 +512,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
             {
             	boolean foundSubscription = false;
             	//check if we have already subscribed
-            	List subscriptions = filterCollection.getAssociations_CIM_FilterCollectionSubscription(getCimClient(), false, false, null, null);
-            	for (Iterator iterator2 = subscriptions.iterator(); iterator2.hasNext() && !foundSubscription;) {
+            	List<CIM_FilterCollectionSubscription> subscriptions = filterCollection.getAssociations_CIM_FilterCollectionSubscription(getCimClient(), false, false, null, null);
+            	for (Iterator<CIM_FilterCollectionSubscription> iterator2 = subscriptions.iterator(); iterator2.hasNext() && !foundSubscription;) {
             		CIM_FilterCollectionSubscription subscription = (CIM_FilterCollectionSubscription) iterator2.next();
             		if (subscription.get_Handler_CIM_ListenerDestination(getCimClient()).getCimObjectPath().toString().equals(ourDestination.getCimObjectPath().toString()))
             		{
@@ -516,7 +573,7 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 				if (fco != null)
 				{
 				    String[] types = HostSystem.getVirtualSystemTypes(fco, cimClient);
-				    Set typeSet = new HashSet();
+				    Set<String> typeSet = new HashSet<String>();
 				    typeSet.addAll(Arrays.asList(types));
 				    
 				    for (int i=0; i < hostSystems.size(); i++)
@@ -749,10 +806,10 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 	private static CIM_RegisteredProfile[] getProfiles(WBEMClient client, String interOpNamespace, UnsignedInteger16 organizationId,
 			String profileName, ProfileVersion profileversion)
 			throws WbemsmtException {
-		List list = CIM_RegisteredProfileHelper.enumerateInstances(client,interOpNamespace, true);
-        List result = new ArrayList();
+		List<CIM_RegisteredProfile> list = CIM_RegisteredProfileHelper.enumerateInstances(client,interOpNamespace, true);
+        List<CIM_RegisteredProfile> result = new ArrayList<CIM_RegisteredProfile>();
         
-        for (Iterator iter = list.iterator(); iter.hasNext();) {
+        for (Iterator<CIM_RegisteredProfile> iter = list.iterator(); iter.hasNext();) {
         	
         	CIM_RegisteredProfile profile = (CIM_RegisteredProfile) iter.next();
         	
@@ -836,8 +893,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
 	    
 	    super.setCimClient(cimClient);
 
-	    Set appNamespaces = new HashSet();
-        Set slpNamespaces = new HashSet();
+	    Set<String> appNamespaces = new HashSet<String>();
+        Set<String> slpNamespaces = new HashSet<String>();
         
         //get the namespace which was used for initialization of the given cimClient instance
         String tempNamespace = WbemsmtSession.getSession().getCIMClientPool(cimClient).getNamespace(cimClient);
@@ -846,8 +903,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
         for (int i = 0; i < profiles.length; i++) {
         	CIM_RegisteredProfile registeredProfile = profiles[i];
         	slpNamespaces.add(registeredProfile.getCimObjectPath().getNamespace());
-        	List meList = registeredProfile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfileNames(cimClient);
-        	for (Iterator iterator = meList.iterator(); iterator.hasNext();) {
+        	List<CIMObjectPath> meList = registeredProfile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfileNames(cimClient);
+        	for (Iterator<CIMObjectPath> iterator = meList.iterator(); iterator.hasNext();) {
         		CIMObjectPath path = (CIMObjectPath) iterator.next();
         		appNamespaces.add(path.getNamespace());
         	}
@@ -856,8 +913,8 @@ public class VMCimAdapter extends AbstractBaseCimAdapter implements IndicationLi
         for (int i = 0; i < profiles.length; i++) {
         	CIM_RegisteredProfile registeredProfile = profiles[i];
         	slpNamespaces.add(registeredProfile.getCimObjectPath().getNamespace());
-        	List meList = registeredProfile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfileNames(cimClient);
-        	for (Iterator iterator = meList.iterator(); iterator.hasNext();) {
+        	List<CIMObjectPath> meList = registeredProfile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfileNames(cimClient);
+        	for (Iterator<CIMObjectPath> iterator = meList.iterator(); iterator.hasNext();) {
         		CIMObjectPath path = (CIMObjectPath) iterator.next();
         		appNamespaces.add(path.getNamespace());
         	}

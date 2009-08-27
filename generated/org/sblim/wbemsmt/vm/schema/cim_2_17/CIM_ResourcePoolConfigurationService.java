@@ -1,27 +1,15 @@
-/** 
- * CIM_ResourcePoolConfigurationService.java
- *
+/**
+ * CIM_ResourcePoolConfigurationService.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED
+ * UNDER THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR
+ * DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a
+ * current copy of the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: This service provides for active management of Resource Pools. It allows jobs to be started for the creation and deletion of ResourcePools as well as addition and subtraction of host resources from ResourcePools
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: This service provides for active management
+ *            of Resource Pools. It allows jobs to be started for the creation and deletion of
+ *            ResourcePools as well as addition and subtraction of host resources from ResourcePools
+ *            generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -203,7 +191,6 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@585c585c
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -600,7 +587,6 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@523c523c
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -1019,7 +1005,6 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@7b2c7b2c
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -1437,7 +1422,6 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@17da17da
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -1832,7 +1816,6 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@16c216c2
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -2196,7 +2179,6 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@4b264b26
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -2511,53 +2493,63 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
      *
      */
 
-    public AddResourcesToResourcePoolResult invoke_AddResourcesToResourcePool(WBEMClient cimClient,
-            CIM_LogicalDevice[] HostResources, CIM_ResourcePool Pool) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[2];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("HostResources", new CIMDataType(
-                CIM_LogicalDevice.CIM_CLASS_NAME, 0), getCIMObjectPathes(HostResources));
-        inParameter[1] = new CIMArgument("Pool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME),
-                Pool.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_ADDRESOURCESTORESOURCEPOOL.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public AddResourcesToResourcePoolResult invoke_AddResourcesToResourcePool(WBEMClient cimClient
+                                 ,CIM_LogicalDevice[] HostResources
+                      ,CIM_ResourcePool Pool
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[2];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( HostResources == null ? null : new CIMArgument("HostResources", new CIMDataType(CIM_LogicalDevice.CIM_CLASS_NAME,0), getCIMObjectPathes(HostResources)) );
+       
+                    inParameter[1] = ( Pool == null ? null : new CIMArgument("Pool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME), Pool.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_ADDRESOURCESTORESOURCEPOOL.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_ADDRESOURCESTORESOURCEPOOL.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_ADDRESOURCESTORESOURCEPOOL.NAME, inParameter, outParameter));
-        }
-
+        
         AddResourcesToResourcePoolResult result = new AddResourcesToResourcePoolResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method AddResourcesToResourcePool
@@ -2624,56 +2616,66 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
      *
      */
 
-    public ChangeParentResourcePoolResult invoke_ChangeParentResourcePool(WBEMClient cimClient,
-            CIM_ResourcePool ChildPool, CIM_ResourcePool[] ParentPool,
-            CIM_ResourceAllocationSettingData[] Settings) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[3];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("ChildPool", new CIMDataType(
-                CIM_ResourcePool.CIM_CLASS_NAME), ChildPool.getCimObjectPath());
-        inParameter[1] = new CIMArgument("ParentPool", new CIMDataType(
-                CIM_ResourcePool.CIM_CLASS_NAME, 0), getCIMObjectPathes(ParentPool));
-        inParameter[2] = new CIMArgument("Settings", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(Settings));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CHANGEPARENTRESOURCEPOOL.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public ChangeParentResourcePoolResult invoke_ChangeParentResourcePool(WBEMClient cimClient
+                                 ,CIM_ResourcePool ChildPool
+                      ,CIM_ResourcePool[] ParentPool
+                      ,CIM_ResourceAllocationSettingData[] Settings
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[3];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( ChildPool == null ? null : new CIMArgument("ChildPool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME), ChildPool.getCimObjectPath()) );
+       
+                    inParameter[1] = ( ParentPool == null ? null : new CIMArgument("ParentPool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME,0), getCIMObjectPathes(ParentPool)) );
+       
+                    inParameter[2] = ( Settings == null ? null : new CIMArgument("Settings", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(Settings)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CHANGEPARENTRESOURCEPOOL.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CHANGEPARENTRESOURCEPOOL.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CHANGEPARENTRESOURCEPOOL.NAME, inParameter, outParameter));
-        }
-
+        
         ChangeParentResourcePoolResult result = new ChangeParentResourcePoolResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method ChangeParentResourcePool
@@ -2740,63 +2742,76 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
      *
      */
 
-    public CreateChildResourcePoolResult invoke_CreateChildResourcePool(WBEMClient cimClient,
-            String ElementName, CIM_ResourceAllocationSettingData[] Settings,
-            CIM_ResourcePool[] ParentPool) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[3];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("ElementName", CIMDataType.STRING_T, ElementName);
-        inParameter[1] = new CIMArgument("Settings", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(Settings));
-        inParameter[2] = new CIMArgument("ParentPool", new CIMDataType(
-                CIM_ResourcePool.CIM_CLASS_NAME, 0), getCIMObjectPathes(ParentPool));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CREATECHILDRESOURCEPOOL.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public CreateChildResourcePoolResult invoke_CreateChildResourcePool(WBEMClient cimClient
+                                 ,String ElementName
+                      ,CIM_ResourceAllocationSettingData[] Settings
+                      ,CIM_ResourcePool[] ParentPool
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[3];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( ElementName == null ? null : new CIMArgument("ElementName", CIMDataType.STRING_T, ElementName) );
+       
+                    inParameter[1] = ( Settings == null ? null : new CIMArgument("Settings", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(Settings)) );
+       
+                    inParameter[2] = ( ParentPool == null ? null : new CIMArgument("ParentPool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME,0), getCIMObjectPathes(ParentPool)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CREATECHILDRESOURCEPOOL.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CREATECHILDRESOURCEPOOL.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CREATECHILDRESOURCEPOOL.NAME, inParameter, outParameter));
-        }
-
+        
         CreateChildResourcePoolResult result = new CreateChildResourcePoolResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Pool = (CIMArgument) mapOutParameter.get("Pool");
-        if (arg_Pool != null) {
-            CIM_ResourcePool out_Pool = CIM_ResourcePoolHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Pool.getValue());
-
-            result.set_Pool(out_Pool);
-        }
-
+        if (arg_Pool != null)
+       	 {
+                                          CIM_ResourcePool out_Pool = CIM_ResourcePoolHelper.getInstance(cimClient,(CIMObjectPath)arg_Pool.getValue());
+                                    
+           result.set_Pool(out_Pool);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method CreateChildResourcePool
@@ -2884,62 +2899,76 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
      *
      */
 
-    public CreateResourcePoolResult invoke_CreateResourcePool(WBEMClient cimClient,
-            String ElementName, CIM_LogicalDevice[] HostResources, String ResourceType)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[3];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("ElementName", CIMDataType.STRING_T, ElementName);
-        inParameter[1] = new CIMArgument("HostResources", new CIMDataType(
-                CIM_LogicalDevice.CIM_CLASS_NAME, 0), getCIMObjectPathes(HostResources));
-        inParameter[2] = new CIMArgument("ResourceType", CIMDataType.STRING_T, ResourceType);
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CREATERESOURCEPOOL.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public CreateResourcePoolResult invoke_CreateResourcePool(WBEMClient cimClient
+                                 ,String ElementName
+                      ,CIM_LogicalDevice[] HostResources
+                      ,String ResourceType
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[3];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( ElementName == null ? null : new CIMArgument("ElementName", CIMDataType.STRING_T, ElementName) );
+       
+                    inParameter[1] = ( HostResources == null ? null : new CIMArgument("HostResources", new CIMDataType(CIM_LogicalDevice.CIM_CLASS_NAME,0), getCIMObjectPathes(HostResources)) );
+       
+                    inParameter[2] = ( ResourceType == null ? null : new CIMArgument("ResourceType", CIMDataType.STRING_T, ResourceType) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CREATERESOURCEPOOL.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CREATERESOURCEPOOL.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CREATERESOURCEPOOL.NAME, inParameter, outParameter));
-        }
-
+        
         CreateResourcePoolResult result = new CreateResourcePoolResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Pool = (CIMArgument) mapOutParameter.get("Pool");
-        if (arg_Pool != null) {
-            CIM_ResourcePool out_Pool = CIM_ResourcePoolHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Pool.getValue());
-
-            result.set_Pool(out_Pool);
-        }
-
+        if (arg_Pool != null)
+       	 {
+                                          CIM_ResourcePool out_Pool = CIM_ResourcePoolHelper.getInstance(cimClient,(CIMObjectPath)arg_Pool.getValue());
+                                    
+           result.set_Pool(out_Pool);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method CreateResourcePool
@@ -3025,51 +3054,60 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
      *
      */
 
-    public DeleteResourcePoolResult invoke_DeleteResourcePool(WBEMClient cimClient,
-            CIM_ResourcePool Pool) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[1];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("Pool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME),
-                Pool.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_DELETERESOURCEPOOL.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public DeleteResourcePoolResult invoke_DeleteResourcePool(WBEMClient cimClient
+                                 ,CIM_ResourcePool Pool
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[1];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( Pool == null ? null : new CIMArgument("Pool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME), Pool.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_DELETERESOURCEPOOL.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_DELETERESOURCEPOOL.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_DELETERESOURCEPOOL.NAME, inParameter, outParameter));
-        }
-
+        
         DeleteResourcePoolResult result = new DeleteResourcePoolResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method DeleteResourcePool
@@ -3135,54 +3173,63 @@ public class CIM_ResourcePoolConfigurationService extends CIM_Service {
      *
      */
 
-    public RemoveResourcesFromResourcePoolResult invoke_RemoveResourcesFromResourcePool(
-            WBEMClient cimClient, CIM_LogicalDevice[] HostResources, CIM_ResourcePool Pool)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[2];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("HostResources", new CIMDataType(
-                CIM_LogicalDevice.CIM_CLASS_NAME, 0), getCIMObjectPathes(HostResources));
-        inParameter[1] = new CIMArgument("Pool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME),
-                Pool.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_REMOVERESOURCESFROMRESOURCEPOOL.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public RemoveResourcesFromResourcePoolResult invoke_RemoveResourcesFromResourcePool(WBEMClient cimClient
+                                 ,CIM_LogicalDevice[] HostResources
+                      ,CIM_ResourcePool Pool
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[2];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( HostResources == null ? null : new CIMArgument("HostResources", new CIMDataType(CIM_LogicalDevice.CIM_CLASS_NAME,0), getCIMObjectPathes(HostResources)) );
+       
+                    inParameter[1] = ( Pool == null ? null : new CIMArgument("Pool", new CIMDataType(CIM_ResourcePool.CIM_CLASS_NAME), Pool.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_REMOVERESOURCESFROMRESOURCEPOOL.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_REMOVERESOURCESFROMRESOURCEPOOL.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_REMOVERESOURCESFROMRESOURCEPOOL.NAME, inParameter, outParameter));
-        }
-
+        
         RemoveResourcesFromResourcePoolResult result = new RemoveResourcesFromResourcePoolResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method RemoveResourcesFromResourcePool

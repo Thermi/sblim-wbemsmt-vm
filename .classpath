@@ -2,21 +2,23 @@
 <classpath>
 	<classpathentry kind="src" path="java"/>
 	<classpathentry kind="src" path="generated"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/wbemsmt-commons">
 		<accessrules>
-			<accessrule kind="nonaccessible" pattern="**/cim29/**"/>
-			<accessrule kind="nonaccessible" pattern="**/cim_2_14/**"/>
+			<accessrule kind="nonaccessible" pattern="**/cim221/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry exported="true" kind="var" path="JAR_REPO/commons-cli/commons-cli/1.0/commons-cli-1.0.jar" sourcepath="/SRC/commons-cli-1.0/src/java"/>
-	<classpathentry kind="var" path="JAR_REPO/commons-lang/commons-lang/2.1/commons-lang-2.1.jar"/>
-	<classpathentry kind="var" path="JAR_REPO/sblim/sblim-wbemsmt-commons-launcher-config/0.2.3/sblim-wbemsmt-commons-launcher-config-0.2.3.jar"/>
-	<classpathentry kind="var" path="JAR_REPO/xmlbeans/xbean/2.2.0/xbean-2.2.0.jar"/>
-	<classpathentry kind="var" path="JAR_REPO/myfaces/myfaces-api/1.1.5/myfaces-api-1.1.5.jar"/>
-	<classpathentry kind="var" path="JAR_REPO/xml-apis/xml-apis/2.9.0/xml-apis-2.9.0.jar"/>
-	<classpathentry kind="var" path="JAR_REPO/myfaces/tomahawk/1.1.3/tomahawk-1.1.3.jar" sourcepath="/SOURCES/tomahawk-1.1.3"/>
+	<classpathentry kind="var" path="JAR_REPO/commons-cli/commons-cli/current/commons-cli.jar" sourcepath="/SRC/commons-cli-1.0/src/java"/>
+	<classpathentry kind="var" path="JAR_REPO/commons-lang/commons-lang/current/commons-lang.jar"/>
+	<classpathentry kind="var" path="JAR_REPO/sblim/sblim-wbemsmt-commons-launcher-config/current/sblim-wbemsmt-commons-launcher-config.jar"/>
+	<classpathentry kind="var" path="JAR_REPO/xmlbeans/xbean/current/xbean.jar"/>
+	<classpathentry kind="var" path="JAR_REPO/myfaces/myfaces-api/current/myfaces-api.jar"/>
+	<classpathentry kind="var" path="JAR_REPO/xml-apis/xml-apis/current/xml-apis.jar"/>
+	<classpathentry kind="var" path="JAR_REPO/myfaces/tomahawk/current/tomahawk.jar" sourcepath="/SOURCES/tomahawk-1.1.3"/>
 	<classpathentry kind="var" path="JAR_REPO/commons-logging/commons-logging/current/commons-logging.jar"/>
 	<classpathentry kind="var" path="JAR_REPO/sblim/sblim-cim-client/current/sblim-cim-client.jar"/>
+	<classpathentry kind="var" path="JAR_REPO/commons-collections/commons-collections/current/commons-collections.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/wbemsmt-jar-repository/javax/servlet/servlet-api/current/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/wbemsmt-jar-repository/jsp-api/jsp-api/current/jsp-api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

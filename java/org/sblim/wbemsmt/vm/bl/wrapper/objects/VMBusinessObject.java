@@ -1,14 +1,14 @@
  /** 
   * MetaclusterObjects.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -20,16 +20,31 @@
 package org.sblim.wbemsmt.vm.bl.wrapper.objects;
 
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 
-import javax.cim.*;
+import javax.cim.CIMClass;
+import javax.cim.CIMInstance;
+import javax.cim.CIMProperty;
+import javax.cim.UnsignedInteger16;
+import javax.cim.UnsignedInteger64;
 
-import org.apache.commons.collections.MultiHashMap;
-import org.apache.commons.collections.MultiMap;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.sblim.wbemsmt.bl.fco.AbstractWbemsmtFcoHelper;
 import org.sblim.wbemsmt.bl.messages.Message;
 import org.sblim.wbemsmt.bl.messages.MessageList;
@@ -42,7 +57,13 @@ import org.sblim.wbemsmt.vm.VMErrCodes;
 import org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapter;
 import org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.RASDProperty;
 import org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.RASDPropertyComparator;
-import org.sblim.wbemsmt.vm.schema.cim_2_17.*;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_AllocationCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ConcreteJob;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ConcreteJobHelper;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourceAllocationSettingData;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_SettingData;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_SettingsDefineCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemSettingData;
 
 
 public abstract class VMBusinessObject extends WbemsmtBusinessObject{
@@ -56,7 +77,7 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
     public static final String VSSD = "vssd";
     
     
-    private static final MultiMap DEFAULT_PROPERTIES_BY_RASD_TYPE = new MultiHashMap();
+    private static final MultiValueMap DEFAULT_PROPERTIES_BY_RASD_TYPE = new MultiValueMap();
     
     static
     {
@@ -86,7 +107,7 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
 	 * Stores the RASD by using parts of the RASD, the resource Type and the value range
 	 * @see #getKey(CIM_ResourceAllocationSettingData, UnsignedInteger16, UnsignedInteger16)
 	 */
-    protected Map rasds = new HashMap();
+    protected Map<String,CIM_ResourceAllocationSettingData> rasds = new HashMap<String,CIM_ResourceAllocationSettingData>();
 
     private NumberFormat FORMAT_BYTES = new DecimalFormat("#######0");
     
@@ -129,9 +150,9 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
             return found;
         }
         
-        List sds = caps.getAssociations_CIM_SettingsDefineCapabilities(getCimClient(),false,false,null,null);
+        List<CIM_SettingsDefineCapabilities> sds = caps.getAssociations_CIM_SettingsDefineCapabilities(getCimClient(),false,false,null,null);
         
-        for (Iterator iterator = sds.iterator(); iterator.hasNext();) {
+        for (Iterator<CIM_SettingsDefineCapabilities> iterator = sds.iterator(); iterator.hasNext();) {
             CIM_SettingsDefineCapabilities sdc = (CIM_SettingsDefineCapabilities) iterator.next();
             
             boolean valueRangeMatching = range == null || 
@@ -168,8 +189,8 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
                     if (found == null)
                     {
                         String path = sdc.getProperty(CIM_SettingsDefineCapabilities.PROPERTY_PARTCOMPONENT_CIM_SETTINGDATA.NAME).getValue().toString();                    
-                        List rasds = caps.getAssociated_CIM_SettingData_CIM_SettingsDefineCapabilitiess(getCimClient(), CIM_ResourceAllocationSettingData.CIM_CLASS_NAME,null,null);
-                        for (Iterator iterator2 = rasds.iterator(); found == null && iterator2.hasNext();) {
+                        List<CIM_SettingData> rasds = caps.getAssociated_CIM_SettingData_CIM_SettingsDefineCapabilitiess(getCimClient(), CIM_ResourceAllocationSettingData.CIM_CLASS_NAME,null,null);
+                        for (Iterator<CIM_SettingData> iterator2 = rasds.iterator(); found == null && iterator2.hasNext();) {
                             rasd = (CIM_ResourceAllocationSettingData) iterator2.next();
                             if (rasd.getCimObjectPath().toString().equals(path))
                             {
@@ -226,7 +247,7 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
         else
         {
             //check if there are different units
-            Set allocationUnits = new HashSet();
+            Set<String> allocationUnits = new HashSet<String>();
             for (int i = 0; i < rasds.length; i++) {
                 CIM_ResourceAllocationSettingData sdForMemory = rasds[i];
                 if (isAllocationUnitKiloBytes(sdForMemory))
@@ -386,10 +407,10 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
      * @return the sorted list with the property names
      * @throws WbemsmtException
      */
-    protected List getPropertyNames(CIM_VirtualSystemSettingData[] vssds, String virtualSystemType, boolean view) throws WbemsmtException {
+    protected List<String> getPropertyNames(CIM_VirtualSystemSettingData[] vssds, String virtualSystemType, boolean view) throws WbemsmtException {
         
         //read all the properties of all vssd
-        Set names = new HashSet();
+        Set<String> names = new HashSet<String>();
         for (int i = 0; i < vssds.length; i++) {
             CIM_VirtualSystemSettingData vssd = vssds[i];
             CIMProperty[] properties2 = vssd.getProperties();
@@ -430,8 +451,8 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
                 Properties props = new Properties();
                 props.load(stream);
                 
-                Set excludes = props.keySet();
-                for (Iterator iterator = excludes.iterator(); iterator.hasNext();) {
+                Set<Object> excludes = props.keySet();
+                for (Iterator<Object> iterator = excludes.iterator(); iterator.hasNext();) {
                     String propertyToExclude = (String) iterator.next();
                     if (view)
                     {
@@ -455,7 +476,7 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
             logger.info("resource  " + resourceName + " was not found.");
         }
         
-        List properties = new ArrayList();
+        List<String> properties = new ArrayList<String>();
         properties.addAll(names);
         
         Collections.sort(properties, new StringComparator());
@@ -472,10 +493,10 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
      * @return the sorted list with RASDProperty objects
      * @throws WbemsmtException
      */
-    protected List getRASDProperties(CIM_ResourceAllocationSettingData rasd, String rasdType, String virtualSystemType) throws WbemsmtException {
+    protected List<RASDProperty> getRASDProperties(CIM_ResourceAllocationSettingData rasd, String rasdType, String virtualSystemType) throws WbemsmtException {
         
         //read all the properties of all vssd
-        Set namesInRasd = new HashSet();
+        Set<String> namesInRasd = new HashSet<String>();
         String rasdClassName = "";
         if (rasd != null) {
         	rasdClassName = rasd.getCimInstance().getClassName();
@@ -485,7 +506,7 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
 	            namesInRasd.add(property.getName());
 	        }
         }
-        Set result = new HashSet();
+        Set<RASDProperty> result = new HashSet<RASDProperty>();
         
         String resourceName =  System.getProperty("user.home") + "/" + virtualSystemType + ".wizard.properties";
         
@@ -517,8 +538,8 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
                 Properties props = new Properties();
                 props.load(stream);
                 
-                Set propKeys = props.keySet();
-                for (Iterator iterator = propKeys.iterator(); iterator.hasNext();) {
+                Set<Object> propKeys = props.keySet();
+                for (Iterator<Object> iterator = propKeys.iterator(); iterator.hasNext();) {
                     String key = (String) iterator.next();
                     if (key.startsWith(rasdType + "."))
                     {
@@ -550,7 +571,7 @@ public abstract class VMBusinessObject extends WbemsmtBusinessObject{
             logger.info("resource  " + resourceName + " was not found.");
         }
         
-        List properties = new ArrayList();
+        List<RASDProperty> properties = new ArrayList<RASDProperty>();
         properties.addAll(result);
         
         Collections.sort(properties, new RASDPropertyComparator());

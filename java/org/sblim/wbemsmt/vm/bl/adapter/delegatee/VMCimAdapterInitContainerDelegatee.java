@@ -1,14 +1,14 @@
  /** 
   * MetaclusterCimAdapterInitContainerDelegatee.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -24,10 +24,57 @@ import org.sblim.wbemsmt.bl.fielddata.PictureData;
 import org.sblim.wbemsmt.exception.WbemsmtException;
 import org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapter;
 import org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapterInitContainerIf;
-import org.sblim.wbemsmt.vm.container.edit.*;
 import org.sblim.wbemsmt.vm.container.edit.ConfigItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.DiskHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.DiskHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.DiskVMInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.DiskVMInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.HostSystemInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.HostSystemInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.MemoryHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.MemoryHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.MemoryVMInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.MemoryVMInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.NetworkHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.NetworkHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.NetworkVMInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.NetworkVMInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.PossibleOperationsDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.PossibleOperationsItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.ProcessorHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.ProcessorHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.ProcessorVMInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.ProcessorVMInfoItemDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.VMConfigDataContainer;
-import org.sblim.wbemsmt.vm.container.wizard.*;
+import org.sblim.wbemsmt.vm.container.edit.VMDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.VMOperationsDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.VMOverviewDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.VMOverviewItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.WelcomeDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.WelcomeItemDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.ChangeVMSettingsSummaryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage1;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2a;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2b;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2c;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage3;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerSummary;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMPage1DataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMPage2DataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMPage3DataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMSummaryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DefineSystemCLIDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DefineSystemCLISummaryConfigItemDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DefineSystemCLISummaryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DiskDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DiskItemDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.MemoryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.NetworkDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.NetworkItemDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.ProcessorDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.SummaryConfigItemDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.SummaryDiskItemDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.SummaryNetworkItemDataContainer;
 import org.sblim.wbemsmt.vm.listener.DefineSystemListener;
 
 public class VMCimAdapterInitContainerDelegatee implements VMCimAdapterInitContainerIf {

@@ -1,27 +1,14 @@
-/** 
- * CIM_MediaAccessDevice.java
- *
+/**
+ * CIM_MediaAccessDevice.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER
+ * MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: A MediaAccessDevice represents the ability to access one or more media and use this media to store and retrieve data.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: A MediaAccessDevice represents the ability to
+ *            access one or more media and use this media to store and retrieve data. generated
+ *            Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -235,7 +222,6 @@ public class CIM_MediaAccessDevice extends CIM_LogicalDevice {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@7f667f66
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Unknown.equals(value)) {
@@ -751,7 +737,6 @@ public class CIM_MediaAccessDevice extends CIM_LogicalDevice {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@49824982
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Other.equals(value)) {
@@ -2992,42 +2977,50 @@ public class CIM_MediaAccessDevice extends CIM_LogicalDevice {
      *
      */
 
-    public LockMediaResult invoke_LockMedia(WBEMClient cimClient, Boolean Lock)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[1];
-        CIMArgument[] outParameter = new CIMArgument[0];
-
-        inParameter[0] = new CIMArgument("Lock", CIMDataType.BOOLEAN_T, Lock);
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(), METHOD_LOCKMEDIA.NAME,
-                    inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public LockMediaResult invoke_LockMedia(WBEMClient cimClient
+                                 ,Boolean Lock
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[1];
+       CIMArgument[] outParameter = new CIMArgument[0];
+    
+                    inParameter[0] = ( Lock == null ? null : new CIMArgument("Lock", CIMDataType.BOOLEAN_T, Lock) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_LOCKMEDIA.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_LOCKMEDIA.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_LOCKMEDIA.NAME, inParameter, outParameter));
-        }
-
+        
         LockMediaResult result = new LockMediaResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
-        return result;
-    }
+                  
+     return result;               
+   }
 
     /**
      * Result object for the method LockMedia

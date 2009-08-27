@@ -10,7 +10,7 @@
 Name:           %{name}
 Version:        %{version}
 Release:        %{release}
-License:        Common Public License
+License:        Eclipse Public License
 Url:            http://sblim.sourceforge.net/
 Group:          Systems Management/Web Application
 Vendor:         IBM
@@ -21,10 +21,10 @@ BuildArch:      noarch
 
 BuildRequires: jpackage-utils >= 0:1.5.32
 BuildRequires: ant >= 0:1.6
-BuildRequires: sblim-cim-client >= 0:1.3
+#BuildRequires: sblim-cim-client >= 0:1.3
 BuildRequires: sblim-wbemsmt-commons => 0.5.0
-BuildRequires: jakarta-commons-lang >= 2.0
-BuildRequires: jakarta-commons-collections >= 3.1
+#BuildRequires: jakarta-commons-lang >= 2.0
+#BuildRequires: jakarta-commons-collections >= 3.1
 
 # Commented out because these requirements are supplied by jar files not included in the distro repository
 #BuildRequires: jakarta-commons-cli >= 1.0
@@ -35,11 +35,11 @@ BuildRequires: jakarta-commons-collections >= 3.1
 ###############################################################################
 
 Requires: jpackage-utils >= 0:1.5.32
-Requires: sblim-cim-client >= 0:1.3
+#Requires: sblim-cim-client >= 0:1.3
 Requires: sblim-wbemsmt-commons => 0.5.0
 Requires: sblim-wbemsmt-webapp => 0.5.0
-Requires: jakarta-commons-lang >= 2.0
-Requires: jakarta-commons-collections >= 3.1
+#Requires: jakarta-commons-lang >= 2.0
+#Requires: jakarta-commons-collections >= 3.1
 
 # Commented out because these requirements are supplied by jar files not included in the distro repository
 #Requires: jakarta-commons-cli >= 1.0
@@ -65,6 +65,7 @@ interface for the vm task.
 %build
 CLASSPATH=$(build-classpath sblim-cim-client)
 CLASSPATH=$(build-classpath commons-cli commons-collections commons-lang):$CLASSPATH
+CLASSPATH=$(build-classpath servlet-api jsp-api):$CLASSPATH
 CLASSPATH=$(build-classpath myfaces-api myfaces-impl tomahawk xbean):$CLASSPATH
 CLASSPATH=$(build-classpath sblim-wbemsmt/sblim-wbemsmt-commons sblim-wbemsmt/sblim-wbemsmt-commons-launcher-config):$CLASSPATH
 export CLASSPATH
@@ -80,7 +81,7 @@ install -d $RPM_BUILD_ROOT%{_bindir}/
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/sblim-wbemsmt/tasklauncher.d
 install -d $RPM_BUILD_ROOT%{_javadir}/sblim-wbemsmt
 install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
-install -d $RPM_BUILD_ROOT%{_localstatedir}/lib/%{name}/help
+install -d $RPM_BUILD_ROOT%{_localstatedir}/lib/sblim-wbemsmt/help
 
 # Installation of documentation files
 install COPYING   $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/COPYING
@@ -102,7 +103,7 @@ install target/package/%{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/sblim-w
 )
 
 # Moving help files to the webapp directory
-mv target/package/help/* $RPM_BUILD_ROOT%{_localstatedir}/lib/%{name}/help
+mv target/package/help/* $RPM_BUILD_ROOT%{_localstatedir}/lib/sblim-wbemsmt/help
 
 ###############################################################################
 
@@ -113,13 +114,8 @@ unset JAVA_HOME
 [ -z "$JAVA_HOME" ] && JAVA_HOME=%{_jvmdir}/java
 
 unset WBEMSMT_WEBAPP_HOME
-[ -r %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf ] && . %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf
+#[ -r %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf ] && . %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf
 [ -z "$WBEMSMT_WEBAPP_HOME" ] && WBEMSMT_WEBAPP_HOME=%{_localstatedir}/lib/sblim-wbemsmt-webapp/webapps/sblim-wbemsmt-webapp
-
-unset WBEMSMT_HELPDIR
-[ -r %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-commons.conf ] && . %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-commons.conf
-[ -z "$WBEMSMT_HELPDIR" ] && WBEMSMT_HELPDIR=/var/lib/sblim-wbemsmt/help
-ln -sf %{_localstatedir}/lib/%{name}/help/plugins/org.sblim.wbemsmt.help.vm $WBEMSMT_HELPDIR/plugins/org.sblim.wbemsmt.help.vm
 
 build-jar-repository $WBEMSMT_WEBAPP_HOME/WEB-INF/lib sblim-wbemsmt/%{name}
 
@@ -128,15 +124,9 @@ build-jar-repository $WBEMSMT_WEBAPP_HOME/WEB-INF/lib sblim-wbemsmt/%{name}
 
 %preun
 unset WBEMSMT_WEBAPP_HOME
-[ -r %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf ] && . %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf
+#[ -r %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf ] && . %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-webapp.conf
 [ -z "$WBEMSMT_WEBAPP_HOME" ] && WBEMSMT_WEBAPP_HOME=%{_localstatedir}/lib/sblim-wbemsmt-webapp/webapps/sblim-wbemsmt-webapp
 rm -f $WBEMSMT_WEBAPP_HOME/WEB-INF/lib/\[sblim-wbemsmt\]\[%{name}.jar\]*.jar
-
-unset WBEMSMT_HELPDIR
-[ -r %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-commons.conf ] && . %{_sysconfdir}/sblim-wbemsmt/sblim-wbemsmt-commons.conf
-[ -z "$WBEMSMT_HELPDIR" ] && WBEMSMT_HELPDIR=/var/lib/sblim-wbemsmt/help
-unlink $WBEMSMT_HELPDIR/plugins/org.sblim.wbemsmt.help.vm
-
 
 ###############################################################################
 
@@ -149,7 +139,8 @@ unlink $WBEMSMT_HELPDIR/plugins/org.sblim.wbemsmt.help.vm
 %doc %{_docdir}/%{name}-%{version}/NEWS
 %doc %{_docdir}/%{name}-%{version}/TroubleShooting
 %doc %{_docdir}/%{name}-%{version}/MultipleHostsSupport
-%{_localstatedir}/lib/%{name}/help/*
+%{_localstatedir}/lib/sblim-wbemsmt/help/plugins/org.sblim.wbemsmt.help.hypervisor-mgr/*
+%{_localstatedir}/lib/sblim-wbemsmt/help/plugins/org.sblim.wbemsmt.help.vm/*
 %{_javadir}/sblim-wbemsmt/%{name}.jar
 %{_javadir}/sblim-wbemsmt/%{name}-%{version}.jar
 %{_bindir}/sblim-wbemsmt-vm-cli.sh

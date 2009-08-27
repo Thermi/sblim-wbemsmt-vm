@@ -1,27 +1,14 @@
-/** 
- * CIM_VirtualSystemMigrationService.java
- *
+/**
+ * CIM_VirtualSystemMigrationService.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED
+ * UNDER THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR
+ * DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a
+ * current copy of the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: Service to control the migration of virtual systems between host systems, including pre-checking to determine if an intended migration operation is likely to succeed.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: Service to control the migration of virtual
+ *            systems between host systems, including pre-checking to determine if an intended
+ *            migration operation is likely to succeed. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -177,7 +164,6 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@48e848e8
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -533,7 +519,6 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@32483248
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -902,7 +887,6 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@4fe04fe0
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -1283,7 +1267,6 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@c9e0c9e
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -1635,61 +1618,73 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
      *
      */
 
-    public CheckVirtualSystemIsMigratableToHostResult invoke_CheckVirtualSystemIsMigratableToHost(
-            WBEMClient cimClient, CIM_ComputerSystem ComputerSystem, String DestinationHost,
-            CIM_VirtualSystemMigrationSettingData MigrationSettingData,
-            CIM_VirtualSystemSettingData NewSystemSettingData,
-            CIM_ResourceAllocationSettingData[] NewResourceSettingData) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[5];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("ComputerSystem", new CIMDataType(
-                CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath());
-        inParameter[1] = new CIMArgument("DestinationHost", CIMDataType.STRING_T, DestinationHost);
-        inParameter[2] = new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T,
-                MigrationSettingData.getCimInstance());
-        inParameter[3] = new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T,
-                NewSystemSettingData.getCimInstance());
-        inParameter[4] = new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(NewResourceSettingData));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOHOST.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public CheckVirtualSystemIsMigratableToHostResult invoke_CheckVirtualSystemIsMigratableToHost(WBEMClient cimClient
+                                 ,CIM_ComputerSystem ComputerSystem
+                      ,String DestinationHost
+                      ,CIM_VirtualSystemMigrationSettingData MigrationSettingData
+                      ,CIM_VirtualSystemSettingData NewSystemSettingData
+                      ,CIM_ResourceAllocationSettingData[] NewResourceSettingData
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[5];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( ComputerSystem == null ? null : new CIMArgument("ComputerSystem", new CIMDataType(CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath()) );
+       
+                    inParameter[1] = ( DestinationHost == null ? null : new CIMArgument("DestinationHost", CIMDataType.STRING_T, DestinationHost) );
+       
+                    inParameter[2] = ( MigrationSettingData == null ? null : new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T, MigrationSettingData.getCimInstance()) );
+       
+                    inParameter[3] = ( NewSystemSettingData == null ? null : new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T, NewSystemSettingData.getCimInstance()) );
+       
+                    inParameter[4] = ( NewResourceSettingData == null ? null : new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(NewResourceSettingData)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOHOST.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOHOST.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOHOST.NAME, inParameter, outParameter));
-        }
-
+        
         CheckVirtualSystemIsMigratableToHostResult result = new CheckVirtualSystemIsMigratableToHostResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_IsMigratable = (CIMArgument) mapOutParameter.get("IsMigratable");
-        if (arg_IsMigratable != null) {
-
-            Boolean out_IsMigratable = (Boolean) arg_IsMigratable.getValue();
-
-            result.set_IsMigratable(out_IsMigratable);
-        }
-
-        return result;
-    }
+        if (arg_IsMigratable != null)
+       	 {
+              
+              Boolean out_IsMigratable = (Boolean)arg_IsMigratable.getValue();    
+                      
+           result.set_IsMigratable(out_IsMigratable);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method CheckVirtualSystemIsMigratableToHost
@@ -1765,62 +1760,73 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
      *
      */
 
-    public CheckVirtualSystemIsMigratableToSystemResult invoke_CheckVirtualSystemIsMigratableToSystem(
-            WBEMClient cimClient, CIM_ComputerSystem ComputerSystem, CIM_System DestinationSystem,
-            CIM_VirtualSystemMigrationSettingData MigrationSettingData,
-            CIM_VirtualSystemSettingData NewSystemSettingData,
-            CIM_ResourceAllocationSettingData[] NewResourceSettingData) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[5];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("ComputerSystem", new CIMDataType(
-                CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath());
-        inParameter[1] = new CIMArgument("DestinationSystem", new CIMDataType(
-                CIM_System.CIM_CLASS_NAME), DestinationSystem.getCimObjectPath());
-        inParameter[2] = new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T,
-                MigrationSettingData.getCimInstance());
-        inParameter[3] = new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T,
-                NewSystemSettingData.getCimInstance());
-        inParameter[4] = new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(NewResourceSettingData));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOSYSTEM.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public CheckVirtualSystemIsMigratableToSystemResult invoke_CheckVirtualSystemIsMigratableToSystem(WBEMClient cimClient
+                                 ,CIM_ComputerSystem ComputerSystem
+                      ,CIM_System DestinationSystem
+                      ,CIM_VirtualSystemMigrationSettingData MigrationSettingData
+                      ,CIM_VirtualSystemSettingData NewSystemSettingData
+                      ,CIM_ResourceAllocationSettingData[] NewResourceSettingData
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[5];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( ComputerSystem == null ? null : new CIMArgument("ComputerSystem", new CIMDataType(CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath()) );
+       
+                    inParameter[1] = ( DestinationSystem == null ? null : new CIMArgument("DestinationSystem", new CIMDataType(CIM_System.CIM_CLASS_NAME), DestinationSystem.getCimObjectPath()) );
+       
+                    inParameter[2] = ( MigrationSettingData == null ? null : new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T, MigrationSettingData.getCimInstance()) );
+       
+                    inParameter[3] = ( NewSystemSettingData == null ? null : new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T, NewSystemSettingData.getCimInstance()) );
+       
+                    inParameter[4] = ( NewResourceSettingData == null ? null : new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(NewResourceSettingData)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOSYSTEM.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOSYSTEM.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CHECKVIRTUALSYSTEMISMIGRATABLETOSYSTEM.NAME, inParameter, outParameter));
-        }
-
+        
         CheckVirtualSystemIsMigratableToSystemResult result = new CheckVirtualSystemIsMigratableToSystemResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_IsMigratable = (CIMArgument) mapOutParameter.get("IsMigratable");
-        if (arg_IsMigratable != null) {
-
-            Boolean out_IsMigratable = (Boolean) arg_IsMigratable.getValue();
-
-            result.set_IsMigratable(out_IsMigratable);
-        }
-
-        return result;
-    }
+        if (arg_IsMigratable != null)
+       	 {
+              
+              Boolean out_IsMigratable = (Boolean)arg_IsMigratable.getValue();    
+                      
+           result.set_IsMigratable(out_IsMigratable);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method CheckVirtualSystemIsMigratableToSystem
@@ -1898,61 +1904,72 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
      *
      */
 
-    public MigrateVirtualSystemToHostResult invoke_MigrateVirtualSystemToHost(WBEMClient cimClient,
-            CIM_ComputerSystem ComputerSystem, String DestinationHost,
-            CIM_VirtualSystemMigrationSettingData MigrationSettingData,
-            CIM_VirtualSystemSettingData NewSystemSettingData,
-            CIM_ResourceAllocationSettingData[] NewResourceSettingData) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[5];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("ComputerSystem", new CIMDataType(
-                CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath());
-        inParameter[1] = new CIMArgument("DestinationHost", CIMDataType.STRING_T, DestinationHost);
-        inParameter[2] = new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T,
-                MigrationSettingData.getCimInstance());
-        inParameter[3] = new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T,
-                NewSystemSettingData.getCimInstance());
-        inParameter[4] = new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(NewResourceSettingData));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_MIGRATEVIRTUALSYSTEMTOHOST.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public MigrateVirtualSystemToHostResult invoke_MigrateVirtualSystemToHost(WBEMClient cimClient
+                                 ,CIM_ComputerSystem ComputerSystem
+                      ,String DestinationHost
+                      ,CIM_VirtualSystemMigrationSettingData MigrationSettingData
+                      ,CIM_VirtualSystemSettingData NewSystemSettingData
+                      ,CIM_ResourceAllocationSettingData[] NewResourceSettingData
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[5];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( ComputerSystem == null ? null : new CIMArgument("ComputerSystem", new CIMDataType(CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath()) );
+       
+                    inParameter[1] = ( DestinationHost == null ? null : new CIMArgument("DestinationHost", CIMDataType.STRING_T, DestinationHost) );
+       
+                    inParameter[2] = ( MigrationSettingData == null ? null : new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T, MigrationSettingData.getCimInstance()) );
+       
+                    inParameter[3] = ( NewSystemSettingData == null ? null : new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T, NewSystemSettingData.getCimInstance()) );
+       
+                    inParameter[4] = ( NewResourceSettingData == null ? null : new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(NewResourceSettingData)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_MIGRATEVIRTUALSYSTEMTOHOST.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_MIGRATEVIRTUALSYSTEMTOHOST.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_MIGRATEVIRTUALSYSTEMTOHOST.NAME, inParameter, outParameter));
-        }
-
+        
         MigrateVirtualSystemToHostResult result = new MigrateVirtualSystemToHostResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method MigrateVirtualSystemToHost
@@ -2029,70 +2046,82 @@ public class CIM_VirtualSystemMigrationService extends CIM_Service {
      *
      */
 
-    public MigrateVirtualSystemToSystemResult invoke_MigrateVirtualSystemToSystem(
-            WBEMClient cimClient, CIM_ComputerSystem ComputerSystem, CIM_System DestinationSystem,
-            CIM_VirtualSystemMigrationSettingData MigrationSettingData,
-            CIM_VirtualSystemSettingData NewSystemSettingData,
-            CIM_ResourceAllocationSettingData[] NewResourceSettingData) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[5];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("ComputerSystem", new CIMDataType(
-                CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath());
-        inParameter[1] = new CIMArgument("DestinationSystem", new CIMDataType(
-                CIM_System.CIM_CLASS_NAME), DestinationSystem.getCimObjectPath());
-        inParameter[2] = new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T,
-                MigrationSettingData.getCimInstance());
-        inParameter[3] = new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T,
-                NewSystemSettingData.getCimInstance());
-        inParameter[4] = new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(NewResourceSettingData));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_MIGRATEVIRTUALSYSTEMTOSYSTEM.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public MigrateVirtualSystemToSystemResult invoke_MigrateVirtualSystemToSystem(WBEMClient cimClient
+                                 ,CIM_ComputerSystem ComputerSystem
+                      ,CIM_System DestinationSystem
+                      ,CIM_VirtualSystemMigrationSettingData MigrationSettingData
+                      ,CIM_VirtualSystemSettingData NewSystemSettingData
+                      ,CIM_ResourceAllocationSettingData[] NewResourceSettingData
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[5];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( ComputerSystem == null ? null : new CIMArgument("ComputerSystem", new CIMDataType(CIM_ComputerSystem.CIM_CLASS_NAME), ComputerSystem.getCimObjectPath()) );
+       
+                    inParameter[1] = ( DestinationSystem == null ? null : new CIMArgument("DestinationSystem", new CIMDataType(CIM_System.CIM_CLASS_NAME), DestinationSystem.getCimObjectPath()) );
+       
+                    inParameter[2] = ( MigrationSettingData == null ? null : new CIMArgument("MigrationSettingData", CIMDataType.OBJECT_T, MigrationSettingData.getCimInstance()) );
+       
+                    inParameter[3] = ( NewSystemSettingData == null ? null : new CIMArgument("NewSystemSettingData", CIMDataType.OBJECT_T, NewSystemSettingData.getCimInstance()) );
+       
+                    inParameter[4] = ( NewResourceSettingData == null ? null : new CIMArgument("NewResourceSettingData", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(NewResourceSettingData)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_MIGRATEVIRTUALSYSTEMTOSYSTEM.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_MIGRATEVIRTUALSYSTEMTOSYSTEM.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_MIGRATEVIRTUALSYSTEMTOSYSTEM.NAME, inParameter, outParameter));
-        }
-
+        
         MigrateVirtualSystemToSystemResult result = new MigrateVirtualSystemToSystemResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_NewComputerSystem = (CIMArgument) mapOutParameter.get("NewComputerSystem");
-        if (arg_NewComputerSystem != null) {
-            CIM_ComputerSystem out_NewComputerSystem = CIM_ComputerSystemHelper.getInstance(
-                    cimClient, (CIMObjectPath) arg_NewComputerSystem.getValue());
-
-            result.set_NewComputerSystem(out_NewComputerSystem);
-        }
-
+        if (arg_NewComputerSystem != null)
+       	 {
+                                          CIM_ComputerSystem out_NewComputerSystem = CIM_ComputerSystemHelper.getInstance(cimClient,(CIMObjectPath)arg_NewComputerSystem.getValue());
+                                    
+           result.set_NewComputerSystem(out_NewComputerSystem);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method MigrateVirtualSystemToSystem

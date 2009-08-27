@@ -1,28 +1,23 @@
-/** 
- * CIM_SystemComponent.java
- *
+/**
+ * CIM_SystemComponent.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS
+ * OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: CIM_SystemComponent is a specialization of the CIM_Component association that establishes 'part of' relationships between a System and any ManagedSystemElements of which it is composed. 
- * Use this association with caution when using it instead of a subclass such as SystemDevice or a peer association such as HostedService. This class is very broadly defined, which can lead to erroneous use. For example, Access Points that are dependent on (and hosted on) a System are NOT Components of the System. The System is not made up of any AccessPoint 'parts', which is why a Dependency association, HostedAccessPoint, was defined. Similarly, a PhysicalPackage is not a 'part' of a System, because the physical element exists independently of any internal components, software, and so on. In fact, again, a Dependency relationship is true where a ComputerSystem is Dependent on its packaging, as described by the ComputerSystemPackage association.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: CIM_SystemComponent is a specialization of
+ *            the CIM_Component association that establishes 'part of' relationships between a
+ *            System and any ManagedSystemElements of which it is composed. Use this association
+ *            with caution when using it instead of a subclass such as SystemDevice or a peer
+ *            association such as HostedService. This class is very broadly defined, which can lead
+ *            to erroneous use. For example, Access Points that are dependent on (and hosted on) a
+ *            System are NOT Components of the System. The System is not made up of any AccessPoint
+ *            'parts', which is why a Dependency association, HostedAccessPoint, was defined.
+ *            Similarly, a PhysicalPackage is not a 'part' of a System, because the physical element
+ *            exists independently of any internal components, software, and so on. In fact, again,
+ *            a Dependency relationship is true where a ComputerSystem is Dependent on its
+ *            packaging, as described by the ComputerSystemPackage association. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

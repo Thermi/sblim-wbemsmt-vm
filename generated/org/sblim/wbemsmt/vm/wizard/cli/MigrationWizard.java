@@ -1,27 +1,12 @@
-/** 
- * MigrationWizard.java
- *
+/**
+ * MigrationWizard.java Â© Copyright IBM Corp.  2009,2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS OF
+ * THE ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/eclipse-1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.cmd.CMDPresentationLayerGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/cmd/wizardClass.vm
- *
- * Contributors: 
- *   Prashanth Karnam <prkarnam@in.ibm.com>
- * 
- * Description: 
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/cmd/wizardClass.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: generated Class
  */
 
 package org.sblim.wbemsmt.vm.wizard.cli;
@@ -47,37 +32,37 @@ public class MigrationWizard extends CliWizardBase implements IPageWizardAdapter
                 "messagesVm" }, Locale.getDefault()));
         this.container = new org.sblim.wbemsmt.vm.wizard.MigrationWizardContainer(adapter,
                 new org.sblim.wbemsmt.vm.wizard.MigrationWizardContainerPanels() {
-                    public Object getPanel1() throws WbemsmtException {
+                    public DataContainer getPanel1() throws WbemsmtException {
                         DataContainer dc = new org.sblim.wbemsmt.vm.container.wizard.cli.CreateMigrationContainerPage1Impl(
                                 adapter);
                         return dc;
                     }
 
-                    public Object getPanel2a() throws WbemsmtException {
+                    public DataContainer getPanel2a() throws WbemsmtException {
                         DataContainer dc = new org.sblim.wbemsmt.vm.container.wizard.cli.CreateMigrationContainerPage2aImpl(
                                 adapter);
                         return dc;
                     }
 
-                    public Object getPanel2b() throws WbemsmtException {
+                    public DataContainer getPanel2b() throws WbemsmtException {
                         DataContainer dc = new org.sblim.wbemsmt.vm.container.wizard.cli.CreateMigrationContainerPage2bImpl(
                                 adapter);
                         return dc;
                     }
 
-                    public Object getSummary() throws WbemsmtException {
+                    public DataContainer getSummary() throws WbemsmtException {
                         DataContainer dc = new org.sblim.wbemsmt.vm.container.wizard.cli.CreateMigrationContainerSummaryImpl(
                                 adapter);
                         return dc;
                     }
 
-                    public Object getPanel2c() throws WbemsmtException {
+                    public DataContainer getPanel2c() throws WbemsmtException {
                         DataContainer dc = new org.sblim.wbemsmt.vm.container.wizard.cli.CreateMigrationContainerPage2cImpl(
                                 adapter);
                         return dc;
                     }
 
-                    public Object getPanel3() throws WbemsmtException {
+                    public DataContainer getPanel3() throws WbemsmtException {
                         DataContainer dc = new org.sblim.wbemsmt.vm.container.wizard.cli.CreateMigrationContainerPage3Impl(
                                 adapter);
                         return dc;

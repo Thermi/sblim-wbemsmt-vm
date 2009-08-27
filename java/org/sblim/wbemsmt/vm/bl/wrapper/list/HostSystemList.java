@@ -1,14 +1,14 @@
  /** 
   * HostedSystemList.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -75,8 +75,8 @@ public class HostSystemList extends ObjectList  {
 	 */
 	public HostSystem getHostedSystemByType(String typeOfHostedSystem) throws WbemsmtException {
 		
-	    List list = getList();
-	    for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+	    List<Object> list = getList();
+	    for (Iterator<Object> iterator = list.iterator(); iterator.hasNext();) {
             HostSystem host = (HostSystem) iterator.next();
             if (host.getVirtualSystemType().equals(typeOfHostedSystem))
             {
@@ -95,11 +95,11 @@ public class HostSystemList extends ObjectList  {
 	}
 
     public String[] getVirtualSystemTypeArray() throws WbemsmtException {
-        List list2 = getList();
+        List<Object> list2 = getList();
         
         String[] result = new String[list2.size()]; 
         int i=0;
-        for (Iterator iterator = list2.iterator(); iterator.hasNext();) {
+        for (Iterator<Object> iterator = list2.iterator(); iterator.hasNext();) {
             HostSystem host = (HostSystem) iterator.next();
             result[i++] = host.getVirtualSystemType();
         }

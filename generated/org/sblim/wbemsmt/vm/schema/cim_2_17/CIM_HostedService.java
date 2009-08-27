@@ -1,27 +1,19 @@
-/** 
- * CIM_HostedService.java
- *
+/**
+ * CIM_HostedService.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS OF
+ * THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: CIM_HostedService is an association between a Service and the System on which the functionality is located. The cardinality of this association is one-to-many. A System can host many Services. Services are weak with respect to their hosting System. Heuristic: A Service is hosted on the System where the LogicalDevices or SoftwareFeatures that implement the Service are located. The model does not represent Services hosted across multiple systems. The model is as an ApplicationSystem that acts as an aggregation point for Services that are each located on a single host.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: CIM_HostedService is an association between a
+ *            Service and the System on which the functionality is located. The cardinality of this
+ *            association is one-to-many. A System can host many Services. Services are weak with
+ *            respect to their hosting System. Heuristic: A Service is hosted on the System where
+ *            the LogicalDevices or SoftwareFeatures that implement the Service are located. The
+ *            model does not represent Services hosted across multiple systems. The model is as an
+ *            ApplicationSystem that acts as an aggregation point for Services that are each located
+ *            on a single host. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

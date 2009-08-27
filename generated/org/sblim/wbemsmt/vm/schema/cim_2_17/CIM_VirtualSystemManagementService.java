@@ -1,33 +1,18 @@
-/** 
- * CIM_VirtualSystemManagementService.java
- *
+/**
+ * CIM_VirtualSystemManagementService.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED
+ * UNDER THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR
+ * DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a
+ * current copy of the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: Service to define and manipulate virtual systems and their components
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: Service to define and manipulate virtual
+ *            systems and their components generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
 
 import javax.cim.*;
-import javax.naming.ReferralException;
 import javax.wbem.client.*;
 
 import org.sblim.wbemsmt.exception.*;
@@ -157,7 +142,6 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@35fa35fa
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -465,7 +449,6 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@d980d98
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -796,7 +779,6 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@17f417f4
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -1115,7 +1097,6 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@17dc17dc
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -1456,7 +1437,6 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@49cc49cc
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -1774,7 +1754,6 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@31e631e6
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -2047,73 +2026,83 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
      *
      */
 
-    public AddResourceSettingsResult invoke_AddResourceSettings(WBEMClient cimClient,
-            CIM_VirtualSystemSettingData AffectedConfiguration,
-            CIM_ResourceAllocationSettingData[] ResourceSettings) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[2];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("AffectedConfiguration", new CIMDataType(
-                CIM_VirtualSystemSettingData.CIM_CLASS_NAME), AffectedConfiguration
-                .getCimObjectPath());
-        inParameter[1] = new CIMArgument("ResourceSettings", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(ResourceSettings));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_ADDRESOURCESETTINGS.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public AddResourceSettingsResult invoke_AddResourceSettings(WBEMClient cimClient
+                                 ,CIM_VirtualSystemSettingData AffectedConfiguration
+                      ,CIM_ResourceAllocationSettingData[] ResourceSettings
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[2];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( AffectedConfiguration == null ? null : new CIMArgument("AffectedConfiguration", new CIMDataType(CIM_VirtualSystemSettingData.CIM_CLASS_NAME), AffectedConfiguration.getCimObjectPath()) );
+       
+                    inParameter[1] = ( ResourceSettings == null ? null : new CIMArgument("ResourceSettings", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(ResourceSettings)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_ADDRESOURCESETTINGS.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_ADDRESOURCESETTINGS.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_ADDRESOURCESETTINGS.NAME, inParameter, outParameter));
-        }
-
+        
         AddResourceSettingsResult result = new AddResourceSettingsResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
-        CIMArgument arg_ResultingResourceSettings = (CIMArgument) mapOutParameter
-                .get("ResultingResourceSettings");
-        if (arg_ResultingResourceSettings != null) {
-
-            CIMObjectPath[] path_ResultingResourceSettings = (CIMObjectPath[]) arg_ResultingResourceSettings
-                    .getValue();
-            CIM_ResourceAllocationSettingData[] out_ResultingResourceSettings = new CIM_ResourceAllocationSettingData[path_ResultingResourceSettings.length];
-            for (int i = 0; i < path_ResultingResourceSettings.length; i++) {
-                CIMObjectPath path = path_ResultingResourceSettings[i];
-                if (path != null) {
-                    out_ResultingResourceSettings[i] = CIM_ResourceAllocationSettingDataHelper
-                            .getInstance(cimClient, path);
-                }
-            }
-
-            result.set_ResultingResourceSettings(out_ResultingResourceSettings);
-        }
-
+                
+        
+        CIMArgument arg_ResultingResourceSettings = (CIMArgument) mapOutParameter.get("ResultingResourceSettings");
+        if (arg_ResultingResourceSettings != null)
+       	 {
+                                          
+                 CIMObjectPath[] path_ResultingResourceSettings = (CIMObjectPath[])arg_ResultingResourceSettings.getValue();
+                 CIM_ResourceAllocationSettingData[] out_ResultingResourceSettings = new CIM_ResourceAllocationSettingData[path_ResultingResourceSettings.length];
+                 for (int i=0; i < path_ResultingResourceSettings.length; i++)
+                 {
+                    CIMObjectPath path = path_ResultingResourceSettings[i];
+                    if (path != null)
+                    {
+                       out_ResultingResourceSettings[i] = CIM_ResourceAllocationSettingDataHelper.getInstance(cimClient,path);    
+                    }
+                 }
+                                    
+           result.set_ResultingResourceSettings(out_ResultingResourceSettings);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method AddResourceSettings
@@ -2202,67 +2191,76 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
      *
      */
 
-    public DefineSystemResult invoke_DefineSystem(WBEMClient cimClient,
-            CIM_VirtualSystemSettingData SystemSettings,
-            CIM_ResourceAllocationSettingData[] ResourceSettings,
-            CIM_VirtualSystemSettingData ReferenceConfiguration) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[3];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("SystemSettings", CIMDataType.OBJECT_T, SystemSettings
-                .getCimInstance());
-        inParameter[1] = new CIMArgument("ResourceSettings", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(ResourceSettings));
-        if(ReferenceConfiguration != null)
-        inParameter[2] = new CIMArgument("ReferenceConfiguration", new CIMDataType(
-                CIM_VirtualSystemSettingData.CIM_CLASS_NAME), ReferenceConfiguration
-                .getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_DEFINESYSTEM.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public DefineSystemResult invoke_DefineSystem(WBEMClient cimClient
+                                 ,CIM_VirtualSystemSettingData SystemSettings
+                      ,CIM_ResourceAllocationSettingData[] ResourceSettings
+                      ,CIM_VirtualSystemSettingData ReferenceConfiguration
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[3];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( SystemSettings == null ? null : new CIMArgument("SystemSettings", CIMDataType.OBJECT_T, SystemSettings.getCimInstance()) );
+       
+                    inParameter[1] = ( ResourceSettings == null ? null : new CIMArgument("ResourceSettings", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(ResourceSettings)) );
+       
+                    inParameter[2] = ( ReferenceConfiguration == null ? null : new CIMArgument("ReferenceConfiguration", new CIMDataType(CIM_VirtualSystemSettingData.CIM_CLASS_NAME), ReferenceConfiguration.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_DEFINESYSTEM.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_DEFINESYSTEM.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_DEFINESYSTEM.NAME, inParameter, outParameter));
-        }
-
+        
         DefineSystemResult result = new DefineSystemResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_ResultingSystem = (CIMArgument) mapOutParameter.get("ResultingSystem");
-        if (arg_ResultingSystem != null) {
-            CIM_ComputerSystem out_ResultingSystem = CIM_ComputerSystemHelper.getInstance(
-                    cimClient, (CIMObjectPath) arg_ResultingSystem.getValue());
-
-            result.set_ResultingSystem(out_ResultingSystem);
-        }
-
+        if (arg_ResultingSystem != null)
+       	 {
+                                          CIM_ComputerSystem out_ResultingSystem = CIM_ComputerSystemHelper.getInstance(cimClient,(CIMObjectPath)arg_ResultingSystem.getValue());
+                                    
+           result.set_ResultingSystem(out_ResultingSystem);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method DefineSystem
@@ -2349,51 +2347,60 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
      *
      */
 
-    public DestroySystemResult invoke_DestroySystem(WBEMClient cimClient,
-            CIM_ComputerSystem AffectedSystem) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[1];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("AffectedSystem", new CIMDataType(
-                CIM_ComputerSystem.CIM_CLASS_NAME), AffectedSystem.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_DESTROYSYSTEM.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public DestroySystemResult invoke_DestroySystem(WBEMClient cimClient
+                                 ,CIM_ComputerSystem AffectedSystem
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[1];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( AffectedSystem == null ? null : new CIMArgument("AffectedSystem", new CIMDataType(CIM_ComputerSystem.CIM_CLASS_NAME), AffectedSystem.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_DESTROYSYSTEM.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_DESTROYSYSTEM.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_DESTROYSYSTEM.NAME, inParameter, outParameter));
-        }
-
+        
         DestroySystemResult result = new DestroySystemResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method DestroySystem
@@ -2459,69 +2466,80 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
      *
      */
 
-    public ModifyResourceSettingsResult invoke_ModifyResourceSettings(WBEMClient cimClient,
-            CIM_ResourceAllocationSettingData[] ResourceSettings) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[1];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("ResourceSettings", CIMDataType.OBJECT_ARRAY_T,
-                getCIMInstances(ResourceSettings));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_MODIFYRESOURCESETTINGS.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public ModifyResourceSettingsResult invoke_ModifyResourceSettings(WBEMClient cimClient
+                                 ,CIM_ResourceAllocationSettingData[] ResourceSettings
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[1];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( ResourceSettings == null ? null : new CIMArgument("ResourceSettings", CIMDataType.OBJECT_ARRAY_T, getCIMInstances(ResourceSettings)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_MODIFYRESOURCESETTINGS.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_MODIFYRESOURCESETTINGS.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_MODIFYRESOURCESETTINGS.NAME, inParameter, outParameter));
-        }
-
+        
         ModifyResourceSettingsResult result = new ModifyResourceSettingsResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
-        CIMArgument arg_ResultingResourceSettings = (CIMArgument) mapOutParameter
-                .get("ResultingResourceSettings");
-        if (arg_ResultingResourceSettings != null) {
-
-            CIMObjectPath[] path_ResultingResourceSettings = (CIMObjectPath[]) arg_ResultingResourceSettings
-                    .getValue();
-            CIM_ResourceAllocationSettingData[] out_ResultingResourceSettings = new CIM_ResourceAllocationSettingData[path_ResultingResourceSettings.length];
-            for (int i = 0; i < path_ResultingResourceSettings.length; i++) {
-                CIMObjectPath path = path_ResultingResourceSettings[i];
-                if (path != null) {
-                    out_ResultingResourceSettings[i] = CIM_ResourceAllocationSettingDataHelper
-                            .getInstance(cimClient, path);
-                }
-            }
-
-            result.set_ResultingResourceSettings(out_ResultingResourceSettings);
-        }
-
+                
+        
+        CIMArgument arg_ResultingResourceSettings = (CIMArgument) mapOutParameter.get("ResultingResourceSettings");
+        if (arg_ResultingResourceSettings != null)
+       	 {
+                                          
+                 CIMObjectPath[] path_ResultingResourceSettings = (CIMObjectPath[])arg_ResultingResourceSettings.getValue();
+                 CIM_ResourceAllocationSettingData[] out_ResultingResourceSettings = new CIM_ResourceAllocationSettingData[path_ResultingResourceSettings.length];
+                 for (int i=0; i < path_ResultingResourceSettings.length; i++)
+                 {
+                    CIMObjectPath path = path_ResultingResourceSettings[i];
+                    if (path != null)
+                    {
+                       out_ResultingResourceSettings[i] = CIM_ResourceAllocationSettingDataHelper.getInstance(cimClient,path);    
+                    }
+                 }
+                                    
+           result.set_ResultingResourceSettings(out_ResultingResourceSettings);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method ModifyResourceSettings
@@ -2608,51 +2626,60 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
      *
      */
 
-    public ModifySystemSettingsResult invoke_ModifySystemSettings(WBEMClient cimClient,
-            CIM_VirtualSystemSettingData SystemSettings) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[1];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("SystemSettings", CIMDataType.OBJECT_T, SystemSettings
-                .getCimInstance());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_MODIFYSYSTEMSETTINGS.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public ModifySystemSettingsResult invoke_ModifySystemSettings(WBEMClient cimClient
+                                 ,CIM_VirtualSystemSettingData SystemSettings
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[1];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( SystemSettings == null ? null : new CIMArgument("SystemSettings", CIMDataType.OBJECT_T, SystemSettings.getCimInstance()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_MODIFYSYSTEMSETTINGS.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_MODIFYSYSTEMSETTINGS.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_MODIFYSYSTEMSETTINGS.NAME, inParameter, outParameter));
-        }
-
+        
         ModifySystemSettingsResult result = new ModifySystemSettingsResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method ModifySystemSettings
@@ -2718,52 +2745,60 @@ public class CIM_VirtualSystemManagementService extends CIM_Service {
      *
      */
 
-    public RemoveResourceSettingsResult invoke_RemoveResourceSettings(WBEMClient cimClient,
-            CIM_ResourceAllocationSettingData[] ResourceSettings) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[1];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("ResourceSettings", new CIMDataType(
-                CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, 0),
-                getCIMObjectPathes(ResourceSettings));
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_REMOVERESOURCESETTINGS.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public RemoveResourceSettingsResult invoke_RemoveResourceSettings(WBEMClient cimClient
+                                 ,CIM_ResourceAllocationSettingData[] ResourceSettings
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[1];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( ResourceSettings == null ? null : new CIMArgument("ResourceSettings", new CIMDataType(CIM_ResourceAllocationSettingData.CIM_CLASS_NAME,0), getCIMObjectPathes(ResourceSettings)) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_REMOVERESOURCESETTINGS.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_REMOVERESOURCESETTINGS.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_REMOVERESOURCESETTINGS.NAME, inParameter, outParameter));
-        }
-
+        
         RemoveResourceSettingsResult result = new RemoveResourceSettingsResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method RemoveResourceSettings

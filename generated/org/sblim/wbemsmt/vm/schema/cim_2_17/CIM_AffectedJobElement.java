@@ -1,27 +1,17 @@
-/** 
- * CIM_AffectedJobElement.java
- *
+/**
+ * CIM_AffectedJobElement.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER
+ * MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: AffectedJobElement represents an association between a Job and the ManagedElement(s) that may be affected by its execution. It may not be feasible for the Job to describe all of the affected elements. The main purpose of this association is to provide information when a Job requires exclusive use of the 'affected' ManagedElment(s) or when describing that side effects may result.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: AffectedJobElement represents an association
+ *            between a Job and the ManagedElement(s) that may be affected by its execution. It may
+ *            not be feasible for the Job to describe all of the affected elements. The main purpose
+ *            of this association is to provide information when a Job requires exclusive use of the
+ *            'affected' ManagedElment(s) or when describing that side effects may result. generated
+ *            Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -123,7 +113,6 @@ public class CIM_AffectedJobElement extends org.sblim.wbemsmt.bl.fco.AbstractWbe
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@3d743d74
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Unknown.equals(value)) {

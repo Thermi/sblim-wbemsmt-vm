@@ -1,27 +1,13 @@
-/** 
- * CIM_VirtualSystemSnapshotService.java
- *
+/**
+ * CIM_VirtualSystemSnapshotService.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED
+ * UNDER THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR
+ * DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a
+ * current copy of the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: Service to create, apply and destroy snapshots of virtual systems.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: Service to create, apply and destroy
+ *            snapshots of virtual systems. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -179,7 +165,6 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@2d7a2d7a
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -506,7 +491,6 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@47644764
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -749,7 +733,6 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
              * @param value the value to find the ValueMapEntry for
              * @return the ValueMap entry or null if not found
              */
-            //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@12c012c
             public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
                 if (VALUE_ENTRY_Full_Snapshot.equals(value)) {
@@ -1015,7 +998,6 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@141e141e
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Completed_with_No_Error.equals(value)) {
@@ -1296,53 +1278,63 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
      *
      */
 
-    public ApplySnapshotResult invoke_ApplySnapshot(WBEMClient cimClient,
-            CIM_VirtualSystemSettingData Snapshot, CIM_ConcreteJob Job) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[2];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("Snapshot", new CIMDataType(
-                CIM_VirtualSystemSettingData.CIM_CLASS_NAME), Snapshot.getCimObjectPath());
-        inParameter[1] = new CIMArgument("Job", new CIMDataType(CIM_ConcreteJob.CIM_CLASS_NAME),
-                Job.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_APPLYSNAPSHOT.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public ApplySnapshotResult invoke_ApplySnapshot(WBEMClient cimClient
+                                 ,CIM_VirtualSystemSettingData Snapshot
+                      ,CIM_ConcreteJob Job
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[2];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( Snapshot == null ? null : new CIMArgument("Snapshot", new CIMDataType(CIM_VirtualSystemSettingData.CIM_CLASS_NAME), Snapshot.getCimObjectPath()) );
+       
+                    inParameter[1] = ( Job == null ? null : new CIMArgument("Job", new CIMDataType(CIM_ConcreteJob.CIM_CLASS_NAME), Job.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_APPLYSNAPSHOT.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_APPLYSNAPSHOT.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_APPLYSNAPSHOT.NAME, inParameter, outParameter));
-        }
-
+        
         ApplySnapshotResult result = new ApplySnapshotResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method ApplySnapshot
@@ -1413,69 +1405,82 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
      *
      */
 
-    public CreateSnapshotResult invoke_CreateSnapshot(WBEMClient cimClient,
-            CIM_ComputerSystem AffectedSystem, CIM_SettingData SnapshotSettings,
-            javax.cim.UnsignedInteger16 SnapshotType,
-            CIM_VirtualSystemSettingData ResultingSnapshot, CIM_ConcreteJob Job)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[5];
-        CIMArgument[] outParameter = new CIMArgument[2];
-
-        inParameter[0] = new CIMArgument("AffectedSystem", new CIMDataType(
-                CIM_ComputerSystem.CIM_CLASS_NAME), AffectedSystem.getCimObjectPath());
-        inParameter[1] = new CIMArgument("SnapshotSettings", CIMDataType.OBJECT_T, SnapshotSettings
-                .getCimInstance());
-        inParameter[2] = new CIMArgument("SnapshotType", CIMDataType.UINT16_T, SnapshotType);
-        inParameter[3] = new CIMArgument("ResultingSnapshot", new CIMDataType(
-                CIM_VirtualSystemSettingData.CIM_CLASS_NAME), ResultingSnapshot.getCimObjectPath());
-        inParameter[4] = new CIMArgument("Job", new CIMDataType(CIM_ConcreteJob.CIM_CLASS_NAME),
-                Job.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CREATESNAPSHOT.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public CreateSnapshotResult invoke_CreateSnapshot(WBEMClient cimClient
+                                 ,CIM_ComputerSystem AffectedSystem
+                      ,CIM_SettingData SnapshotSettings
+                      ,javax.cim.UnsignedInteger16 SnapshotType
+                      ,CIM_VirtualSystemSettingData ResultingSnapshot
+                      ,CIM_ConcreteJob Job
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[5];
+       CIMArgument[] outParameter = new CIMArgument[2];
+    
+                    inParameter[0] = ( AffectedSystem == null ? null : new CIMArgument("AffectedSystem", new CIMDataType(CIM_ComputerSystem.CIM_CLASS_NAME), AffectedSystem.getCimObjectPath()) );
+       
+                    inParameter[1] = ( SnapshotSettings == null ? null : new CIMArgument("SnapshotSettings", CIMDataType.OBJECT_T, SnapshotSettings.getCimInstance()) );
+       
+                    inParameter[2] = ( SnapshotType == null ? null : new CIMArgument("SnapshotType", CIMDataType.UINT16_T, SnapshotType) );
+       
+                    inParameter[3] = ( ResultingSnapshot == null ? null : new CIMArgument("ResultingSnapshot", new CIMDataType(CIM_VirtualSystemSettingData.CIM_CLASS_NAME), ResultingSnapshot.getCimObjectPath()) );
+       
+                    inParameter[4] = ( Job == null ? null : new CIMArgument("Job", new CIMDataType(CIM_ConcreteJob.CIM_CLASS_NAME), Job.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CREATESNAPSHOT.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CREATESNAPSHOT.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CREATESNAPSHOT.NAME, inParameter, outParameter));
-        }
-
+        
         CreateSnapshotResult result = new CreateSnapshotResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_ResultingSnapshot = (CIMArgument) mapOutParameter.get("ResultingSnapshot");
-        if (arg_ResultingSnapshot != null) {
-            CIM_VirtualSystemSettingData out_ResultingSnapshot = CIM_VirtualSystemSettingDataHelper
-                    .getInstance(cimClient, (CIMObjectPath) arg_ResultingSnapshot.getValue());
-
-            result.set_ResultingSnapshot(out_ResultingSnapshot);
-        }
-
+        if (arg_ResultingSnapshot != null)
+       	 {
+                                          CIM_VirtualSystemSettingData out_ResultingSnapshot = CIM_VirtualSystemSettingDataHelper.getInstance(cimClient,(CIMObjectPath)arg_ResultingSnapshot.getValue());
+                                    
+           result.set_ResultingSnapshot(out_ResultingSnapshot);
+       	 }
+ 
+             
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method CreateSnapshot
@@ -1562,54 +1567,63 @@ public class CIM_VirtualSystemSnapshotService extends CIM_Service {
      *
      */
 
-    public DestroySnapshotResult invoke_DestroySnapshot(WBEMClient cimClient,
-            CIM_VirtualSystemSettingData AffectedSnapshot, CIM_ConcreteJob Job)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[2];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("AffectedSnapshot", new CIMDataType(
-                CIM_VirtualSystemSettingData.CIM_CLASS_NAME), AffectedSnapshot.getCimObjectPath());
-        inParameter[1] = new CIMArgument("Job", new CIMDataType(CIM_ConcreteJob.CIM_CLASS_NAME),
-                Job.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_DESTROYSNAPSHOT.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public DestroySnapshotResult invoke_DestroySnapshot(WBEMClient cimClient
+                                 ,CIM_VirtualSystemSettingData AffectedSnapshot
+                      ,CIM_ConcreteJob Job
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[2];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( AffectedSnapshot == null ? null : new CIMArgument("AffectedSnapshot", new CIMDataType(CIM_VirtualSystemSettingData.CIM_CLASS_NAME), AffectedSnapshot.getCimObjectPath()) );
+       
+                    inParameter[1] = ( Job == null ? null : new CIMArgument("Job", new CIMDataType(CIM_ConcreteJob.CIM_CLASS_NAME), Job.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_DESTROYSNAPSHOT.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_DESTROYSNAPSHOT.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_DESTROYSNAPSHOT.NAME, inParameter, outParameter));
-        }
-
+        
         DestroySnapshotResult result = new DestroySnapshotResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method DestroySnapshot

@@ -1,27 +1,13 @@
-/** 
- * CIM_SoftwareInstallationService.java
- *
+/**
+ * CIM_SoftwareInstallationService.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER
+ * THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF
+ * THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of
+ * the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: A subclass of service which provides methods to install (or update) Software Identities in ManagedElements.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: A subclass of service which provides methods
+ *            to install (or update) Software Identities in ManagedElements. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -330,7 +316,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@e2e0e2e
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -795,7 +780,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
              * @param value the value to find the ValueMapEntry for
              * @return the ValueMap entry or null if not found
              */
-            //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@75867586
             public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
                 if (VALUE_ENTRY_Target_automatic_reset.equals(value)) {
@@ -1270,7 +1254,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@77347734
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -1753,7 +1736,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
              * @param value the value to find the ValueMapEntry for
              * @return the ValueMap entry or null if not found
              */
-            //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@26ca26ca
             public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
                 if (VALUE_ENTRY_Defer_target_system_reset.equals(value)) {
@@ -2274,7 +2256,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@1ec01ec0
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -2744,7 +2725,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
              * @param value the value to find the ValueMapEntry for
              * @return the ValueMap entry or null if not found
              */
-            //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@24422442
             public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
                 if (VALUE_ENTRY_Defer_target_system_reset.equals(value)) {
@@ -3286,7 +3266,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@35dc35dc
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Job_Completed_with_No_Error.equals(value)) {
@@ -3768,7 +3747,6 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
              * @param value the value to find the ValueMapEntry for
              * @return the ValueMap entry or null if not found
              */
-            //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@4100410
             public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
                 if (VALUE_ENTRY_Defer_target_system_reset.equals(value)) {
@@ -4098,58 +4076,67 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
      *
      */
 
-    public CheckSoftwareIdentityResult invoke_CheckSoftwareIdentity(WBEMClient cimClient,
-            CIM_SoftwareIdentity Source, CIM_ManagedElement Target, CIM_Collection Collection)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[3];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("Source", new CIMDataType(
-                CIM_SoftwareIdentity.CIM_CLASS_NAME), Source.getCimObjectPath());
-        inParameter[1] = new CIMArgument("Target", new CIMDataType(
-                CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath());
-        inParameter[2] = new CIMArgument("Collection", new CIMDataType(
-                CIM_Collection.CIM_CLASS_NAME), Collection.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_CHECKSOFTWAREIDENTITY.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public CheckSoftwareIdentityResult invoke_CheckSoftwareIdentity(WBEMClient cimClient
+                                 ,CIM_SoftwareIdentity Source
+                      ,CIM_ManagedElement Target
+                      ,CIM_Collection Collection
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[3];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( Source == null ? null : new CIMArgument("Source", new CIMDataType(CIM_SoftwareIdentity.CIM_CLASS_NAME), Source.getCimObjectPath()) );
+       
+                    inParameter[1] = ( Target == null ? null : new CIMArgument("Target", new CIMDataType(CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath()) );
+       
+                    inParameter[2] = ( Collection == null ? null : new CIMArgument("Collection", new CIMDataType(CIM_Collection.CIM_CLASS_NAME), Collection.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_CHECKSOFTWAREIDENTITY.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_CHECKSOFTWAREIDENTITY.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_CHECKSOFTWAREIDENTITY.NAME, inParameter, outParameter));
-        }
-
+        
         CheckSoftwareIdentityResult result = new CheckSoftwareIdentityResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
-        CIMArgument arg_InstallCharacteristics = (CIMArgument) mapOutParameter
-                .get("InstallCharacteristics");
-        if (arg_InstallCharacteristics != null) {
-
-            javax.cim.UnsignedInteger16[] out_InstallCharacteristics = (javax.cim.UnsignedInteger16[]) arg_InstallCharacteristics
-                    .getValue();
-
-            result.set_InstallCharacteristics(out_InstallCharacteristics);
-        }
-
-        return result;
-    }
+                
+        
+        CIMArgument arg_InstallCharacteristics = (CIMArgument) mapOutParameter.get("InstallCharacteristics");
+        if (arg_InstallCharacteristics != null)
+       	 {
+              
+              javax.cim.UnsignedInteger16[] out_InstallCharacteristics = (javax.cim.UnsignedInteger16[])arg_InstallCharacteristics.getValue();    
+                      
+           result.set_InstallCharacteristics(out_InstallCharacteristics);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method CheckSoftwareIdentity
@@ -4222,58 +4209,69 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
      *
      */
 
-    public InstallFromByteStreamResult invoke_InstallFromByteStream(WBEMClient cimClient,
-            javax.cim.UnsignedInteger8[] Image, CIM_ManagedElement Target,
-            javax.cim.UnsignedInteger16[] InstallOptions, String[] InstallOptionsValues)
-            throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[4];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("Image", CIMDataType.UINT8_ARRAY_T, Image);
-        inParameter[1] = new CIMArgument("Target", new CIMDataType(
-                CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath());
-        inParameter[2] = new CIMArgument("InstallOptions", CIMDataType.UINT16_ARRAY_T,
-                InstallOptions);
-        inParameter[3] = new CIMArgument("InstallOptionsValues", CIMDataType.STRING_ARRAY_T,
-                InstallOptionsValues);
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_INSTALLFROMBYTESTREAM.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public InstallFromByteStreamResult invoke_InstallFromByteStream(WBEMClient cimClient
+                                 ,javax.cim.UnsignedInteger8[] Image
+                      ,CIM_ManagedElement Target
+                      ,javax.cim.UnsignedInteger16[] InstallOptions
+                      ,String[] InstallOptionsValues
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[4];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( Image == null ? null : new CIMArgument("Image", CIMDataType.UINT8_ARRAY_T, Image) );
+       
+                    inParameter[1] = ( Target == null ? null : new CIMArgument("Target", new CIMDataType(CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath()) );
+       
+                    inParameter[2] = ( InstallOptions == null ? null : new CIMArgument("InstallOptions", CIMDataType.UINT16_ARRAY_T, InstallOptions) );
+       
+                    inParameter[3] = ( InstallOptionsValues == null ? null : new CIMArgument("InstallOptionsValues", CIMDataType.STRING_ARRAY_T, InstallOptionsValues) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_INSTALLFROMBYTESTREAM.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_INSTALLFROMBYTESTREAM.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_INSTALLFROMBYTESTREAM.NAME, inParameter, outParameter));
-        }
-
+        
         InstallFromByteStreamResult result = new InstallFromByteStreamResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method InstallFromByteStream
@@ -4357,61 +4355,72 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
      *
      */
 
-    public InstallFromSoftwareIdentityResult invoke_InstallFromSoftwareIdentity(
-            WBEMClient cimClient, javax.cim.UnsignedInteger16[] InstallOptions,
-            String[] InstallOptionsValues, CIM_SoftwareIdentity Source, CIM_ManagedElement Target,
-            CIM_Collection Collection) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[5];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("InstallOptions", CIMDataType.UINT16_ARRAY_T,
-                InstallOptions);
-        inParameter[1] = new CIMArgument("InstallOptionsValues", CIMDataType.STRING_ARRAY_T,
-                InstallOptionsValues);
-        inParameter[2] = new CIMArgument("Source", new CIMDataType(
-                CIM_SoftwareIdentity.CIM_CLASS_NAME), Source.getCimObjectPath());
-        inParameter[3] = new CIMArgument("Target", new CIMDataType(
-                CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath());
-        inParameter[4] = new CIMArgument("Collection", new CIMDataType(
-                CIM_Collection.CIM_CLASS_NAME), Collection.getCimObjectPath());
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_INSTALLFROMSOFTWAREIDENTITY.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public InstallFromSoftwareIdentityResult invoke_InstallFromSoftwareIdentity(WBEMClient cimClient
+                                 ,javax.cim.UnsignedInteger16[] InstallOptions
+                      ,String[] InstallOptionsValues
+                      ,CIM_SoftwareIdentity Source
+                      ,CIM_ManagedElement Target
+                      ,CIM_Collection Collection
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[5];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( InstallOptions == null ? null : new CIMArgument("InstallOptions", CIMDataType.UINT16_ARRAY_T, InstallOptions) );
+       
+                    inParameter[1] = ( InstallOptionsValues == null ? null : new CIMArgument("InstallOptionsValues", CIMDataType.STRING_ARRAY_T, InstallOptionsValues) );
+       
+                    inParameter[2] = ( Source == null ? null : new CIMArgument("Source", new CIMDataType(CIM_SoftwareIdentity.CIM_CLASS_NAME), Source.getCimObjectPath()) );
+       
+                    inParameter[3] = ( Target == null ? null : new CIMArgument("Target", new CIMDataType(CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath()) );
+       
+                    inParameter[4] = ( Collection == null ? null : new CIMArgument("Collection", new CIMDataType(CIM_Collection.CIM_CLASS_NAME), Collection.getCimObjectPath()) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_INSTALLFROMSOFTWAREIDENTITY.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_INSTALLFROMSOFTWAREIDENTITY.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_INSTALLFROMSOFTWAREIDENTITY.NAME, inParameter, outParameter));
-        }
-
+        
         InstallFromSoftwareIdentityResult result = new InstallFromSoftwareIdentityResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method InstallFromSoftwareIdentity
@@ -4483,57 +4492,69 @@ public class CIM_SoftwareInstallationService extends CIM_Service {
      *
      */
 
-    public InstallFromURIResult invoke_InstallFromURI(WBEMClient cimClient, String URI,
-            CIM_ManagedElement Target, javax.cim.UnsignedInteger16[] InstallOptions,
-            String[] InstallOptionsValues) throws WbemsmtException {
-
-        CIMArgument[] inParameter = new CIMArgument[4];
-        CIMArgument[] outParameter = new CIMArgument[1];
-
-        inParameter[0] = new CIMArgument("URI", CIMDataType.STRING_T, URI);
-        inParameter[1] = new CIMArgument("Target", new CIMDataType(
-                CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath());
-        inParameter[2] = new CIMArgument("InstallOptions", CIMDataType.UINT16_ARRAY_T,
-                InstallOptions);
-        inParameter[3] = new CIMArgument("InstallOptionsValues", CIMDataType.STRING_ARRAY_T,
-                InstallOptionsValues);
-
-        javax.cim.UnsignedInteger32 resultObject = null;
-
-        try {
-            Object oResult = cimClient.invokeMethod(this.getCimObjectPath(),
-                    METHOD_INSTALLFROMURI.NAME, inParameter, outParameter);
-            if (oResult != null) {
-
-                resultObject = (javax.cim.UnsignedInteger32) oResult;
-            }
+    public InstallFromURIResult invoke_InstallFromURI(WBEMClient cimClient
+                                 ,String URI
+                      ,CIM_ManagedElement Target
+                      ,javax.cim.UnsignedInteger16[] InstallOptions
+                      ,String[] InstallOptionsValues
+                      ) throws WbemsmtException {
+         
+       CIMArgument[] inParameter = new CIMArgument[4];
+       CIMArgument[] outParameter = new CIMArgument[1];
+    
+                    inParameter[0] = ( URI == null ? null : new CIMArgument("URI", CIMDataType.STRING_T, URI) );
+       
+                    inParameter[1] = ( Target == null ? null : new CIMArgument("Target", new CIMDataType(CIM_ManagedElement.CIM_CLASS_NAME), Target.getCimObjectPath()) );
+       
+                    inParameter[2] = ( InstallOptions == null ? null : new CIMArgument("InstallOptions", CIMDataType.UINT16_ARRAY_T, InstallOptions) );
+       
+                    inParameter[3] = ( InstallOptionsValues == null ? null : new CIMArgument("InstallOptionsValues", CIMDataType.STRING_ARRAY_T, InstallOptionsValues) );
+       
+                            
+       javax.cim.UnsignedInteger32 resultObject = null;
+          
+       try {
+           Object oResult =  cimClient.invokeMethod(           	                                            this.getCimObjectPath()
+           	                                         , 
+                                                    METHOD_INSTALLFROMURI.NAME,
+                                                    inParameter,
+                                                    outParameter);
+           if (oResult != null)
+           {
+              
+                                 resultObject = (javax.cim.UnsignedInteger32)oResult;    
+                         }
+        } catch (WBEMException e) {
+            throw new InvokeMethodException(e,new InvokeMethodUserObject( this.getCimObjectPath() , 
+                                                          METHOD_INSTALLFROMURI.NAME,
+                                                          inParameter,
+                                                          outParameter));
         }
-        catch (WBEMException e) {
-            throw new InvokeMethodException(e, new InvokeMethodUserObject(this.getCimObjectPath(),
-                    METHOD_INSTALLFROMURI.NAME, inParameter, outParameter));
-        }
-
+        
         InstallFromURIResult result = new InstallFromURIResult();
         result.setResultObject(resultObject);
 
-        java.util.HashMap mapOutParameter = new java.util.HashMap();
+        java.util.HashMap<String, CIMArgument> mapOutParameter = new java.util.HashMap<String, CIMArgument>();
         for (int i = 0; i < outParameter.length; i++) {
-            CIMArgument argument = outParameter[i];
-            if (argument != null) {
-                mapOutParameter.put(argument.getName(), argument);
-            }
+           CIMArgument argument = outParameter[i];
+           if (argument != null)
+           {
+              mapOutParameter.put(argument.getName(), argument);
+           }
         }
-
+                
+        
         CIMArgument arg_Job = (CIMArgument) mapOutParameter.get("Job");
-        if (arg_Job != null) {
-            CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,
-                    (CIMObjectPath) arg_Job.getValue());
-
-            result.set_Job(out_Job);
-        }
-
-        return result;
-    }
+        if (arg_Job != null)
+       	 {
+                                          CIM_ConcreteJob out_Job = CIM_ConcreteJobHelper.getInstance(cimClient,(CIMObjectPath)arg_Job.getValue());
+                                    
+           result.set_Job(out_Job);
+       	 }
+ 
+               
+     return result;               
+   }
 
     /**
      * Result object for the method InstallFromURI

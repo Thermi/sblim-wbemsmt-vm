@@ -1,14 +1,14 @@
 /** 
  * ApplicationContainer.java
  *
- * © Copyright IBM Corp. 2005
+ * © Copyright IBM Corp.  2009,2005
  *
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+ * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
  * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
  * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
  *
- * You can obtain a current copy of the Common Public License from
- * http://www.opensource.org/licenses/cpl1.0.php
+ * You can obtain a current copy of the Eclipse Public License from
+ * http://www.opensource.org/licenses/eclipse-1.0.php
  *
  * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
  *
@@ -30,7 +30,6 @@ import javax.cim.CIMClassProperty;
 import javax.cim.CIMDataType;
 import javax.cim.CIMDateTime;
 import javax.cim.CIMDateTimeInterval;
-import javax.cim.CIMInstance;
 import javax.cim.CIMObjectPath;
 import javax.cim.CIMProperty;
 import javax.cim.UnsignedInteger16;
@@ -78,6 +77,7 @@ import org.sblim.wbemsmt.vm.container.edit.ProcessorVMInfoItemDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.VMConfigDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.VMDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.VMOperationsDataContainer;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Capabilities;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ConcreteJob;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_DiskDrive;
@@ -86,6 +86,7 @@ import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_EnabledLogicalElement;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_EnabledLogicalElementCapabilities;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_LogicalDevice;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_LogicalDisk;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ManagedElement;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Memory;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_NetworkAdapter;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_NetworkPort;
@@ -93,6 +94,7 @@ import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Processor;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_RegisteredProfile;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourceAllocationSettingData;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourcePool;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_SettingData;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_System;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementCapabilities;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementService;
@@ -128,8 +130,8 @@ public class VM extends VMBusinessObject {
 	private Memory memory;
 	private Processor processor;
 	private String currentProcessor;
-	private List networks;
-	private List disks;
+	private List<Network> networks;
+	private List<Disk> disks;
 	// flag to check if the capabilities are already loaded. Because
 	// capabilities are optional the field capabilities cannot be used to check
 	// if already loaded
@@ -137,8 +139,8 @@ public class VM extends VMBusinessObject {
 
 	private boolean capabilitiesLoaded = false;
 	private final int count;
-	private List systemDevices;
-	private List vssdPropertyNames;
+	private List<CIM_LogicalDevice> systemDevices;
+	private List<String> vssdPropertyNames;
 
 	/**
 	 * @param count
@@ -265,8 +267,8 @@ public class VM extends VMBusinessObject {
 	 *             if the settingData object was not found
 	 */
 	public CIM_VirtualSystemSettingData getCurrentSettingData(CIM_ComputerSystem system, WBEMClient cc) throws WbemsmtException {
-		List list = system.getAssociated_CIM_SettingData_CIM_SettingsDefineStates(cc, CIM_VirtualSystemSettingData.CIM_CLASS_NAME, null, null);
-		for (Iterator iter = list.iterator(); iter.hasNext();) {
+		List<CIM_SettingData> list = system.getAssociated_CIM_SettingData_CIM_SettingsDefineStates(cc, CIM_VirtualSystemSettingData.CIM_CLASS_NAME, null, null);
+		for (Iterator<CIM_SettingData> iter = list.iterator(); iter.hasNext();) {
 			return (CIM_VirtualSystemSettingData) iter.next();
 		}
 		throw new WbemsmtException(WbemsmtException.ERR_LOADING_MODEL, "For system " + system.getCimObjectPath() + " no IBM_ContainerVirtualSystemSettingData was found");
@@ -314,8 +316,8 @@ public class VM extends VMBusinessObject {
 		CIM_ElementSettingData nextSingleUseSd = null;
 
 		CIM_VirtualSystemSettingData currentSettingData = getCurrentSettingData(system, client);
-		List settingDatas = currentSettingData.getAssociations_CIM_ElementSettingData(client, false, false, null, null);
-		for (Iterator iterator = settingDatas.iterator(); iterator.hasNext();) {
+		List<CIM_ElementSettingData> settingDatas = currentSettingData.getAssociations_CIM_ElementSettingData(client, false, false, null, null);
+		for (Iterator<CIM_ElementSettingData> iterator = settingDatas.iterator(); iterator.hasNext();) {
 			CIM_ElementSettingData sd = (CIM_ElementSettingData) iterator.next();
 
 			// TODO use UsCurrent or isNext ???
@@ -395,8 +397,8 @@ public class VM extends VMBusinessObject {
 		CIM_VirtualSystemSettingData defaultSd = null;
 
 		CIM_VirtualSystemSettingData currentSettingData = getCurrentSettingData(system, client);
-		List settingDatas = currentSettingData.getAssociations_CIM_ElementSettingData(client, false, false, null, null);
-		for (Iterator iterator = settingDatas.iterator(); iterator.hasNext();) {
+		List<CIM_ElementSettingData> settingDatas = currentSettingData.getAssociations_CIM_ElementSettingData(client, false, false, null, null);
+		for (Iterator<CIM_ElementSettingData> iterator = settingDatas.iterator(); iterator.hasNext();) {
 			CIM_ElementSettingData sd = (CIM_ElementSettingData) iterator.next();
 
 			int iDefault = sd.get_IsDefault() != null ? sd.get_IsDefault().intValue() : 0;
@@ -421,7 +423,7 @@ public class VM extends VMBusinessObject {
 	}
 
 	public CIM_EnabledLogicalElementCapabilities getCapabilities(CIM_ComputerSystem system, WBEMClient cc) throws WbemsmtException {
-		List capabilitiesList = system.getAssociated_CIM_Capabilities_CIM_ElementCapabilitiess(cc, CIM_EnabledLogicalElementCapabilities.CIM_CLASS_NAME, null, null);
+		List<CIM_Capabilities> capabilitiesList = system.getAssociated_CIM_Capabilities_CIM_ElementCapabilitiess(cc, CIM_EnabledLogicalElementCapabilities.CIM_CLASS_NAME, null, null);
 
 		capabilitiesLoaded = true;
 
@@ -571,13 +573,13 @@ public class VM extends VMBusinessObject {
 	 */
 	public static CIM_ComputerSystem[] getVMs(WBEMClient client, String slpNamespace) throws WbemsmtException {
 
-		List vms = new ArrayList();
+		List<CIM_ManagedElement> vms = new ArrayList<CIM_ManagedElement>();
 
 		CIM_RegisteredProfile[] profiles = VMCimAdapter.getVirtualSystemProfile(client, slpNamespace);
 		for (int i = 0; i < profiles.length; i++) {
 			CIM_RegisteredProfile profile = profiles[i];
 			try {
-				List containerList = profile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfiles(client, CIM_ComputerSystem.CIM_CLASS_NAME, null, null);
+				List<CIM_ManagedElement> containerList = profile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfiles(client, CIM_ComputerSystem.CIM_CLASS_NAME, null, null);
 				vms.addAll(containerList);
 			} catch (WbemsmtException e1) {
 				logger.log(Level.SEVERE, "Cannot get VMs", e1);
@@ -735,9 +737,9 @@ public class VM extends VMBusinessObject {
 	public static CIM_ComputerSystem[] getVMs(String type, CIM_System system, WBEMClient cimClient) throws WbemsmtException {
 
 		try {
-			List containers = system.getAssociated_CIM_ManagedElement_CIM_HostedDependencys(cimClient, CIM_ComputerSystem.CIM_CLASS_NAME, null, null);
-			List computerSystems = new ArrayList();
-			for (Iterator iterator = containers.iterator(); iterator.hasNext();) {
+			List<CIM_ManagedElement> containers = system.getAssociated_CIM_ManagedElement_CIM_HostedDependencys(cimClient, CIM_ComputerSystem.CIM_CLASS_NAME, null, null);
+			List<CIM_ComputerSystem> computerSystems = new ArrayList<CIM_ComputerSystem>();
+			for (Iterator<CIM_ManagedElement> iterator = containers.iterator(); iterator.hasNext();) {
 				CIM_ComputerSystem cs = (CIM_ComputerSystem) iterator.next();
 				if (VM.isVirtualSystem(cimClient, (CIM_ComputerSystem) cs)) {
 					computerSystems.add(cs);
@@ -822,7 +824,7 @@ public class VM extends VMBusinessObject {
 	}
 
 	
-	public List getVssdPropertyNames() throws WbemsmtException {
+	public List<String> getVssdPropertyNames() throws WbemsmtException {
 
 		if (vssdPropertyNames == null) {
 			CIM_VirtualSystemSettingData[] vssds = new CIM_VirtualSystemSettingData[] { getCurrentSettingData(), getNextSettingData(), getDefaultSettingData() };
@@ -906,7 +908,7 @@ public class VM extends VMBusinessObject {
 	
 	public void updateControls(ProcessorVMInfoDataContainer container) throws WbemsmtException {
 
-		List model = new ArrayList();
+		List<Processor> model = new ArrayList<Processor>();
 		model.add(getProcessor());
 		adapter.updateControls(container.getItems(), model);
 	}
@@ -917,16 +919,16 @@ public class VM extends VMBusinessObject {
 	}
 
 	
-	public List getNetworks() throws WbemsmtException {
+	public List<Network> getNetworks() throws WbemsmtException {
 		if (networks == null && stopPreload()) {
-			networks = new ArrayList();
+			networks = new ArrayList<Network>();
 			if (isActive()) {
 				// network port obsoletes NetworkAdapter - check for old
 				// implementations also
-				List networkList = getSystemDevices(new Class[] { CIM_NetworkPort.class, CIM_NetworkAdapter.class });
-				for (Iterator iterator = networkList.iterator(); iterator.hasNext();) {
+				List<CIM_LogicalDevice>  networkList = getSystemDevices(new Class[] { CIM_NetworkPort.class, CIM_NetworkAdapter.class });
+				for (Iterator<CIM_LogicalDevice>  iterator = networkList.iterator(); iterator.hasNext();) {
 					CIM_LogicalDevice networkFco = (CIM_LogicalDevice) iterator.next();
-					List defineStates = networkFco.getAssociated_CIM_SettingData_CIM_SettingsDefineStates(getCimClient(), CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
+					List<CIM_SettingData> defineStates = networkFco.getAssociated_CIM_SettingData_CIM_SettingsDefineStates(getCimClient(), CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
 					if (defineStates.size() == 1) {
 						CIM_ResourceAllocationSettingData rasd = (CIM_ResourceAllocationSettingData) defineStates.get(0);
 						networks.add(getNetworkFromRASD(rasd));
@@ -939,7 +941,7 @@ public class VM extends VMBusinessObject {
 				if (sd == null) {
 					logger.warning("No default VSSD found for VM " + vm.getCimObjectPath());
 				} else {
-					List rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
+					List<CIM_ResourceAllocationSettingData> rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
 					filterRASDsByResourceType(rasds, VMCimAdapter.RESOURCE_TYPE_ETHERNET);
 					if (rasds.size() > 0) {
 						for(int i = 0; i < rasds.size(); i++){
@@ -1000,7 +1002,7 @@ public class VM extends VMBusinessObject {
 	
 	public void updateControls(MemoryVMInfoDataContainer container) throws WbemsmtException {
 
-		List model = new ArrayList();
+		List<Memory> model = new ArrayList<Memory>();
 		model.add(getMemory());
 		adapter.updateControls(container.getItems(), model);
 	}
@@ -1013,7 +1015,7 @@ public class VM extends VMBusinessObject {
 			if (getCurrentSettingData() != null) {
 				WBEMClient cc = getCimClient();
 
-				List rasds = currentSettingData.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(cc, CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
+				List<CIM_ResourceAllocationSettingData> rasds = currentSettingData.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(cc, CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
 				filterRASDsByResourceType(rasds, VMCimAdapter.RESOURCE_TYPE_MEMORY);
 				
 				if (rasds.size() > 0) { 
@@ -1054,7 +1056,7 @@ public class VM extends VMBusinessObject {
 			if (getCurrentSettingData() != null) {
 				WBEMClient cc = getCimClient();
 
-				List rasds = currentSettingData.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(cc, CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
+				List<CIM_ResourceAllocationSettingData> rasds = currentSettingData.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(cc, CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
 				filterRASDsByResourceType(rasds, VMCimAdapter.RESOURCE_TYPE_CPU);
 				
 				if (rasds.size() > 0) { 
@@ -1101,14 +1103,14 @@ public class VM extends VMBusinessObject {
 	}
 
 	
-	public List getDisks() throws WbemsmtException {
+	public List<Disk> getDisks() throws WbemsmtException {
 		if (disks == null && stopPreload()) {
-			disks = new ArrayList();
+			disks = new ArrayList<Disk>();
 			if (isActive()) {
-				List devices = getSystemDevices(new Class[] { CIM_DiskDrive.class, CIM_LogicalDisk.class });
-				for (Iterator iterator = devices.iterator(); iterator.hasNext();) {
+				List<CIM_LogicalDevice> devices = getSystemDevices(new Class[] { CIM_DiskDrive.class, CIM_LogicalDisk.class });
+				for (Iterator<CIM_LogicalDevice> iterator = devices.iterator(); iterator.hasNext();) {
 					CIM_LogicalDevice fco = (CIM_LogicalDevice) iterator.next();
-					List defineStates = fco.getAssociated_CIM_SettingData_CIM_SettingsDefineStates(getCimClient(), CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
+					List<CIM_SettingData> defineStates = fco.getAssociated_CIM_SettingData_CIM_SettingsDefineStates(getCimClient(), CIM_ResourceAllocationSettingData.CIM_CLASS_NAME, null, null);
 					if (defineStates.size() == 1) {
 						CIM_ResourceAllocationSettingData rasd = (CIM_ResourceAllocationSettingData) defineStates.get(0);
 						disks.add(getDiskFromRASD(rasd));
@@ -1122,7 +1124,7 @@ public class VM extends VMBusinessObject {
 				if (sd == null) {
 					logger.warning("No default VSSD found for VM " + vm.getCimObjectPath());
 				} else {
-					List rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
+					List<CIM_ResourceAllocationSettingData> rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
 					filterRASDsByResourceType(rasds, VMCimAdapter.RESOURCE_TYPE_DISK);
 					if (rasds.size() > 0) {
 						for(int i = 0; i < rasds.size(); i++){
@@ -1190,8 +1192,8 @@ public class VM extends VMBusinessObject {
 
 		double sum = 0.0;
 		if (isActive()) {
-			List memoryList = getSystemDevices(new Class[] { CIM_Memory.class });
-			for (Iterator iterator = memoryList.iterator(); iterator.hasNext();) {
+			List<CIM_LogicalDevice> memoryList = getSystemDevices(new Class[] { CIM_Memory.class });
+			for (Iterator<CIM_LogicalDevice> iterator = memoryList.iterator(); iterator.hasNext();) {
 				CIM_Memory memory = (CIM_Memory) iterator.next();
 				sum = sum + memory.get_BlockSize().longValue() * memory.get_NumberOfBlocks().longValue();
 			}
@@ -1202,7 +1204,7 @@ public class VM extends VMBusinessObject {
 				logger.warning("No default VSSD found for VM " + vm.getCimObjectPath());
 				currentMemory = "-";
 			} else {
-				List rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
+				List<CIM_ResourceAllocationSettingData> rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
 				filterRASDsByResourceType(rasds, VMCimAdapter.RESOURCE_TYPE_MEMORY);
 				currentMemory = getMemoryAsString((CIM_ResourceAllocationSettingData[]) rasds.toArray(new CIM_ResourceAllocationSettingData[rasds.size()]));
 			}
@@ -1231,7 +1233,7 @@ public class VM extends VMBusinessObject {
 		}
 
 		if (isActive()) {
-			List processorList = getSystemDevices(new Class[] { CIM_Processor.class });
+			List<CIM_LogicalDevice> processorList = getSystemDevices(new Class[] { CIM_Processor.class });
 			currentProcessor = "" + processorList.size();
 		} else {
 			CIM_VirtualSystemSettingData sd = getDefaultSettingData();
@@ -1239,7 +1241,7 @@ public class VM extends VMBusinessObject {
 				logger.warning("No default VSSD found for VM " + vm.getCimObjectPath());
 				currentProcessor = "-";
 			} else {
-				List rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
+				List<CIM_ResourceAllocationSettingData> rasds = sd.getAssociated_CIM_ResourceAllocationSettingData_CIM_VirtualSystemSettingDataComponents(getCimClient());
 				filterRASDsByResourceType(rasds, VMCimAdapter.RESOURCE_TYPE_CPU);
 				currentProcessor = getProcessorAsString((CIM_ResourceAllocationSettingData[]) rasds.toArray(new CIM_ResourceAllocationSettingData[rasds.size()]));
 			}
@@ -1257,7 +1259,7 @@ public class VM extends VMBusinessObject {
 	 * @param resourceType
 	 *            only RASDs with that resource Type are included in the liste
 	 */
-	private void filterRASDsByResourceType(List rasds, UnsignedInteger16 resourceType) {
+	private void filterRASDsByResourceType(List<CIM_ResourceAllocationSettingData> rasds, UnsignedInteger16 resourceType) {
 		for (int i = rasds.size() - 1; i >= 0; i--) {
 			CIM_ResourceAllocationSettingData rasd = (CIM_ResourceAllocationSettingData) rasds.get(i);
 			if (rasd.get_ResourceType().intValue() != resourceType.intValue()) {
@@ -1280,8 +1282,8 @@ public class VM extends VMBusinessObject {
 	 */
 	private static boolean isVirtualSystem(WBEMClient cimClient, CIM_ComputerSystem element) throws WbemsmtException {
 
-		List profiles = element.getAssociated_CIM_RegisteredProfile_CIM_ElementConformsToProfiles(cimClient);
-		for (Iterator iterator = profiles.iterator(); iterator.hasNext();) {
+		List<CIM_RegisteredProfile> profiles = element.getAssociated_CIM_RegisteredProfile_CIM_ElementConformsToProfiles(cimClient);
+		for (Iterator<CIM_RegisteredProfile> iterator = profiles.iterator(); iterator.hasNext();) {
 			CIM_RegisteredProfile profile = (CIM_RegisteredProfile) iterator.next();
 			if (VMCimAdapter.isVirtualSystemProfile(profile)) {
 				return true;
@@ -1366,7 +1368,7 @@ public class VM extends VMBusinessObject {
 	}
 
 	
-	public List getSystemDevices() throws WbemsmtException {
+	public List<CIM_LogicalDevice> getSystemDevices() throws WbemsmtException {
 		if (systemDevices == null) {
 			systemDevices = vm.getAssociated_CIM_LogicalDevice_CIM_SystemDevices(getCimClient());
 		}
@@ -1383,8 +1385,8 @@ public class VM extends VMBusinessObject {
 	 * @return
 	 * @throws WbemsmtException
 	 */
-	public List getSystemDevices(final Class[] filterClasses) throws WbemsmtException {
-		List result = new ArrayList();
+	public List<CIM_LogicalDevice> getSystemDevices(final Class<?>[] filterClasses) throws WbemsmtException {
+		List<CIM_LogicalDevice>  result = new ArrayList<CIM_LogicalDevice> ();
 		result.addAll(getSystemDevices());
 
 		if (filterClasses != null) {
@@ -1393,7 +1395,7 @@ public class VM extends VMBusinessObject {
 				public boolean evaluate(Object arg0) {
 
 					for (int i = 0; i < filterClasses.length; i++) {
-						Class cls = filterClasses[i];
+						Class<?> cls = filterClasses[i];
 						if (cls.isAssignableFrom(arg0.getClass())) {
 							return true;
 						}

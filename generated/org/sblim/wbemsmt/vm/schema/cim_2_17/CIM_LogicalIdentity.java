@@ -1,29 +1,19 @@
-/** 
- * CIM_LogicalIdentity.java
- *
+/**
+ * CIM_LogicalIdentity.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS
+ * OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: CIM_LogicalIdentity is an abstract and generic association, indicating that two ManagedElements represent different aspects of the same underlying entity. This relationship conveys what could be defined with multiple inheritance. In most scenarios, the Identity relationship is determined by the equivalence of Keys or some other identifying properties of the related Elements. 
- * 
- * This relationship is reasonable in several scenarios. For example, it could be used to represent that a LogicalDevice is both a 'bus' entity and a 'functional' entity. A Device could be both a USB (bus) and a Keyboard (functional) entity.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: CIM_LogicalIdentity is an abstract and
+ *            generic association, indicating that two ManagedElements represent different aspects
+ *            of the same underlying entity. This relationship conveys what could be defined with
+ *            multiple inheritance. In most scenarios, the Identity relationship is determined by
+ *            the equivalence of Keys or some other identifying properties of the related Elements.
+ *            This relationship is reasonable in several scenarios. For example, it could be used to
+ *            represent that a LogicalDevice is both a 'bus' entity and a 'functional' entity. A
+ *            Device could be both a USB (bus) and a Keyboard (functional) entity. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

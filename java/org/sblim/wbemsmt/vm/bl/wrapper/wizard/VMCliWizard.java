@@ -1,14 +1,14 @@
  /** 
   * VMCliWizard.java
   *
-  * © Copyright IBM Corp. 2008
+  * © Copyright IBM Corp.  2009,2008
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.cim.*;
+import javax.cim.CIMClass;
+import javax.cim.CIMClassProperty;
+import javax.cim.CIMInstance;
+import javax.cim.CIMProperty;
+import javax.cim.UnsignedInteger16;
+import javax.cim.UnsignedInteger64;
 
 import org.apache.commons.lang.StringUtils;
 import org.sblim.wbemsmt.bl.adapter.DataContainer;
@@ -96,7 +101,7 @@ public class VMCliWizard extends VMWizard {
     private UserDataConfiguration cliWizardConfig;
     private boolean execute;
     private String[] referencableSystems;
-    private List configValues;
+    private List<String> configValues;
     
     public VMCliWizard(VMCimAdapter adapter) {
         super(adapter);
@@ -131,8 +136,8 @@ public class VMCliWizard extends VMWizard {
         Entry entry = cliWizardConfig.addEntry(userdata, CLI_DISK,  "" + getFreeId(userdata,CLI_DISK, ""));
         cliWizardConfig.addEntry(entry, CLI_WBEMSMT_POOLID, pool.get_key_InstanceID());
         
-        List properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
-        for (Iterator iterator = properties.iterator(); iterator.hasNext();) {
+        List<RASDProperty> properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
+        for (Iterator<RASDProperty> iterator = properties.iterator(); iterator.hasNext();) {
             RASDProperty property = (RASDProperty) iterator.next();
             String propertyName = property.getFieldname();
             CIMInstance instance = disk.getRasd().getCimInstance();
@@ -149,8 +154,8 @@ public class VMCliWizard extends VMWizard {
         Entry entry = cliWizardConfig.addEntry(userdata, CLI_NETWORK,  "" + getFreeId(userdata,CLI_NETWORK, ""));
         cliWizardConfig.addEntry(entry, CLI_WBEMSMT_POOLID, pool.get_key_InstanceID());
         
-        List properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
-        for (Iterator iterator = properties.iterator(); iterator.hasNext();) {
+        List<RASDProperty> properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
+        for (Iterator<RASDProperty> iterator = properties.iterator(); iterator.hasNext();) {
             RASDProperty property = (RASDProperty) iterator.next();
             String propertyName = property.getFieldname();
             CIMInstance instance = network.getRasd().getCimInstance();
@@ -301,9 +306,9 @@ public class VMCliWizard extends VMWizard {
         getDisks();
 
         Entry[] entryArray = userdata.getEntryArray();
-        List newDisks = new ArrayList();
+        List<Disk> newDisks = new ArrayList<Disk>();
         
-        List toRemove = new ArrayList();
+        List<Integer> toRemove = new ArrayList<Integer>();
         
         //first look for existing ones
         for (int i = 0; i < entryArray.length; i++) {
@@ -367,9 +372,9 @@ public class VMCliWizard extends VMWizard {
         getNetworks();
 
         Entry[] entryArray = userdata.getEntryArray();
-        List newNetworks = new ArrayList();
+        List<Network> newNetworks = new ArrayList<Network>();
         
-        List toRemove = new ArrayList();
+        List<Integer> toRemove = new ArrayList<Integer>();
         
         //first look for existing ones
         for (int i = 0; i < entryArray.length; i++) {
@@ -453,8 +458,8 @@ public class VMCliWizard extends VMWizard {
         
         //create a vssd entry if not found
         entry = cliWizardConfig.addEntry(userdata, CLI_VSSD, null);
-        List names = getVssdPropertyNames();
-        for (Iterator iterator = names.iterator(); iterator.hasNext();) {
+        List<String> names = getVssdPropertyNames();
+        for (Iterator<String> iterator = names.iterator(); iterator.hasNext();) {
             String name = (String) iterator.next();
             Object value = vssd.getProperty(name).getValue();
             cliWizardConfig.addEntry(entry, name, value != null ? value.toString() : null);
@@ -496,7 +501,7 @@ public class VMCliWizard extends VMWizard {
         if (adapter.getUpdateTrigger() == container.get_usr_AddNetwork()) {
             UnsignedInteger16 idx = (UnsignedInteger16) container.get_usr_Networks().getConvertedControlValue();
             if (idx != null) {
-                List pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
+                List<CIM_ResourcePool> pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
                 CIM_ResourcePool pool = (CIM_ResourcePool) pools.get(idx.intValue());
                 Network network = getNetworkFromPool(container, pool);
                 addNetwork(userdata, network, pool);
@@ -665,9 +670,9 @@ public class VMCliWizard extends VMWizard {
      * @param rasdNetwork
      * @throws WbemsmtException 
      */
-    private void addResources(Userdata userdata, List rasdContainers, String resourceNameForUserConfig, String rasdType) throws WbemsmtException {
+    private void addResources(Userdata userdata, List<?> rasdContainers, String resourceNameForUserConfig, String rasdType) throws WbemsmtException {
         
-        for (Iterator iterator = rasdContainers.iterator(); iterator.hasNext();) {
+        for (Iterator<?> iterator = rasdContainers.iterator(); iterator.hasNext();) {
             RASDContainer container = (RASDContainer) iterator.next();
             CIM_ResourceAllocationSettingData rasd = container.getRasd();
             CIMInstance instance = rasd.getCimInstance();
@@ -676,8 +681,8 @@ public class VMCliWizard extends VMWizard {
             Entry entry = cliWizardConfig.addEntry(userdata,resourceNameForUserConfig, ""+getFreeId(userdata, resourceNameForUserConfig, ""));
             cliWizardConfig.addEntry(entry, CLI_WBEMSMT_PATH, rasd.getCimObjectPath().toString());
 
-            List properties = getRASDProperties(rasd, rasdType, virtualSystemType);
-            for (Iterator iterator2 = properties.iterator(); iterator2.hasNext();) {
+            List<RASDProperty> properties = getRASDProperties(rasd, rasdType, virtualSystemType);
+            for (Iterator<RASDProperty> iterator2 = properties.iterator(); iterator2.hasNext();) {
                 RASDProperty rasdProperty = (RASDProperty) iterator2.next();
                 String fieldname = rasdProperty.getFieldname();
                 cliWizardConfig.addEntry(entry, fieldname, FcoUtil.getValueAsString(instance, fieldname, cls, adapter.getBundle()));
@@ -731,7 +736,7 @@ public class VMCliWizard extends VMWizard {
     }
 
     private String[] getSelectorsByName(String resourceName, Userdata userdata) {
-        List result = new ArrayList();
+        List<String> result = new ArrayList<String>();
         Entry[] entryArray = userdata.getEntryArray();
         for (int i = 0; i < entryArray.length; i++) {
             Entry entry = entryArray[i];
@@ -750,7 +755,7 @@ public class VMCliWizard extends VMWizard {
             UnsignedInteger16 idx = (UnsignedInteger16) container.get_usr_Disks().getConvertedControlValue();
             if (idx != null)
             {
-                List pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
+                List<CIM_ResourcePool> pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
                 CIM_ResourcePool pool = (CIM_ResourcePool) pools.get(idx.intValue());
                 Disk disk = getDiskFromPool(container, pool);
                 addDisk(userdata,disk,pool);
@@ -788,10 +793,10 @@ public class VMCliWizard extends VMWizard {
      * get all the configured values of disk-rasds, network-rasds, and vssds 
      * @return
      */
-    public List getConfigValues() {
+    public List<String> getConfigValues() {
         if (configValues == null){
             
-            configValues = new ArrayList();
+            configValues = new ArrayList<String>();
         }
         return configValues;
     }

@@ -1,28 +1,21 @@
-/** 
- * CIM_MostCurrentSnapshotInBranch.java
- *
+/**
+ * CIM_MostCurrentSnapshotInBranch.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER
+ * THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF
+ * THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of
+ * the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: The CIM_MostCurrentSnapshotInBranch association associates an instance of the CIM_ComputerSystem class representing a virtual system, and the instance of the CIM_VirtualSystemSettingData class representing the virtual system snapshot that is the most current snapshot in a branch of dependent snapshots. 
- * Note that a new branch is implied as a snapshot that is part of an existing branch is applied to a virtual system, such that in this case initially that snapshot is the most current snapshot in that new branch. Note that this association does not exist if the virtual system was not activated based on a snapshot or no snapshot was yet created from the current instance of the virtual system.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: The CIM_MostCurrentSnapshotInBranch
+ *            association associates an instance of the CIM_ComputerSystem class representing a
+ *            virtual system, and the instance of the CIM_VirtualSystemSettingData class
+ *            representing the virtual system snapshot that is the most current snapshot in a branch
+ *            of dependent snapshots. Note that a new branch is implied as a snapshot that is part
+ *            of an existing branch is applied to a virtual system, such that in this case initially
+ *            that snapshot is the most current snapshot in that new branch. Note that this
+ *            association does not exist if the virtual system was not activated based on a snapshot
+ *            or no snapshot was yet created from the current instance of the virtual system.
+ *            generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

@@ -1,28 +1,19 @@
-/** 
- * CIM_LastAppliedSnapshot.java
- *
+/**
+ * CIM_LastAppliedSnapshot.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER
+ * MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: The CIM_LastAppliedSnapshot association associates an instance of the CIM_VirtualSystemSettingData class representing a virtual system snapshot that was most recently applied to a virtual system, and the instance of the CIM_ComputerSystem class representing the related virtual system.
- * An instance of this assocation indicates that the referenced snapshot is the snapshot the was last applied to the virtual system from the set of snapshots taken from that virtual system. For each virtual system at any time there is at most one snapshot the last applied snapshot.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: The CIM_LastAppliedSnapshot association
+ *            associates an instance of the CIM_VirtualSystemSettingData class representing a
+ *            virtual system snapshot that was most recently applied to a virtual system, and the
+ *            instance of the CIM_ComputerSystem class representing the related virtual system. An
+ *            instance of this assocation indicates that the referenced snapshot is the snapshot the
+ *            was last applied to the virtual system from the set of snapshots taken from that
+ *            virtual system. For each virtual system at any time there is at most one snapshot the
+ *            last applied snapshot. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

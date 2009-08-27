@@ -1,27 +1,26 @@
-/** 
- * CIM_BaseMetricDefinition.java
- *
+/**
+ * CIM_BaseMetricDefinition.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE
+ * TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS
+ * FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the
+ * Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: CIM_BaseMetricDefinition represents the definitional aspects of a metric, i.e., a definition template containing meta data about a new metric. Since CIM_BaseMetricDefinition does not capture metric instance information, it does not contain the value of the metric. The associated class CIM_BaseMetricValue holds the metric value and encapsulates its runtime behavior. The purpose of CIM_BaseMetricDefinition is to provide a convenient mechanism for introducing a new metric definition at runtime and capturing its instance values in a separate class. This mechanism is targeted specifically at CIM users who would like to enhance existing CIM schemas by introducing domain-specific metrics that are not captured in the existing CIM schemas. In addition, vendors of managed resources may make use of this mechanism if a small subset of a potentially large and heterogeneous amount of performance-related data needs to be exposed, based on the context in which the data is captured. Additional meta data for a metric can be provided by subclassing from CIM_BaseMetricDefinition. The CIM_BaseMetricDefinition should be associated with the CIM_ManagedElement(s) to which it applies.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: CIM_BaseMetricDefinition represents the
+ *            definitional aspects of a metric, i.e., a definition template containing meta data
+ *            about a new metric. Since CIM_BaseMetricDefinition does not capture metric instance
+ *            information, it does not contain the value of the metric. The associated class
+ *            CIM_BaseMetricValue holds the metric value and encapsulates its runtime behavior. The
+ *            purpose of CIM_BaseMetricDefinition is to provide a convenient mechanism for
+ *            introducing a new metric definition at runtime and capturing its instance values in a
+ *            separate class. This mechanism is targeted specifically at CIM users who would like to
+ *            enhance existing CIM schemas by introducing domain-specific metrics that are not
+ *            captured in the existing CIM schemas. In addition, vendors of managed resources may
+ *            make use of this mechanism if a small subset of a potentially large and heterogeneous
+ *            amount of performance-related data needs to be exposed, based on the context in which
+ *            the data is captured. Additional meta data for a metric can be provided by subclassing
+ *            from CIM_BaseMetricDefinition. The CIM_BaseMetricDefinition should be associated with
+ *            the CIM_ManagedElement(s) to which it applies. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -126,7 +125,6 @@ public class CIM_BaseMetricDefinition extends CIM_ManagedElement {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@7f0c7f0c
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Non_calculable.equals(value)) {
@@ -319,7 +317,6 @@ public class CIM_BaseMetricDefinition extends CIM_ManagedElement {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@640a640a
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Unknown.equals(value)) {
@@ -626,7 +623,6 @@ public class CIM_BaseMetricDefinition extends CIM_ManagedElement {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@4d1a4d1a
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_boolean.equals(value)) {
@@ -918,7 +914,6 @@ public class CIM_BaseMetricDefinition extends CIM_ManagedElement {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@23f423f4
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Unknown.equals(value)) {
@@ -1189,7 +1184,6 @@ public class CIM_BaseMetricDefinition extends CIM_ManagedElement {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@40624062
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Unknown.equals(value)) {

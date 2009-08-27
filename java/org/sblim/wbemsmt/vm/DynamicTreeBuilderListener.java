@@ -1,14 +1,14 @@
 /** 
   * DynamicTreeBuilderListener.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * Contributors: 
   * 
@@ -25,7 +25,12 @@ import java.util.Set;
 
 import javax.wbem.client.WBEMClient;
 
-import org.sblim.wbemsmt.bl.tree.*;
+import org.sblim.wbemsmt.bl.tree.CIMInstanceNode;
+import org.sblim.wbemsmt.bl.tree.ITaskLauncherTreeNode;
+import org.sblim.wbemsmt.bl.tree.TaskLauncherDelegaterTreeNode;
+import org.sblim.wbemsmt.bl.tree.TaskLauncherTreeNodeEvent;
+import org.sblim.wbemsmt.bl.tree.TaskLauncherTreeNodeEventListener;
+import org.sblim.wbemsmt.bl.tree.TaskLauncherTreeNodeEventListenerImpl;
 import org.sblim.wbemsmt.exception.ExceptionUtil;
 import org.sblim.wbemsmt.exception.WbemsmtException;
 import org.sblim.wbemsmt.tasklauncher.TaskLauncherContextMenu;
@@ -38,7 +43,11 @@ import org.sblim.wbemsmt.util.StringComparator;
 import org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapter;
 import org.sblim.wbemsmt.vm.bl.wrapper.objects.HostSystem;
 import org.sblim.wbemsmt.vm.bl.wrapper.objects.VM;
-import org.sblim.wbemsmt.vm.listener.*;
+import org.sblim.wbemsmt.vm.listener.ChangeVMSettingsListener;
+import org.sblim.wbemsmt.vm.listener.DefineSystemListener;
+import org.sblim.wbemsmt.vm.listener.DeleteVMListener;
+import org.sblim.wbemsmt.vm.listener.EditHostSystemListener;
+import org.sblim.wbemsmt.vm.listener.EditVMListener;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_System;
 
@@ -73,8 +82,8 @@ public class DynamicTreeBuilderListener extends TaskLauncherTreeNodeEventListene
 					}
 					
 					//get All the HostSystems
-					Map systems = HostSystem.getHostSystemsByVirtualSystemType(cimClient, namespace);
-					Set keySet = systems.keySet();
+					Map<String,CIM_System> systems = HostSystem.getHostSystemsByVirtualSystemType(cimClient, namespace);
+					Set<String> keySet = systems.keySet();
                     String[] names = (String[]) keySet.toArray(new String[keySet.size()]);
 					Arrays.sort(names, new StringComparator());
 					

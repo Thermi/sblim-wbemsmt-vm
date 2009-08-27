@@ -1,14 +1,14 @@
  /** 
   * HostSystem.java
   *
-  * © Copyright IBM Corp. 2008
+  * © Copyright IBM Corp.  2009,2008
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -19,7 +19,13 @@
   */
 package org.sblim.wbemsmt.vm.bl.wrapper.objects;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import javax.cim.UnsignedInteger16;
@@ -35,9 +41,40 @@ import org.sblim.wbemsmt.exception.WbemsmtException;
 import org.sblim.wbemsmt.vm.bl.adapter.MethodSupport;
 import org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapter;
 import org.sblim.wbemsmt.vm.bl.wrapper.list.VMList;
-import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.*;
-import org.sblim.wbemsmt.vm.container.edit.*;
-import org.sblim.wbemsmt.vm.schema.cim_2_17.*;
+import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Disk;
+import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Memory;
+import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Network;
+import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.PossibleOperation;
+import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.PossibleOperationComparator;
+import org.sblim.wbemsmt.vm.bl.wrapper.objects.host.Processor;
+import org.sblim.wbemsmt.vm.container.edit.DiskHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.DiskHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.HostSystemInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.HostSystemInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.MemoryHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.MemoryHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.NetworkHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.NetworkHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.PossibleOperationsDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.PossibleOperationsItemDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.ProcessorHostInfoDataContainer;
+import org.sblim.wbemsmt.vm.container.edit.ProcessorHostInfoItemDataContainer;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_AllocationCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Capabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_DiskDrive;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ElementCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ManagedElement;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_NetworkAdapter;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_RegisteredProfile;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourceAllocationSettingData;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourcePool;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_Service;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_System;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementService;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationService;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemSnapshotService;
 
 public class HostSystem extends VMBusinessObject {
 
@@ -64,21 +101,21 @@ public class HostSystem extends VMBusinessObject {
     private CIM_VirtualSystemSnapshotService snapshotService;
     private CIM_VirtualSystemMigrationCapabilities migrationCapabilities; 
     private VMList vms;
-    private Map capMap = new HashMap();
-    private Map resourcePoolsByInstanceid;
+    private Map<UnsignedInteger16,CIM_AllocationCapabilities> capMap = new HashMap<UnsignedInteger16,CIM_AllocationCapabilities>();
+    private Map<String,CIM_ResourcePool> resourcePoolsByInstanceid;
     
     private String SUPPORT_NONE = "none";
     private String SUPPORT_ASYNC = "async";
     private String SUPPORT_SYNC = "sync";
     
-    private List networks;
-    private List disks;
+    private List<Network> networks;
+    private List<Disk> disks;
 
     private Memory memory;
 
     private Processor processor;
 
-    private HashMap possibleOperations;
+    private HashMap<String,PossibleOperation> possibleOperations;
 
     public HostSystem(VMCimAdapter adapter, CIM_System host, String type) {
         super(adapter);
@@ -216,9 +253,9 @@ public class HostSystem extends VMBusinessObject {
         if (migrationService == null && stopPreload())
         {
             //first get all associated Services
-            List services = host.getAssociated_CIM_Service_CIM_HostedServices(getCimClient(), CIM_VirtualSystemMigrationService.CIM_CLASS_NAME,null,null);
+            List<CIM_Service> services = host.getAssociated_CIM_Service_CIM_HostedServices(getCimClient(), CIM_VirtualSystemMigrationService.CIM_CLASS_NAME,null,null);
             
-            for (Iterator iterator2 = services.iterator(); iterator2.hasNext();) {
+            for (Iterator<CIM_Service> iterator2 = services.iterator(); iterator2.hasNext();) {
                 migrationService = (CIM_VirtualSystemMigrationService) iterator2.next();
             }
         }
@@ -240,8 +277,8 @@ public class HostSystem extends VMBusinessObject {
             CIM_VirtualSystemMigrationService service = getVirtualSystemMigrationService();
             if (service !=null)
             {   
-                List capabilitiess = service.getAssociated_CIM_Capabilities_CIM_ElementCapabilitiess(getCimClient(), CIM_VirtualSystemMigrationCapabilities.CIM_CLASS_NAME,null,null);
-                for (Iterator iterator = capabilitiess.iterator(); iterator.hasNext();) {
+                List<CIM_Capabilities> capabilitiess = service.getAssociated_CIM_Capabilities_CIM_ElementCapabilitiess(getCimClient(), CIM_VirtualSystemMigrationCapabilities.CIM_CLASS_NAME,null,null);
+                for (Iterator<CIM_Capabilities> iterator = capabilitiess.iterator(); iterator.hasNext();) {
                     migrationCapabilities =  (CIM_VirtualSystemMigrationCapabilities) iterator.next();
                     return migrationCapabilities;
                 }
@@ -275,9 +312,9 @@ public class HostSystem extends VMBusinessObject {
 
     public static CIM_VirtualSystemManagementService getVirtualSystemManagementService(CIM_System host, WBEMClient cimClient) throws WbemsmtException {
         //first get all associated Services
-        List services = host.getAssociated_CIM_Service_CIM_HostedServices(cimClient, CIM_VirtualSystemManagementService.CIM_CLASS_NAME,null,null);
+        List<CIM_Service> services = host.getAssociated_CIM_Service_CIM_HostedServices(cimClient, CIM_VirtualSystemManagementService.CIM_CLASS_NAME,null,null);
         
-        for (Iterator iterator2 = services.iterator(); iterator2.hasNext();) {
+        for (Iterator<CIM_Service> iterator2 = services.iterator(); iterator2.hasNext();) {
             return (CIM_VirtualSystemManagementService) iterator2.next();
         }
         return null;
@@ -294,9 +331,9 @@ public class HostSystem extends VMBusinessObject {
     public CIM_VirtualSystemSnapshotService getVirtualSystemSnapshotService() throws WbemsmtException {
         if (snapshotService == null && stopPreload()) {
             //first get all associated Services
-            List services = host.getAssociated_CIM_Service_CIM_HostedServices(getCimClient(), CIM_VirtualSystemSnapshotService.CIM_CLASS_NAME,null,null);
+            List<CIM_Service> services = host.getAssociated_CIM_Service_CIM_HostedServices(getCimClient(), CIM_VirtualSystemSnapshotService.CIM_CLASS_NAME,null,null);
             
-            for (Iterator iterator2 = services.iterator(); iterator2.hasNext();) {
+            for (Iterator<CIM_Service> iterator2 = services.iterator(); iterator2.hasNext();) {
                 snapshotService = (CIM_VirtualSystemSnapshotService) iterator2.next();
             }
         }
@@ -312,12 +349,12 @@ public class HostSystem extends VMBusinessObject {
 
     
     public static CIM_System[] getHostSystems(WBEMClient cimClient, String interOpNamespace) throws WbemsmtException {
-        List containers = new ArrayList();
+        List<CIM_ManagedElement> containers = new ArrayList<CIM_ManagedElement>();
         
         CIM_RegisteredProfile[] profiles = VMCimAdapter.getSystemVirtualizationProfiles(cimClient,interOpNamespace);
         for (int i = 0; i < profiles.length; i++) {
             CIM_RegisteredProfile profile = profiles[i];
-            List hostList = profile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfiles(cimClient,CIM_System.CIM_CLASS_NAME,null,null);
+            List<CIM_ManagedElement> hostList = profile.getAssociated_CIM_ManagedElement_CIM_ElementConformsToProfiles(cimClient,CIM_System.CIM_CLASS_NAME,null,null);
             containers.addAll(hostList);
         }
         
@@ -337,8 +374,8 @@ public class HostSystem extends VMBusinessObject {
      * @throws WbemsmtException 
      */
     public static CIM_VirtualSystemManagementCapabilities getVirtualSystemManagementCapabilities(CIM_System hostSystem, WBEMClient client) throws WbemsmtException {
-        List capList = hostSystem.getAssociated_CIM_Capabilities_CIM_ElementCapabilitiess(client, CIM_VirtualSystemManagementCapabilities.CIM_CLASS_NAME,null,null);
-        for (Iterator iterator = capList.iterator(); iterator.hasNext();) {
+        List<CIM_Capabilities> capList = hostSystem.getAssociated_CIM_Capabilities_CIM_ElementCapabilitiess(client, CIM_VirtualSystemManagementCapabilities.CIM_CLASS_NAME,null,null);
+        for (Iterator<CIM_Capabilities> iterator = capList.iterator(); iterator.hasNext();) {
             return (CIM_VirtualSystemManagementCapabilities)iterator.next();
         }
         throw new WbemsmtException(WbemsmtException.ERR_FAILED,"No " + CIM_ElementCapabilities.CIM_CLASS_NAME  + " association from hostSystem " + hostSystem.getCimObjectPath() + " to a " + CIM_VirtualSystemManagementCapabilities.CIM_CLASS_NAME);
@@ -377,11 +414,11 @@ public class HostSystem extends VMBusinessObject {
      * @return
      * @throws WbemsmtException 
      */
-    public static Map getHostSystemsByVirtualSystemType(WBEMClient cimClient, String interOpNamespace) throws WbemsmtException {
+    public static Map<String,CIM_System> getHostSystemsByVirtualSystemType(WBEMClient cimClient, String interOpNamespace) throws WbemsmtException {
         CIM_System[] systems = HostSystem.getHostSystems(cimClient,interOpNamespace);
         
         //check if there is more than one virtualsystemManagementService found for one virtual system type
-        Map hostsByType = new HashMap();
+        Map<String,CIM_System> hostsByType = new HashMap<String,CIM_System>();
         
         for (int i = 0; i < systems.length; i++) {
             CIM_System system = systems[i];
@@ -410,7 +447,7 @@ public class HostSystem extends VMBusinessObject {
 
     public void updateControls(MemoryHostInfoDataContainer container) throws WbemsmtException {
         
-        List list = new ArrayList();
+        List<Memory> list = new ArrayList<Memory>();
         list.add(getMemory());
         
         adapter.updateControls(container.getItems(), list);
@@ -422,7 +459,7 @@ public class HostSystem extends VMBusinessObject {
     
     public void updateControls(ProcessorHostInfoDataContainer container) throws WbemsmtException {
 
-        List list = new ArrayList();
+        List<Processor> list = new ArrayList<Processor>();
         list.add(getProcessor());
         
         adapter.updateControls(container.getItems(), list);
@@ -496,8 +533,8 @@ public class HostSystem extends VMBusinessObject {
             //if caps is still null try to go via the resource pool
             if (caps == null)
             {
-                Collection pools = getResurcePools();
-                for (Iterator iterator = pools.iterator(); iterator.hasNext() && caps == null;) {
+                Collection<CIM_ResourcePool> pools = getResurcePools();
+                for (Iterator<CIM_ResourcePool> iterator = pools.iterator(); iterator.hasNext() && caps == null;) {
                     CIM_ResourcePool pool = (CIM_ResourcePool) iterator.next();
                     if (pool.get_ResourceType().intValue() == resourceType.intValue())
                     {
@@ -542,9 +579,9 @@ public class HostSystem extends VMBusinessObject {
      * @return
      * @throws WbemsmtException
      */
-    public Collection getResurcePools() throws WbemsmtException {
+    public Collection<CIM_ResourcePool> getResurcePools() throws WbemsmtException {
+    	if (resourcePoolsByInstanceid == null && stopPreload())
         
-        if (resourcePoolsByInstanceid == null && stopPreload())
         {
             initResourcePools();
         }
@@ -558,14 +595,14 @@ public class HostSystem extends VMBusinessObject {
      * @return
      * @throws WbemsmtException
      */
-    public List getResourcePoolsByResourceType(final UnsignedInteger16 resourceType) throws WbemsmtException {
+    public List<CIM_ResourcePool> getResourcePoolsByResourceType(final UnsignedInteger16 resourceType) throws WbemsmtException {
         
         if (resourcePoolsByInstanceid == null && stopPreload())
         {
             initResourcePools();
         }        
         
-        List result = new ArrayList();
+        List<CIM_ResourcePool> result = new ArrayList<CIM_ResourcePool>();
         result.addAll(resourcePoolsByInstanceid.values());
         
         CollectionUtils.filter(result, new Predicate()
@@ -590,11 +627,11 @@ public class HostSystem extends VMBusinessObject {
      * @throws WbemsmtException
      */
     private void initResourcePools() throws WbemsmtException {
-        resourcePoolsByInstanceid = new HashMap();
+        resourcePoolsByInstanceid = new HashMap<String,CIM_ResourcePool>();
         
-        List pools = host.getAssociated_CIM_ResourcePool_CIM_HostedResourcePools(getCimClient());
+        List<CIM_ResourcePool> pools = host.getAssociated_CIM_ResourcePool_CIM_HostedResourcePools(getCimClient());
         
-        for (Iterator iterator = pools.iterator(); iterator.hasNext();) {
+        for (Iterator<CIM_ResourcePool> iterator = pools.iterator(); iterator.hasNext();) {
             CIM_ResourcePool pool = (CIM_ResourcePool) iterator.next();
             resourcePoolsByInstanceid.put(pool.get_key_InstanceID(), pool);
         }
@@ -612,8 +649,8 @@ public class HostSystem extends VMBusinessObject {
         
         CIM_AllocationCapabilities caps = null;
         
-        List capList = me.getAssociations_CIM_ElementCapabilities(getCimClient(), false, false, null, null);
-        for (Iterator iterator = capList.iterator(); iterator.hasNext() && caps == null;) {
+        List<CIM_ElementCapabilities> capList = me.getAssociations_CIM_ElementCapabilities(getCimClient(), false, false, null, null);
+        for (Iterator<CIM_ElementCapabilities> iterator = capList.iterator(); iterator.hasNext() && caps == null;) {
             CIM_ElementCapabilities cap = (CIM_ElementCapabilities) iterator.next();
             UnsignedInteger16[] chars = cap.get_Characteristics();
             boolean found = false;
@@ -687,16 +724,16 @@ public class HostSystem extends VMBusinessObject {
         return processor;
     }
 
-    public List getNetworks() throws WbemsmtException {
+    public List<Network> getNetworks() throws WbemsmtException {
         if (networks == null && stopPreload())
         {
-            networks = new ArrayList();
+            networks = new ArrayList<Network>();
             
-            Collection c = getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_ETHERNET);
-            for (Iterator iterator = c.iterator(); iterator.hasNext();) {
+            Collection<CIM_ResourcePool> c = getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_ETHERNET);
+            for (Iterator<CIM_ResourcePool> iterator = c.iterator(); iterator.hasNext();) {
                 CIM_ResourcePool pool = (CIM_ResourcePool) iterator.next();
-                List components = pool.getAssociated_CIM_ManagedElement_CIM_Components(getCimClient(), CIM_NetworkAdapter.CIM_CLASS_NAME, null,null);
-                for (Iterator iterator2 = components.iterator(); iterator2.hasNext();) {
+                List<CIM_ManagedElement> components = pool.getAssociated_CIM_ManagedElement_CIM_Components(getCimClient(), CIM_NetworkAdapter.CIM_CLASS_NAME, null,null);
+                for (Iterator<CIM_ManagedElement> iterator2 = components.iterator(); iterator2.hasNext();) {
                     CIM_NetworkAdapter fco = (CIM_NetworkAdapter) iterator2.next();
                     Network network = new Network();
                     network.setNetwork(fco.get_key_DeviceID());
@@ -714,16 +751,16 @@ public class HostSystem extends VMBusinessObject {
      * @return
      * @throws WbemsmtException
      */
-    public List getDisks() throws WbemsmtException {
+    public List<Disk> getDisks() throws WbemsmtException {
         if (disks == null && stopPreload())
         {
-            disks = new ArrayList();
+            disks = new ArrayList<Disk>();
             
-            Collection c = getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
-            for (Iterator iterator = c.iterator(); iterator.hasNext();) {
+            Collection<CIM_ResourcePool> c = getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
+            for (Iterator<CIM_ResourcePool> iterator = c.iterator(); iterator.hasNext();) {
                 CIM_ResourcePool pool = (CIM_ResourcePool) iterator.next();
-                List components = pool.getAssociated_CIM_ManagedElement_CIM_Components(getCimClient(), CIM_DiskDrive.CIM_CLASS_NAME, null,null);
-                for (Iterator iterator2 = components.iterator(); iterator2.hasNext();) {
+                List<CIM_ManagedElement> components = pool.getAssociated_CIM_ManagedElement_CIM_Components(getCimClient(), CIM_DiskDrive.CIM_CLASS_NAME, null,null);
+                for (Iterator<CIM_ManagedElement> iterator2 = components.iterator(); iterator2.hasNext();) {
                     CIM_DiskDrive diskFco = (CIM_DiskDrive) iterator2.next();
                     Disk disk = new Disk();
                     disk.setDisk(diskFco.get_key_DeviceID());
@@ -764,8 +801,8 @@ public class HostSystem extends VMBusinessObject {
         
     }
 
-    private List getPossibleOperationsAsList() throws WbemsmtException {
-        List result = new ArrayList();
+    private List<PossibleOperation> getPossibleOperationsAsList() throws WbemsmtException {
+        List<PossibleOperation> result = new ArrayList<PossibleOperation>();
         result.addAll(getPossibleOperations().values());
         
        Collections.sort(result, new PossibleOperationComparator());
@@ -828,11 +865,11 @@ public class HostSystem extends VMBusinessObject {
         
     }
 
-    private Map getPossibleOperations() throws WbemsmtException {
+    private Map<String,PossibleOperation> getPossibleOperations() throws WbemsmtException {
         
         if (possibleOperations == null && stopPreload())
         {
-            possibleOperations = new HashMap();
+            possibleOperations = new HashMap<String,PossibleOperation>();
             
             CIM_VirtualSystemManagementCapabilities caps = getVirtualSystemManagementCapabilities();
             UnsignedInteger16[] asynchronousMethodsSupported = caps.get_AsynchronousMethodsSupported();

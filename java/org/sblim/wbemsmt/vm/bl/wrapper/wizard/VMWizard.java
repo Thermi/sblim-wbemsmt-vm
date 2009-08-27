@@ -1,14 +1,14 @@
  /** 
   * VMWizard.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -80,7 +80,6 @@ import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourceAllocationSettingData;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourcePool;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementCapabilities;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementService;
-import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementServiceHelper;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemSettingData;
 import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementService.DefineSystemResult;
 import org.sblim.wbemsmt.vm.util.Int2Hex;
@@ -98,13 +97,13 @@ public class VMWizard  extends VMBaseWizard{
      * contains Network objects
      * @see Network
      */
-    protected List networks = new ArrayList();
+    protected List<Network> networks = new ArrayList<Network>();
     /**
      * the Disks used for the new virtualSysten
      * contains Disk objects
      * @see Disk
      */
-    protected List disks = new ArrayList();
+    protected List<Disk> disks = new ArrayList<Disk>();
     /**
      * the references virtual system - if the user starts from scratch this is null
      */
@@ -143,7 +142,7 @@ public class VMWizard  extends VMBaseWizard{
     /**
      * The names of the properties that are shown in the wizard
      */
-    protected List vssdPropertyNames = new ArrayList();
+    protected List<String> vssdPropertyNames = new ArrayList<String>();
     
     /**
      * The virtual system type of the new Virtual system
@@ -180,11 +179,11 @@ public class VMWizard  extends VMBaseWizard{
 
 	    CIM_VirtualSystemManagementService managementService = hostSystem.getVirtualSystemManagementService();
         
-		List rasdList = new ArrayList();
+		List<CIM_ResourceAllocationSettingData> rasdList = new ArrayList<CIM_ResourceAllocationSettingData>();
 		rasdList.add(memoryRasd);
 		if (managementService.get_Caption().startsWith("LXC")){
 			CIMProperty[] properties = processorRasd.getCimInstance().getProperties();
-			ArrayList newList = new ArrayList();
+			ArrayList<CIMProperty> newList = new ArrayList<CIMProperty>();
 			for (int i = 0; i < properties.length; i++){
 				if (!properties[i].getName().equalsIgnoreCase("VirtualQuantity") && !properties[i].getName().equalsIgnoreCase("Limit")){
 					newList.add(properties[i]);
@@ -195,7 +194,7 @@ public class VMWizard  extends VMBaseWizard{
 		}
 		rasdList.add(processorRasd);
 		
-		for (Iterator iterator = disks.iterator(); iterator.hasNext();) {
+		for (Iterator<Disk> iterator = disks.iterator(); iterator.hasNext();) {
             Disk disk = (Disk) iterator.next();
             String vmName = vssd.get_VirtualSystemIdentifier();
             String instance = null;
@@ -208,7 +207,7 @@ public class VMWizard  extends VMBaseWizard{
             rasdList.add(disk.getRasd());
         }
 		
-        for (Iterator iterator = networks.iterator(); iterator.hasNext();) {
+        for (Iterator<Network> iterator = networks.iterator(); iterator.hasNext();) {
             Network network = (Network) iterator.next();
             String vmName = vssd.get_VirtualSystemIdentifier();
         	String instance = vmName + '/' + network.getRasd().get_Address();
@@ -289,7 +288,7 @@ public class VMWizard  extends VMBaseWizard{
 	 * @see Network
 	 * @return
 	 */
-    public List getNetworks() {
+    public List<Network> getNetworks() {
         return networks;
     }
 
@@ -298,7 +297,7 @@ public class VMWizard  extends VMBaseWizard{
      * @see Disk
      * @return
      */
-    public List getDisks() {
+    public List<Disk> getDisks() {
         return disks;
     }
 
@@ -323,7 +322,7 @@ public class VMWizard  extends VMBaseWizard{
             UnsignedInteger16 idx = (UnsignedInteger16) container.get_usr_Networks().getConvertedControlValue();
             if (idx != null)
             {
-                List pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_ETHERNET);
+                List<CIM_ResourcePool> pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_ETHERNET);
                 CIM_ResourcePool pool = (CIM_ResourcePool) pools.get(idx.intValue());
                 getNetworkFromPool(container, pool);
                 
@@ -332,7 +331,7 @@ public class VMWizard  extends VMBaseWizard{
         }
         else if (adapter.getUpdateTrigger() == container.get_usr_Remove())
         {
-            List list = container.getNetworks();
+            List<NetworkItemDataContainer> list = container.getNetworks();
             boolean removed = false; 
             for (int i = list.size() - 1; i >= 0; i--) {
                 NetworkItemDataContainer child = (NetworkItemDataContainer) list.get(i);
@@ -353,7 +352,7 @@ public class VMWizard  extends VMBaseWizard{
         }
         else //the next button
         {
-            List list = container.getNetworks();
+            List<NetworkItemDataContainer> list = container.getNetworks();
             for (int i = 0; i < list.size(); i++) {
                 NetworkItemDataContainer child = (NetworkItemDataContainer) list.get(i);
                 Network network = (Network) getNetworks().get(i);
@@ -441,7 +440,7 @@ public class VMWizard  extends VMBaseWizard{
     
     public void updateModel(DiskDataContainer container) throws WbemsmtException {
 
-    	List dList = container.getDisks();
+    	List<DiskItemDataContainer> dList = container.getDisks();
         for (int i = 0; i < dList.size(); i++) {
             DiskItemDataContainer child = (DiskItemDataContainer) dList.get(i);
             Disk disk = (Disk) getDisks().get(i);
@@ -474,7 +473,7 @@ public class VMWizard  extends VMBaseWizard{
             UnsignedInteger16 idx = (UnsignedInteger16) container.get_usr_Disks().getConvertedControlValue();
             if (idx != null)
             {
-                List pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
+                List<CIM_ResourcePool> pools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
                 CIM_ResourcePool pool = (CIM_ResourcePool) pools.get(idx.intValue());
                 getDiskFromPool(container, pool);
                 
@@ -487,7 +486,7 @@ public class VMWizard  extends VMBaseWizard{
         }
         else if (adapter.getUpdateTrigger() == container.get_usr_Remove())
         {
-            List list = container.getDisks();
+            List<DiskItemDataContainer> list = container.getDisks();
             boolean removed = false;
             for (int i = list.size() - 1; i >= 0; i--) {
                 DiskItemDataContainer child = (DiskItemDataContainer) list.get(i);
@@ -706,8 +705,8 @@ public class VMWizard  extends VMBaseWizard{
     
     public void updateModel(VMConfigDataContainer container) throws WbemsmtException {
 
-        List items = container.getItems();
-        for (Iterator iterator = items.iterator(); iterator.hasNext();) {
+        List<ConfigItemDataContainer> items = container.getItems();
+        for (Iterator<ConfigItemDataContainer> iterator = items.iterator(); iterator.hasNext();) {
             ConfigItemDataContainer child = (ConfigItemDataContainer) iterator.next();
             String propertyName = (String) child.get_usr_Name().getConvertedControlValue();
             CIMProperty property = vssd.getProperty(propertyName);
@@ -761,7 +760,7 @@ public class VMWizard  extends VMBaseWizard{
         
         container.get_usr_Networks().setValues(getNetworkNames());
         
-        List properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
         
         LabeledBaseHeaderComponentIf[] fields = new LabeledBaseHeaderComponentIf[]{
             container.getNetworksHeader().getNetworksHeader_usr_Field1(),
@@ -776,7 +775,7 @@ public class VMWizard  extends VMBaseWizard{
     }
     
     public void updateControls(NetworkItemDataContainer container, Network network) throws WbemsmtException {
-        List properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
         LabeledBaseInputComponentIf[] fields = getNetworkGenericItems(container);
         
         setRasdFields(network.getRasd(), properties, fields,true);
@@ -786,7 +785,7 @@ public class VMWizard  extends VMBaseWizard{
         
         container.get_usr_Disks().setValues(getDiskNames());
         
-        List properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
         
         LabeledBaseHeaderComponentIf[] fields = getDiskGenericHeaders(container);
         
@@ -798,7 +797,7 @@ public class VMWizard  extends VMBaseWizard{
 
     public void updateControls(DiskItemDataContainer container, Disk disk) throws WbemsmtException {
         
-        List properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
         LabeledBaseInputComponentIf[] fields = getDiskGenericItems(container);
         
         setRasdFields(disk.getRasd(), properties, fields,true);
@@ -840,7 +839,7 @@ public class VMWizard  extends VMBaseWizard{
         container.get_Memory().setControlValue(currentMemory);
         container.get_Processor().setControlValue(currentProcessor);
         
-        List properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
         setRasdHeaderFields(properties, getDiskGenericHeaders(container));
         adapter.updateControls(container.getDisks(), getDisks());
         
@@ -868,7 +867,7 @@ public class VMWizard  extends VMBaseWizard{
         container.get_usr_FromPool().setControlValue(pool != null ? pool.get_Caption() : "");
         container.get_usr_Path().setControlValue(disk.getRasd().get_Address());
         
-        List properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
         LabeledBaseInputComponentIf[] fields = getDiskGenericItems(container);
         
         setRasdFields(disk.getRasd(), properties, fields,false);        
@@ -881,7 +880,7 @@ public class VMWizard  extends VMBaseWizard{
         container.get_usr_FromPool().setControlValue(pool != null ? pool.get_Caption() : "");
         container.get_usr_Mac().setControlValue(network.getRasd().get_Address());
         
-        List properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleNetworkRasd, RASD_NETWORK, virtualSystemType);
         LabeledBaseInputComponentIf[] fields = getNetworkGenericItems(container);
         
         setRasdFields(network.getRasd(), properties, fields,false);        
@@ -909,7 +908,7 @@ public class VMWizard  extends VMBaseWizard{
         return getVssdPropertyNames().size();
     }    
     
-    public List getVssdPropertyNames() throws WbemsmtException {
+    public List<String> getVssdPropertyNames() throws WbemsmtException {
         return vssdPropertyNames;
     }
 
@@ -940,8 +939,8 @@ public class VMWizard  extends VMBaseWizard{
          * add disks
          */
         disks.clear();
-        List vmDisks = vm.getDisks();
-        for (Iterator iterator = vmDisks.iterator(); iterator.hasNext();) {
+        List<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk> vmDisks = vm.getDisks();
+        for (Iterator<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk> iterator = vmDisks.iterator(); iterator.hasNext();) {
             org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk vmDisk = (org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk) iterator.next();
             Disk disk = new Disk();
             CIM_ResourceAllocationSettingData rasd = vmDisk.getRasd();
@@ -976,8 +975,8 @@ public class VMWizard  extends VMBaseWizard{
          */
     
         networks.clear();
-        List vmNetworks = vm.getNetworks();
-        for (Iterator iterator = vmNetworks.iterator(); iterator.hasNext();) {
+        List<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network> vmNetworks = vm.getNetworks();
+        for (Iterator<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network> iterator = vmNetworks.iterator(); iterator.hasNext();) {
             org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network vmNetwork = (org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network) iterator.next();
             Network network = new Network();
             CIM_ResourceAllocationSettingData rasd = vmNetwork.getRasd();
@@ -1114,10 +1113,10 @@ public class VMWizard  extends VMBaseWizard{
     	if (hostSystem == null ) {
     		hostSystem = adapter.getSelectedHostSystem();
     	}
-        List diskPools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
+        List<CIM_ResourcePool> diskPools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_DISK);
         String[] result = new String[diskPools.size()];
         int i=0;
-        for (Iterator iterator = diskPools.iterator(); iterator.hasNext();) {
+        for (Iterator<CIM_ResourcePool> iterator = diskPools.iterator(); iterator.hasNext();) {
             CIM_ResourcePool pool = (CIM_ResourcePool) iterator.next();
             result[i++] = pool.get_Caption();
         }
@@ -1126,10 +1125,10 @@ public class VMWizard  extends VMBaseWizard{
 
 
     protected String[] getNetworkNames() throws WbemsmtException {
-        List networkPools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_ETHERNET);
+        List<CIM_ResourcePool> networkPools = hostSystem.getResourcePoolsByResourceType(VMCimAdapter.RESOURCE_TYPE_ETHERNET);
         String[] result = new String[networkPools.size()];
         int i=0;
-        for (Iterator iterator = networkPools.iterator(); iterator.hasNext();) {
+        for (Iterator<CIM_ResourcePool> iterator = networkPools.iterator(); iterator.hasNext();) {
             CIM_ResourcePool pool = (CIM_ResourcePool) iterator.next();
             result[i++] = pool.get_Caption();
         }
@@ -1141,7 +1140,7 @@ public class VMWizard  extends VMBaseWizard{
      * @param properties
      * @param fields
      */
-    protected void setRasdHeaderFields(List properties, LabeledBaseHeaderComponentIf[] fields) {
+    protected void setRasdHeaderFields(List<RASDProperty> properties, LabeledBaseHeaderComponentIf[] fields) {
         for (int i=0; i < fields.length; i++)
         {
             
@@ -1269,7 +1268,7 @@ public class VMWizard  extends VMBaseWizard{
      * @param properties
      * @param fields
      */
-    private void setRasdFields(CIM_ResourceAllocationSettingData rasd, List properties,
+    private void setRasdFields(CIM_ResourceAllocationSettingData rasd, List<RASDProperty> properties,
             LabeledBaseInputComponentIf[] fields, boolean typeIsGeneric) throws WbemsmtException {
         for (int i=0; i < properties.size() && i < fields.length; i++)
         {

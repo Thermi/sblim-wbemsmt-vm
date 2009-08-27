@@ -1,29 +1,23 @@
-/** 
- * CIM_ConcreteDependency.java
- *
+/**
+ * CIM_ConcreteDependency.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER
+ * MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: CIM_ConcreteDependency is a generic association used to establish dependency relationships between ManagedElements. It is defined as a concrete subclass of the abstract CIM_Dependency class, to be used in place of many specific subclasses of Dependency that add no semantics, that is subclasses that do not clarify the type of dependency, update cardinalities, or add or remove qualifiers. Note that when you define additional semantics for Dependency, this class must not be subclassed. Specific semantics continue to be defined as subclasses of the abstract CIM_Dependency. ConcreteDependency is limited in its use as a concrete form of a general dependency. 
- * 
- * It was deemed more prudent to create this concrete subclass than to change Dependency from an abstract to a concrete class. Dependency already had multiple abstract subclasses in the CIM Schema, and wider industry usage and impact could not be anticipated.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: CIM_ConcreteDependency is a generic
+ *            association used to establish dependency relationships between ManagedElements. It is
+ *            defined as a concrete subclass of the abstract CIM_Dependency class, to be used in
+ *            place of many specific subclasses of Dependency that add no semantics, that is
+ *            subclasses that do not clarify the type of dependency, update cardinalities, or add or
+ *            remove qualifiers. Note that when you define additional semantics for Dependency, this
+ *            class must not be subclassed. Specific semantics continue to be defined as subclasses
+ *            of the abstract CIM_Dependency. ConcreteDependency is limited in its use as a concrete
+ *            form of a general dependency. It was deemed more prudent to create this concrete
+ *            subclass than to change Dependency from an abstract to a concrete class. Dependency
+ *            already had multiple abstract subclasses in the CIM Schema, and wider industry usage
+ *            and impact could not be anticipated. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

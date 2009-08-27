@@ -1,28 +1,24 @@
-/** 
- * CIM_BaseMetricValue.java
- *
+/**
+ * CIM_BaseMetricValue.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS
+ * OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: Each CIM_BaseMetricValue object represents the instance value of a metric. Since the gathering of metric information can involve large quantities of information there may be many instances of this class. The use of this class as an instrumentation source may be inefficient unless the rate of metrics are known. The length of time a CIM_BaseMetricValue instance exists after the metric information is captured is not defined and is implementation dependent. 
- * Most metric data values change over time. There are two ways of mapping this into CIM_BaseMetricValue objects: The value for the next point in time may use the same object and just change its properties (such as the value or timestamp), or the existing objects remain unchanged and a new object is created for the new point in time. The first method is typically used for snapshot data and the second method for historical data. Which method is used, is indicated by the Volatile property.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: Each CIM_BaseMetricValue object represents
+ *            the instance value of a metric. Since the gathering of metric information can involve
+ *            large quantities of information there may be many instances of this class. The use of
+ *            this class as an instrumentation source may be inefficient unless the rate of metrics
+ *            are known. The length of time a CIM_BaseMetricValue instance exists after the metric
+ *            information is captured is not defined and is implementation dependent. Most metric
+ *            data values change over time. There are two ways of mapping this into
+ *            CIM_BaseMetricValue objects: The value for the next point in time may use the same
+ *            object and just change its properties (such as the value or timestamp), or the
+ *            existing objects remain unchanged and a new object is created for the new point in
+ *            time. The first method is typically used for snapshot data and the second method for
+ *            historical data. Which method is used, is indicated by the Volatile property.
+ *            generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

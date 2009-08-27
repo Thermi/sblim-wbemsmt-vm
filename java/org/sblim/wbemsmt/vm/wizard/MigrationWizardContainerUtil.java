@@ -1,14 +1,14 @@
  /** 
   * MigrationWizardContainerUtil.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 
 import javax.cim.UnsignedInteger16;
 
+import org.sblim.wbemsmt.bl.adapter.DataContainer;
 import org.sblim.wbemsmt.tools.wizard.WizardContainerUtil;
 import org.sblim.wbemsmt.tools.wizard.WizardStep;
 import org.sblim.wbemsmt.tools.wizard.WizardStepList;
@@ -47,7 +48,7 @@ public class MigrationWizardContainerUtil extends
 	/* (non-Javadoc)
 	 * @see org.sblim.wbemsmt.tools.wizard.WizardContainerUtil#getNextPanel(java.lang.String, java.util.Map)
 	 */
-	public String getNextPanel(String currentPageName, Map hmPages) {
+	public String getNextPanel(String currentPageName, Map<String, DataContainer> hmPages) {
 		
 		if (currentPageName.equals(""))
 		{
@@ -94,7 +95,7 @@ public class MigrationWizardContainerUtil extends
 		return currentPageName;
 	}
 	
-	public void addInitialWizardSteps(IWizardContainer wizardContainer, WizardStepList stepList, HashMap hmPages) {
+	public void addInitialWizardSteps(IWizardContainer wizardContainer, WizardStepList stepList, HashMap<String, DataContainer> hmPages) {
 
 		stepList.addWizardStep(new WizardStep(wizardContainer, MigrationWizardContainer.WIZARD_PANEL_PANEL1));
 		//add a step which is just for grouping the following three ones

@@ -1,32 +1,24 @@
-/** 
- * CIM_SettingsDefineCapabilities.java
- *
+/**
+ * CIM_SettingsDefineCapabilities.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER
+ * THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF
+ * THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of
+ * the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: This association indicates that the non-null, non-key set of properties of the component SettingData instance specifies some capabilities of the associated Capabilities instance. The interpretation of the set of properties in the associated SettingData is governed by the properties: PropertyPolicy and ValueRole.
- * For a particular Capabilities instance, the complete set of Component SettingData instances, together with properties of the Capabilities instance itself, defines the overall range of supported capabilities.
- * PropertyPolicy determines whether the properties of the set are interpreted independently or as a whole (i.e. correlated.)
- * ValueRole further qualifies the members of the set.
- * This association eliminates the need to define and maintain corresponding property definitions and values in both a Capabilities subclass and a SettingData subclass.
- * Typically these setting instances will be published along with the associated Capabilities instance and will not be modifiable by the client.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: This association indicates that the non-null,
+ *            non-key set of properties of the component SettingData instance specifies some
+ *            capabilities of the associated Capabilities instance. The interpretation of the set of
+ *            properties in the associated SettingData is governed by the properties: PropertyPolicy
+ *            and ValueRole. For a particular Capabilities instance, the complete set of Component
+ *            SettingData instances, together with properties of the Capabilities instance itself,
+ *            defines the overall range of supported capabilities. PropertyPolicy determines whether
+ *            the properties of the set are interpreted independently or as a whole (i.e.
+ *            correlated.) ValueRole further qualifies the members of the set. This association
+ *            eliminates the need to define and maintain corresponding property definitions and
+ *            values in both a Capabilities subclass and a SettingData subclass. Typically these
+ *            setting instances will be published along with the associated Capabilities instance
+ *            and will not be modifiable by the client. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -89,7 +81,6 @@ public class CIM_SettingsDefineCapabilities extends CIM_Component {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@b880b88
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Independent.equals(value)) {
@@ -269,7 +260,6 @@ public class CIM_SettingsDefineCapabilities extends CIM_Component {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@4a1a4a1a
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Point.equals(value)) {
@@ -465,7 +455,6 @@ public class CIM_SettingsDefineCapabilities extends CIM_Component {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@62026202
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Default.equals(value)) {

@@ -1,27 +1,12 @@
-/** 
- * CreateVMWizard.java
- *
+/**
+ * CreateVMWizard.java Â© Copyright IBM Corp.  2009,2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS OF
+ * THE ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/eclipse-1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.jsf.JSFPresentationLayerGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/jsf/wizardClass.vm
- *
- * Contributors: 
- *   Prashanth Karnam <prkarnam@in.ibm.com>
- * 
- * Description: 
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/jsf/wizardClass.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: generated Class
  */
 
 package org.sblim.wbemsmt.vm.wizard.jsf;
@@ -65,7 +50,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
                 new org.sblim.wbemsmt.vm.wizard.CreateVMWizardContainerPanels() {
                     //update the child objects
 
-                    public Object getPage1() throws WbemsmtException {
+                    public DataContainer getPage1() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel1!= null)
@@ -104,7 +89,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getPage2() throws WbemsmtException {
+                    public DataContainer getPage2() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel2!= null)
@@ -143,7 +128,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getProcessor() throws WbemsmtException {
+                    public DataContainer getProcessor() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel3!= null)
@@ -182,7 +167,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getMemory() throws WbemsmtException {
+                    public DataContainer getMemory() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel4!= null)
@@ -221,7 +206,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getDisk() throws WbemsmtException {
+                    public DataContainer getDisk() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel5!= null)
@@ -268,7 +253,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getNetwork() throws WbemsmtException {
+                    public DataContainer getNetwork() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel6!= null)
@@ -316,7 +301,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getPage3() throws WbemsmtException {
+                    public DataContainer getPage3() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel7!= null)
@@ -355,7 +340,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getSummary() throws WbemsmtException {
+                    public DataContainer getSummary() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel8!= null)
@@ -420,7 +405,7 @@ public class CreateVMWizard extends JSFWizardBase implements IPageWizardAdapter 
 
                     //update the child objects
 
-                    public Object getVssd() throws WbemsmtException {
+                    public DataContainer getVssd() throws WbemsmtException {
                         //Workaround for Bug https://issues.apache.org/jira/browse/MYFACES-1438
                         //Create the panel everytime the panel is needed 
                         //if (panel9!= null)

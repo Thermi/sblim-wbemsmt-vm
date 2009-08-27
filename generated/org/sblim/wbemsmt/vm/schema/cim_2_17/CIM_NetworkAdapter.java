@@ -1,28 +1,16 @@
-/** 
- * CIM_NetworkAdapter.java
- *
+/**
+ * CIM_NetworkAdapter.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS
+ * OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: Note: The use of the CIM_NetworkAdpater class has been deprecated in lieu of CIM_NetworkPort. CIM_NetworkPort better reflects that the hardware of a single port is described and managed. 
- * Deprecated description: NetworkAdapter is an Abstract class that defines general networking hardware concepts (for example, PermanentAddress or Speed of operation).
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: Note: The use of the CIM_NetworkAdpater class
+ *            has been deprecated in lieu of CIM_NetworkPort. CIM_NetworkPort better reflects that
+ *            the hardware of a single port is described and managed. Deprecated description:
+ *            NetworkAdapter is an Abstract class that defines general networking hardware concepts
+ *            (for example, PermanentAddress or Speed of operation). generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;

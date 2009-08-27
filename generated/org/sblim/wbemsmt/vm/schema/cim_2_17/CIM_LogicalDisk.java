@@ -1,29 +1,22 @@
-/** 
- * CIM_LogicalDisk.java
- *
+/**
+ * CIM_LogicalDisk.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS PROVIDED UNDER THE TER MS OF
+ * THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
+ * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a current copy of the Common
+ * Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: A LogicalDisk is a presentation of a contiguous range of logical blocks that is identifiable by applications such as filesystems via the Name field. (DeviceID (key) may use the same name or some other unique text such as a UUID.) For example in a Windows environment, the Name field may contain a drive letter. In a Unix environment, it may contain the access path (for example, '/dev/...'); and in a NetWare environment, may contain the volume name. LogicalDisks are typically built on a DiskPartition or other LogicalDisks (for instance, those exposed by a software volume manager). However, it can be based on other StorageExtents, like CIM_Memory, in the case of a RAM disk. 
- * 
- * LogicalDisks SHOULD set the 'Exported' value in ExtentStatus[] if they are intended for application use.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: A LogicalDisk is a presentation of a
+ *            contiguous range of logical blocks that is identifiable by applications such as
+ *            filesystems via the Name field. (DeviceID (key) may use the same name or some other
+ *            unique text such as a UUID.) For example in a Windows environment, the Name field may
+ *            contain a drive letter. In a Unix environment, it may contain the access path (for
+ *            example, '/dev/...'); and in a NetWare environment, may contain the volume name.
+ *            LogicalDisks are typically built on a DiskPartition or other LogicalDisks (for
+ *            instance, those exposed by a software volume manager). However, it can be based on
+ *            other StorageExtents, like CIM_Memory, in the case of a RAM disk. LogicalDisks SHOULD
+ *            set the 'Exported' value in ExtentStatus[] if they are intended for application use.
+ *            generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -89,7 +82,6 @@ public class CIM_LogicalDisk extends CIM_StorageExtent {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@2d6c2d6c
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Other.equals(value)) {
@@ -226,7 +218,6 @@ public class CIM_LogicalDisk extends CIM_StorageExtent {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@55805580
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Other.equals(value)) {
@@ -525,7 +516,6 @@ public class CIM_LogicalDisk extends CIM_StorageExtent {
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@3e7c3e7c
         public static javax.cim.UnsignedInteger16 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_Other.equals(value)) {

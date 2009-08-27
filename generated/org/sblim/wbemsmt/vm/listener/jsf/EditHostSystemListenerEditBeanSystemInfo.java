@@ -1,27 +1,12 @@
-/** 
- * EditHostSystemListenerEditBeanSystemInfo.java
- *
+/**
+ * EditHostSystemListenerEditBeanSystemInfo.java Â© Copyright IBM Corp.  2009,2006,2007 THIS FILE IS
+ * PROVIDED UNDER THE TER MS OF THE ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR
+ * DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a
+ * current copy of the Eclipse Public License from http://www.opensource.org/licenses/eclipse-1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.jsf.JSFPresentationLayerGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/jsf/editBean.vm
- *
- * Contributors: 
- *   Prashanth Karnam <prkarnam@in.ibm.com>
- * 
- * Description: 
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/jsf/editBean.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: generated Class
  */
 
 package org.sblim.wbemsmt.vm.listener.jsf;
@@ -34,8 +19,7 @@ import javax.faces.context.FacesContext;
 import org.sblim.wbemsmt.bl.tree.*;
 import org.sblim.wbemsmt.exception.*;
 import org.sblim.wbemsmt.tools.jsf.*;
-import org.sblim.wbemsmt.tools.resources.*;
-//import org.sblim.wbemsmt.tools.input.jsf.*;
+import org.sblim.wbemsmt.tools.resources.*; // import org.sblim.wbemsmt.tools.input.jsf.*;
 import org.sblim.wbemsmt.bl.adapter.*;
 import org.sblim.wbemsmt.bl.messages.*;
 
@@ -77,7 +61,7 @@ public class EditHostSystemListenerEditBeanSystemInfo extends EditBean {
 
     public void edit(ITaskLauncherTreeNode treeNode) throws WbemsmtException {
 
-        String bindingPrefix = null;
+        String expressionPrefix = null;
         HtmlPanelGrid childEditFields = null;
         Div div = null;
         panel = (HtmlPanelGrid) FacesContext.getCurrentInstance().getApplication().createComponent(
@@ -109,11 +93,11 @@ public class EditHostSystemListenerEditBeanSystemInfo extends EditBean {
 
         //ADD THE FIELDS FOR CONTAINER HostSystemInfoDataContainer in EditPanel ${editPanel.getId()}
 
-        bindingPrefix = "objectActionController.editBeans['SystemInfo'].containers[0].";
+        expressionPrefix = "objectActionController.editBeans['SystemInfo'].containers[0].";
 
         //create cotainner
         currentEditContainer1 = new org.sblim.wbemsmt.vm.container.edit.jsf.HostSystemInfoDataContainerImpl(
-                adapter1, bindingPrefix);
+                adapter1, expressionPrefix);
         currentEditContainer1.getPanelForCustomLayout().setStyleClass("mainTable");
         containerPanel = (HtmlPanelGrid) FacesContext.getCurrentInstance().getApplication()
                 .createComponent(HtmlPanelGrid.COMPONENT_TYPE);
@@ -169,11 +153,11 @@ public class EditHostSystemListenerEditBeanSystemInfo extends EditBean {
 
         //ADD THE FIELDS FOR CONTAINER PossibleOperationsDataContainer in EditPanel ${editPanel.getId()}
 
-        bindingPrefix = "objectActionController.editBeans['SystemInfo'].containers[1].";
+        expressionPrefix = "objectActionController.editBeans['SystemInfo'].containers[1].";
 
         //create cotainner
         currentEditContainer2 = new org.sblim.wbemsmt.vm.container.edit.jsf.PossibleOperationsDataContainerImpl(
-                adapter2, bindingPrefix);
+                adapter2, expressionPrefix);
         currentEditContainer2.getPanelForCustomLayout().setStyleClass("mainTable");
         containerPanel = (HtmlPanelGrid) FacesContext.getCurrentInstance().getApplication()
                 .createComponent(HtmlPanelGrid.COMPONENT_TYPE);

@@ -1,14 +1,14 @@
  /** 
   * MetaclusterCimAdapterInstallValidatorsDelegatee.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -28,8 +28,31 @@ import org.sblim.wbemsmt.vm.container.edit.VMDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.VMOperationsDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.WelcomeDataContainer;
 import org.sblim.wbemsmt.vm.container.edit.WelcomeItemDataContainer;
-import org.sblim.wbemsmt.vm.container.wizard.*;
-import org.sblim.wbemsmt.vm.validator.*;
+import org.sblim.wbemsmt.vm.container.wizard.ChangeVMSettingsSummaryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage1;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2a;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2b;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2c;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage3;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerSummary;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMPage1DataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMPage2DataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMPage3DataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.CreateVMSummaryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DefineSystemCLIDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DefineSystemCLISummaryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.DiskDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.MemoryDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.NetworkDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.ProcessorDataContainer;
+import org.sblim.wbemsmt.vm.container.wizard.VMConfigDataContainer;
+import org.sblim.wbemsmt.vm.validator.ActiveTargetSystemSelectedValidator;
+import org.sblim.wbemsmt.vm.validator.ContainerExistsOnTargetSystemValidator;
+import org.sblim.wbemsmt.vm.validator.ContainerRunningValidator;
+import org.sblim.wbemsmt.vm.validator.ContainerStoppedOnTargetSystemValidator;
+import org.sblim.wbemsmt.vm.validator.ElementNameMaxLengthValidator;
+import org.sblim.wbemsmt.vm.validator.MigratableValidator;
+import org.sblim.wbemsmt.vm.validator.TargetFoundValidator;
 
 
 public class VMCimAdapterInstallValidatorsDelegatee implements VMCimAdapterInstallValidatorsIf {

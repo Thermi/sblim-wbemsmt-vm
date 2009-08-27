@@ -1,27 +1,17 @@
-/** 
- * CIM_ResourcePoolConfigurationCapabilities.java
- *
+/**
+ * CIM_ResourcePoolConfigurationCapabilities.java Â© Copyright IBM Corp. 2006,2007 THIS FILE IS
+ * PROVIDED UNDER THE TER MS OF THE COMMON PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR
+ * DISTRIBUTION OF THIS FILE CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. You can obtain a
+ * current copy of the Common Public License from http://www.opensource.org/licenses/cpl1.0.php
  * 
- * 
- * © Copyright IBM Corp. 2008, 
- * 
- * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE 
- * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE 
- * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT. 
- * 
- * You can obtain a current copy of the Eclipse Public License from 
- * http://www.opensource.org/licenses/eclipse-1.0.php 
- 
- *
  * @author: org.sblim.wbemsmt.dcg.generator.fco.jsr48.FcoGenerator
- * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm
- *
- * Contributors:
- *    Prashanth Karnam <prkarnam@in.ibm.com> 
- * 
- * Description: This class exposes the supported capabilities of a ResourcePoolConfigurationService. Not all implementations will support all methods on the service. Clients may use instances of this class to determine which methods are supported. The same method must not be listed in both lists. Implementations must either be non-blocking and use a Job for long running operations, or always block until the operation completes.
- * 
- * generated Class
+ * @template: org/sblim/wbemsmt/dcg/templates/fco/jsr48/fco.vm Contributors: Prashanth
+ *            Karnam<prkarnam@in.ibm.com> Description: This class exposes the supported capabilities
+ *            of a ResourcePoolConfigurationService. Not all implementations will support all
+ *            methods on the service. Clients may use instances of this class to determine which
+ *            methods are supported. The same method must not be listed in both lists.
+ *            Implementations must either be non-blocking and use a Job for long running operations,
+ *            or always block until the operation completes. generated Class
  */
 
 package org.sblim.wbemsmt.vm.schema.cim_2_17;
@@ -141,7 +131,6 @@ public class CIM_ResourcePoolConfigurationCapabilities extends CIM_Capabilities 
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@2c062c06
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_CreateResourcePool_is_supported.equals(value)) {
@@ -433,7 +422,6 @@ public class CIM_ResourcePoolConfigurationCapabilities extends CIM_Capabilities 
          * @param value the value to find the ValueMapEntry for
          * @return the ValueMap entry or null if not found
          */
-        //org.sblim.wbemsmt.dcg.generator.DCGContextUtil$Wrapper@10f010f0
         public static javax.cim.UnsignedInteger32 getValueMapEntry(String value) {
 
             if (VALUE_ENTRY_CreateResourcePool_is_supported.equals(value)) {

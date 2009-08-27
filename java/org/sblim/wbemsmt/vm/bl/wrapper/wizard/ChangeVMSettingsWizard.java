@@ -1,14 +1,14 @@
  /** 
   * ChangeVMSettingsWizard.java
   *
-  * © Copyright IBM Corp. 2008
+  * © Copyright IBM Corp.  2009,2008
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.sblim.wbemsmt.bl.adapter.CimObjectKey;
 import org.sblim.wbemsmt.bl.fco.AbstractWbemsmtFco;
 import org.sblim.wbemsmt.bl.messages.Message;
 import org.sblim.wbemsmt.bl.messages.MessageDefinition;
@@ -39,6 +38,7 @@ import org.sblim.wbemsmt.vm.bl.wrapper.objects.VM;
 import org.sblim.wbemsmt.vm.bl.wrapper.objects.VMBusinessObject;
 import org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.Disk;
 import org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.Network;
+import org.sblim.wbemsmt.vm.bl.wrapper.wizard.define_system.RASDProperty;
 import org.sblim.wbemsmt.vm.container.wizard.ChangeVMSettingsSummaryDataContainer;
 import org.sblim.wbemsmt.vm.container.wizard.ConfigItemDataContainer;
 import org.sblim.wbemsmt.vm.container.wizard.DiskDataContainer;
@@ -64,8 +64,8 @@ public class ChangeVMSettingsWizard extends VMWizard {
     private boolean removeResourceSupported;
     private boolean modifySettingsSupported;
     private boolean modifyResourceSupported;
-    private ArrayList networksAtStart;
-    private ArrayList disksAtStart;
+    private ArrayList<Network> networksAtStart;
+    private ArrayList<Disk> disksAtStart;
     private String processorAtStart,processorWeightAtStart,processorLimitAtStart;
     private String memoryAtStart;
 
@@ -77,9 +77,9 @@ public class ChangeVMSettingsWizard extends VMWizard {
     public void create(ChangeVMSettingsSummaryDataContainer container) throws WbemsmtException {
         
         
-        List toAdd = new ArrayList();
-        List toModify = new ArrayList();
-        List toDelete = new ArrayList();
+        List<CIM_ResourceAllocationSettingData> toAdd = new ArrayList<CIM_ResourceAllocationSettingData>();
+        List<CIM_ResourceAllocationSettingData> toModify = new ArrayList<CIM_ResourceAllocationSettingData>();
+        List<CIM_ResourceAllocationSettingData> toDelete = new ArrayList<CIM_ResourceAllocationSettingData>();
         sortResourcesByState(toAdd, toModify, toDelete);
         
         modifySettings(container);
@@ -140,7 +140,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
     }
     
 
-    private void removeResources(ChangeVMSettingsSummaryDataContainer container, List toDelete)
+    private void removeResources(ChangeVMSettingsSummaryDataContainer container, List<CIM_ResourceAllocationSettingData> toDelete)
             throws WbemsmtException {
         CIM_VirtualSystemManagementService service = hostSystem.getVirtualSystemManagementService();
 
@@ -152,7 +152,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
         if (removeResourceSupported)
         {
             
-            for (Iterator iterator = toDelete.iterator(); iterator.hasNext();) {
+            for (Iterator<CIM_ResourceAllocationSettingData> iterator = toDelete.iterator(); iterator.hasNext();) {
                 try {
                     CIM_ResourceAllocationSettingData rasd = (CIM_ResourceAllocationSettingData) iterator.next();
                     RemoveResourceSettingsResult result = service.invoke_RemoveResourceSettings(adapter.getCimClient(), new CIM_ResourceAllocationSettingData[]{rasd});
@@ -188,7 +188,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
         }
     }
 
-    private void modifyResources(ChangeVMSettingsSummaryDataContainer container, List toModify)
+    private void modifyResources(ChangeVMSettingsSummaryDataContainer container, List<CIM_ResourceAllocationSettingData> toModify)
             throws WbemsmtException {
         CIM_VirtualSystemManagementService service = hostSystem.getVirtualSystemManagementService();
 
@@ -197,7 +197,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
 
         if (modifyResourceSupported) {
 
-            for (Iterator iterator = toModify.iterator(); iterator.hasNext();) {
+            for (Iterator<CIM_ResourceAllocationSettingData> iterator = toModify.iterator(); iterator.hasNext();) {
                 try {
                     CIM_ResourceAllocationSettingData rasd = (CIM_ResourceAllocationSettingData) iterator.next();
                     ModifyResourceSettingsResult result = service.invoke_ModifyResourceSettings(
@@ -230,7 +230,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
         }
     }
     
-    private void addResources(ChangeVMSettingsSummaryDataContainer container, List toAdd)
+    private void addResources(ChangeVMSettingsSummaryDataContainer container, List<CIM_ResourceAllocationSettingData> toAdd)
             throws WbemsmtException {
         CIM_VirtualSystemManagementService service = hostSystem.getVirtualSystemManagementService();
 
@@ -239,7 +239,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
 
         if (addResourceSupported) {
 
-            for (Iterator iterator = toAdd.iterator(); iterator.hasNext();) {
+            for (Iterator<CIM_ResourceAllocationSettingData> iterator = toAdd.iterator(); iterator.hasNext();) {
                 try {
                     CIM_ResourceAllocationSettingData rasd = (CIM_ResourceAllocationSettingData) iterator.next();
                     AddResourceSettingsResult result = service.invoke_AddResourceSettings(
@@ -286,8 +286,8 @@ public class ChangeVMSettingsWizard extends VMWizard {
         
         // add disks
         disks.clear();
-        List vmDisks = vm.getDisks();
-        for (Iterator iterator = vmDisks.iterator(); iterator.hasNext();) {
+        List<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk> vmDisks = vm.getDisks();
+        for (Iterator<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk> iterator = vmDisks.iterator(); iterator.hasNext();) {
             org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk vmDisk = (org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Disk) iterator.next();
             Disk disk = new Disk();
             CIM_ResourceAllocationSettingData rasd = vmDisk.getRasd();
@@ -318,8 +318,8 @@ public class ChangeVMSettingsWizard extends VMWizard {
         
         // Get networks
         networks.clear();
-        List vmNetworks = vm.getNetworks();
-        for (Iterator iterator = vmNetworks.iterator(); iterator.hasNext();) {
+        List<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network> vmNetworks = vm.getNetworks();
+        for (Iterator<org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network> iterator = vmNetworks.iterator(); iterator.hasNext();) {
             org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network vmNetwork = (org.sblim.wbemsmt.vm.bl.wrapper.objects.vm.Network) iterator.next();
             Network network = new Network();
             CIM_ResourceAllocationSettingData rasd = vmNetwork.getRasd();
@@ -393,18 +393,18 @@ public class ChangeVMSettingsWizard extends VMWizard {
         
     }
 
-    private void sortResourcesByState(List toAdd, List toModify, List toDelete) {
+    private void sortResourcesByState(List<CIM_ResourceAllocationSettingData> toAdd, List<CIM_ResourceAllocationSettingData> toModify, List<CIM_ResourceAllocationSettingData> toDelete) {
         //find the resources to delete
-        List list = disksAtStart;
-        for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+        List<Disk> list = disksAtStart;
+        for (Iterator<Disk> iterator = list.iterator(); iterator.hasNext();) {
             Disk disk = (Disk) iterator.next();
             if (disk.isDeleted())
             {
                 toDelete.add(disk.getRasd());
             }
         }
-        list = networksAtStart;
-        for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+        List<Network> list1 = networksAtStart;
+        for (Iterator<Network> iterator = list1.iterator(); iterator.hasNext();) {
             Network network = (Network) iterator.next();
             if (network.isDeleted())
             {
@@ -414,7 +414,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
         
         //find resources to add or those that are modified
         list = getDisks();
-        for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+        for (Iterator<Disk> iterator = list.iterator(); iterator.hasNext();) {
             Disk disk = (Disk) iterator.next();
             if (disk.isAdded())
             {
@@ -434,8 +434,8 @@ public class ChangeVMSettingsWizard extends VMWizard {
             }
         }
         
-        list = getNetworks();
-        for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+        List<Network> list2 = getNetworks();
+        for (Iterator<Network> iterator = list2.iterator(); iterator.hasNext();) {
             Network network = (Network) iterator.next();
             if (network.isAdded())
             {
@@ -503,10 +503,10 @@ public class ChangeVMSettingsWizard extends VMWizard {
         this.virtualSystemType = hostSystem.getVirtualSystemType();
         setVM(adapter.getSelectedVM());
         
-        disksAtStart = new ArrayList();
+        disksAtStart = new ArrayList<Disk>();
         disksAtStart.addAll(getDisks());
         
-        networksAtStart = new ArrayList();
+        networksAtStart = new ArrayList<Network>();
         networksAtStart.addAll(getNetworks());
         
         memoryAtStart = currentMemory;
@@ -566,7 +566,7 @@ public class ChangeVMSettingsWizard extends VMWizard {
         container.get_Memory().setControlValue(currentMemory);
         container.get_Processor().setControlValue(currentProcessor);
         
-        List properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
+        List<RASDProperty> properties = getRASDProperties(sampleDiskRasd, RASD_DISK, virtualSystemType);
         setRasdHeaderFields(properties, getDiskGenericHeaders(container));
         adapter.updateControls(container.getDisks(), getDisks());
         

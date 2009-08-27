@@ -1,14 +1,14 @@
  /** 
   * MigrationWizard.java
   *
-  * © Copyright IBM Corp. 2005
+  * © Copyright IBM Corp.  2009,2005
   *
-  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE COMMON PUBLIC LICENSE
+  * THIS FILE IS PROVIDED UNDER THE TERMS OF THE ECLIPSE PUBLIC LICENSE
   * ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS FILE
   * CONSTITUTES RECIPIENTS ACCEPTANCE OF THE AGREEMENT.
   *
-  * You can obtain a current copy of the Common Public License from
-  * http://www.opensource.org/licenses/cpl1.0.php
+  * You can obtain a current copy of the Eclipse Public License from
+  * http://www.opensource.org/licenses/eclipse-1.0.php
   *
   * @author: Michael Bauschert <Michael.Bauschert@de.ibm.com>
   *
@@ -45,8 +45,20 @@ import org.sblim.wbemsmt.vm.VMErrCodes;
 import org.sblim.wbemsmt.vm.bl.adapter.MethodSupport;
 import org.sblim.wbemsmt.vm.bl.adapter.VMCimAdapter;
 import org.sblim.wbemsmt.vm.bl.wrapper.objects.VM;
-import org.sblim.wbemsmt.vm.container.wizard.*;
-import org.sblim.wbemsmt.vm.schema.cim_2_17.*;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage1;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2a;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2b;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage2c;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerPage3;
+import org.sblim.wbemsmt.vm.container.wizard.CreateMigrationContainerSummary;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ComputerSystem;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ConcreteJob;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_ResourceAllocationSettingData;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_System;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemManagementService;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationCapabilities;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationService;
+import org.sblim.wbemsmt.vm.schema.cim_2_17.CIM_VirtualSystemMigrationSettingData;
 import org.sblim.wbemsmt.vm.validator.ContainerRunningValidator;
 
 public class MigrationWizard  extends VMBaseWizard{
@@ -74,7 +86,7 @@ public class MigrationWizard  extends VMBaseWizard{
 	 * if adapter is in dummy mode (MetalusterCimAdapter.USING_INSTANCE_MOFS == true) slpClient is also set if preset = IDX_USE_USERDEFINED_NO_CIM
 	 */
 	private WBEMClient slpClient;
-	private ArrayList clients = new ArrayList();
+	private ArrayList<WBEMClient> clients = new ArrayList<WBEMClient>();
 	private int clientSelection;
 	private CreateMigrationContainerPage3 page3;
     
@@ -203,7 +215,7 @@ public class MigrationWizard  extends VMBaseWizard{
 
             CIM_System targetSystem;
             CIM_VirtualSystemManagementService virtualSystemManagementService = adapter.getVirtualSystemManagementService(type);
-            List systems = virtualSystemManagementService.getAssociated_CIM_System_CIM_HostedServices(client);
+            List<CIM_System> systems = virtualSystemManagementService.getAssociated_CIM_System_CIM_HostedServices(client);
             
             if (systems.size() ==  1)
             {
@@ -297,7 +309,7 @@ public class MigrationWizard  extends VMBaseWizard{
 	}
 
 	public void initContainer(CreateMigrationContainerPage2a container) throws WbemsmtException {
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 		clients.clear();
 		
 		
@@ -308,7 +320,7 @@ public class MigrationWizard  extends VMBaseWizard{
 			try {
 				if (nodeWithActiveCimomsNodes != null)
 				{
-					for (Iterator iter = nodeWithActiveCimomsNodes.getSubnodes().iterator(); iter.hasNext();) {
+					for (Iterator<ITaskLauncherTreeNode> iter = nodeWithActiveCimomsNodes.getSubnodes().iterator(); iter.hasNext();) {
 						CimomTreeNode cimomTreeNode = (CimomTreeNode) iter.next();
 						ITaskLauncherTreeNode node =  cimomTreeNode.getNodeForTask(VMCimAdapter.METACLUSTER_TASKNAME);
 						if (node != null)
@@ -344,7 +356,7 @@ public class MigrationWizard  extends VMBaseWizard{
 		container.get_usr_CimClientPreset().setValues(presets);
 	}
 
-	public ArrayList getClients() {
+	public ArrayList<WBEMClient> getClients() {
 		return clients;
 	}
 	
